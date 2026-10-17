@@ -357,6 +357,18 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  // Enter in a field jumps to Download. The button may still be disabled for
+  // the preview's debounce, so retry briefly until it can take focus.
+  const focusDownload = () => {
+    let tries = 0;
+    const attempt = () => {
+      const button = pngButton.current;
+      if (button && !button.disabled) button.focus();
+      else if (tries++ < 10) setTimeout(attempt, 60);
+    };
+    attempt();
+  };
+
   // ------------------------------------------------------------ view
   const errors = encoded.ok ? {} : encoded.errors;
   const visible = (name: string) => state.revealErrors || !!state.touched[name];
@@ -405,7 +417,7 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
                 )
               }
               onBlur={(name) => dispatch({ kind: 'touch', name })}
-              onEnter={() => pngButton.current?.focus()}
+              onEnter={focusDownload}
             />
           </form>
           {type === 'upi' && (

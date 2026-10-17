@@ -85,3 +85,39 @@ test('SEO basics: unique titles, canonical, hreflang, structured data', async ({
   expect(ld.join()).toContain('"WebApplication"');
   expect(ld.join()).toContain('"isAccessibleForFree":true');
 });
+
+test.describe('dark theme', () => {
+  for (const route of ['/', '/hi/upi-qr-code-generator', '/print', '/qr-code-scanner', '/faq']) {
+    test(`${route}: no serious axe issues in dark mode`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme: 'dark' });
+      await page.goto(route, { waitUntil: 'networkidle' });
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+      // @axe-core/playwright is typed against a newer Playwright; the runtime API is the same.
+      const results = await new AxeBuilder({ page: page as never })
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+        .analyze();
+      const bad = results.violations.filter(
+        (v) => v.impact === 'serious' || v.impact === 'critical',
+      );
+      expect(
+        bad.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`),
+      ).toEqual([]);
+    });
+  }
+});
+
+test('keyboard only: choose a type, fill the form and reach Download', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('astro-island:not([ssr])').first().waitFor({ state: 'attached' });
+  await page.keyboard.press('Tab'); // skip link
+  const skip = page.getByRole('link', { name: 'Skip to main content' });
+  await expect(skip).toBeFocused();
+  await page.getByRole('radio', { name: 'Website' }).focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByRole('radio', { name: 'WiFi' })).toBeFocused();
+  await expect(page.getByRole('radio', { name: 'WiFi' })).toHaveAttribute('aria-checked', 'true');
+  await page.getByLabel('Network name (SSID)').fill('Home');
+  await page.getByLabel('Password', { exact: true }).fill('12345678');
+  await page.getByLabel('Password', { exact: true }).press('Enter');
+  await expect(page.getByTestId('download-png')).toBeFocused();
+});
