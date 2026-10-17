@@ -3,7 +3,9 @@
   var pref = 'system';
   try {
     pref = localStorage.getItem('pakkaqr:theme') || 'system';
-  } catch (e) {}
+  } catch {
+    // Storage blocked: fall back to the system theme.
+  }
   var dark =
     pref === 'dark' ||
     (pref === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
