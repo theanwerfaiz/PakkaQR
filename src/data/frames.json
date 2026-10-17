@@ -1,0 +1,13 @@
+{
+  "_meta": {
+    "description": "Frame styles with a call-to-action label. Geometry lives in src/lib/render/geometry.ts (layoutFrame). Default labels per QR type are i18n keys frame.defaultLabel.<type>."
+  },
+  "frames": [
+    { "id": "none" },
+    { "id": "box-bottom" },
+    { "id": "rounded-bottom" },
+    { "id": "banner-top" },
+    { "id": "speech-bubble" },
+    { "id": "phone" }
+  ]
+}

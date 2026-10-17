@@ -1,0 +1,129 @@
+{
+  "_meta": {
+    "description": "Style presets. Each design is merged over the current design (logo, frame, margin and error correction are kept). Every preset must pass the scan test at default settings (tests/unit/render)."
+  },
+  "presets": [
+    {
+      "id": "classic",
+      "design": {
+        "fg": "#000000",
+        "bg": "#FFFFFF",
+        "dotStyle": "square",
+        "cornerSquareStyle": "square",
+        "cornerDotStyle": "square"
+      }
+    },
+    {
+      "id": "rounded-ink",
+      "design": {
+        "fg": "#1F2937",
+        "bg": "#FFFFFF",
+        "dotStyle": "rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "ocean",
+      "design": {
+        "fg": "#0B4F9C",
+        "bg": "#FFFFFF",
+        "gradient": { "kind": "linear", "colors": ["#0B4F9C", "#0E7490"], "angle": 45 },
+        "dotStyle": "rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "sunset",
+      "design": {
+        "fg": "#C2410C",
+        "bg": "#FFFFFF",
+        "gradient": { "kind": "linear", "colors": ["#C2410C", "#BE185D"], "angle": 135 },
+        "dotStyle": "classy-rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "forest",
+      "design": {
+        "fg": "#14532D",
+        "bg": "#FFFFFF",
+        "dotStyle": "dots",
+        "cornerSquareStyle": "dot",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "royal",
+      "design": {
+        "fg": "#5B21B6",
+        "bg": "#FFFFFF",
+        "dotStyle": "classy",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "square"
+      }
+    },
+    {
+      "id": "mint",
+      "design": {
+        "fg": "#0F766E",
+        "bg": "#ECFDF5",
+        "dotStyle": "rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "midnight",
+      "design": {
+        "fg": "#FFFFFF",
+        "bg": "#111318",
+        "dotStyle": "square",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "square"
+      }
+    },
+    {
+      "id": "coffee",
+      "design": {
+        "fg": "#4A2C17",
+        "bg": "#FFF8F0",
+        "dotStyle": "extra-rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "cherry",
+      "design": {
+        "fg": "#B91C1C",
+        "bg": "#FFFFFF",
+        "dotStyle": "rounded",
+        "cornerSquareStyle": "dot",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "minimal-dots",
+      "design": {
+        "fg": "#000000",
+        "bg": "#FFFFFF",
+        "dotStyle": "dots",
+        "cornerSquareStyle": "dot",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "gold",
+      "design": {
+        "fg": "#7A5A00",
+        "bg": "#FFF8E1",
+        "dotStyle": "classy-rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "square"
+      }
+    }
+  ]
+}
