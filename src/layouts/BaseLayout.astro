@@ -3,6 +3,8 @@ import '@fontsource-variable/anek-latin/wdth.css';
 import '@fontsource-variable/anek-devanagari/wght.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import '../styles/global.css';
+// Preloaded so the headline renders in its final font (no layout shift).
+import anekLatinUrl from '@fontsource-variable/anek-latin/files/anek-latin-latin-wdth-normal.woff2?url';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import {
@@ -67,6 +69,12 @@ const ldJson = (data: object) => JSON.stringify(data).replace(/</g, '\\u003c');
         href={abs(localePath(defaultLocale, slug, base))}
       />
     )}
+    {
+      // Hindi pages skip it: preloading the 250 KB Devanagari font delays first paint.
+      locale === 'en' && (
+        <link rel="preload" href={anekLatinUrl} as="font" type="font/woff2" crossorigin />
+      )
+    }
     <meta name="referrer" content="no-referrer" />
     <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)" />

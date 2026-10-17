@@ -591,3 +591,14 @@
     padding-top: 0.2rem;
   }
 }
+
+/* The language switch uses the system font so English pages don't download
+   the 250 KB Devanagari web font just for one word (and vice versa). */
+.lang-switch {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}

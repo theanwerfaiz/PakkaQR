@@ -4,6 +4,8 @@
 
 **State on 2026-10-17:** the code is feature-complete on branch `claude/relaxed-dirac-yjxujt`. Locally: lint, typecheck, 246 unit tests (87% coverage of `src/lib`), the build and 102 Chromium E2E tests all pass, and Lighthouse is ≥ 95 on the four gate pages. **The GitHub repo has no `main` branch yet**, so CI has never run on GitHub.
 
+**Progress (2026-10-17, evening):** `main` is the default branch; CI is green on Chromium, Firefox and WebKit; the site is live on GitHub Pages at https://theanwerfaiz.github.io/PakkaQR/ with the "Ink & Stamp" redesign. Device tests (stage 3) signed off by the owner. Lighthouse re-run (see D-36), demo GIF recorded, and good-first-issue and launch drafts are in `docs/LAUNCH_KIT.md`. Remaining: Hindi review (4.1), optional custom domain (2.4), then go/no-go and tag (stage 5).
+
 Owner key: **F** = Faiz (needs your accounts, devices or judgement) · **C** = Claude (can be done in a session) · **F+C** = together.
 
 ---

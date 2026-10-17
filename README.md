@@ -2,9 +2,9 @@
 
 **QR codes that work. Pakka.** Free QR codes that never expire. No signup. No tracking. No watermark. Runs entirely in your browser.
 
-[Live site](https://pakkaqr.pages.dev) · [Report a bug](../../issues/new?template=bug_report.md) · [Request a feature](../../issues/new?template=feature_request.md)
+[Live site](https://theanwerfaiz.github.io/PakkaQR/) · [Report a bug](../../issues/new?template=bug_report.md) · [Request a feature](../../issues/new?template=feature_request.md)
 
-![PakkaQR generator: a WiFi QR code with the Ocean preset, verified as scannable](docs/images/generator.png)
+![PakkaQR in action: paste a UPI ID, the code is stamped PAKKA, shuffle the style, then make a story card](docs/images/demo.gif)
 
 ## Why
 

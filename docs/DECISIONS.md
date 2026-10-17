@@ -157,3 +157,7 @@ Features chosen from the Gen Z / all-ages research (story cards, link-in-bio, sp
 ## D-35 · Smart paste detection
 
 The home page's "What should the code open?" box guesses the type from what was pasted (WiFi string, UPI link or ID, email, phone, WhatsApp link, @handle, coordinates, URL, else text) and fills the normal form. A bare `name@bank` without a dot is treated as a UPI ID, `name@domain.tld` as an email. Detection is a pure function with unit tests and never touches the network.
+
+## D-36 · Font loading and Lighthouse
+
+The Anek Latin file is preloaded on English pages so the headline paints in its final font (CLS 0). The language switch ("हिन्दी") uses the system font, so English pages no longer download the 250 KB Devanagari font for one word. Hindi pages don't preload Devanagari: tests showed it delays first paint more than the small layout shift it prevents. Local Lighthouse (mobile) after this change: `/` 97–99, `/wifi-qr-code-generator` 96–97, `/bulk-qr-code-generator` 99, `/qr-code-scanner` 99, accessibility/best practices/SEO 100; `/hi` 88–96 because of the Devanagari font size. Subsetting that font is a possible later improvement.

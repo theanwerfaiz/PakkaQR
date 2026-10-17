@@ -31,4 +31,6 @@ Legend: ✅ works · ⚠️ works with caveats (add a note) · ❌ fails · — 
 | PhonePe    | —                  | —                 | —          |       |
 | Paytm      | —                  | —                 | —          |       |
 
-Tested by: ______ · Date: ______ · PakkaQR commit: ______
+Tested by: owner (Faiz Anwer) · Date: 2026-10-17 · PakkaQR commit: c69f9e0
+
+**Sign-off:** the owner reported the real-device checks done on 2026-10-17 with no failures reported. Individual cells above were not itemised; fill them in on the next device pass (for example after a scanning-related change).
