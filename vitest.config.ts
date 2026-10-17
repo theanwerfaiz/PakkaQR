@@ -10,6 +10,7 @@ export default defineConfig({
       include: ['src/lib/**/*.ts'],
       reporter: ['text-summary', 'text', 'json-summary'],
       thresholds: {
+        lines: 80,
         'src/lib/payloads/**': { lines: 95 },
         'src/lib/validate/**': { lines: 95 },
       },

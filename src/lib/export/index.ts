@@ -38,6 +38,7 @@ export function defaultFileName(type: string, date = new Date()): string {
 /** Strips characters that are invalid in file names and any extension the user typed. */
 export function cleanFileName(name: string, fallback: string): string {
   const cleaned = name
+    .trim()
     .replace(/\.(png|jpe?g|webp|svg|pdf)$/i, '')
     // Control characters are invalid in file names on every OS.
     // eslint-disable-next-line no-control-regex
