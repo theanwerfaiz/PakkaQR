@@ -31,7 +31,7 @@ export function TypeTabs({ value, onChange, hideHeading = false }: Props) {
       >
         {t('generator.chooseType')}
       </h2>
-      <div className="flex items-start gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
         <div
           role="radiogroup"
           aria-labelledby="qr-type-heading"
@@ -63,7 +63,7 @@ export function TypeTabs({ value, onChange, hideHeading = false }: Props) {
             );
           })}
         </div>
-        <label className="shrink-0">
+        <label className="self-start sm:shrink-0">
           <span className="visually-hidden">{t('generator.moreTypes')}</span>
           <select
             className={`input min-h-11 w-auto rounded-full text-sm font-semibold ${isPrimary ? '' : 'border-accent'}`}

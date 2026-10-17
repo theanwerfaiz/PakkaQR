@@ -221,7 +221,7 @@ function PrintApp() {
   const papers: PaperId[] = layoutId === 'poster' ? ['a4', 'letter', 'a3'] : ['a4', 'letter'];
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
       <div className="space-y-6">
         <section className="card space-y-4 p-4 sm:p-6" aria-labelledby="print-content">
           <div className="flex flex-wrap items-center justify-between gap-2">

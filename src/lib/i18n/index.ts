@@ -1,5 +1,5 @@
-import en from '../../i18n/en.json';
-import hi from '../../i18n/hi.json';
+import en from '../../i18n/en.json' with { type: 'json' };
+import hi from '../../i18n/hi.json' with { type: 'json' };
 
 export const locales = ['en', 'hi'] as const;
 export type Locale = (typeof locales)[number];

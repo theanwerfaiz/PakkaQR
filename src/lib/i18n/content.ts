@@ -1,5 +1,5 @@
-import en from '../../i18n/content/en.json';
-import hi from '../../i18n/content/hi.json';
+import en from '../../i18n/content/en.json' with { type: 'json' };
+import hi from '../../i18n/content/hi.json' with { type: 'json' };
 import { createT, defaultLocale, type Dict, type Locale, type TFunction } from './index';
 
 /*

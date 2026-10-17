@@ -1,5 +1,5 @@
 import { useMemo, useState, type KeyboardEvent } from 'react';
-import countryData from '../../data/country-codes.json';
+import countryData from '../../data/country-codes.json' with { type: 'json' };
 import type { Fields, MessageMap, QrType } from '../../lib/payloads/types';
 import { hasKey, getUiDict } from '../../lib/i18n';
 import { FormField } from '../common/FormField';

@@ -16,6 +16,8 @@
   --warning: #9a6700;
   --danger: #cf222e;
   --focus: #1f6feb;
+  /* Accent darkened for body links: #1f6feb is 4.45:1 on --bg, just under AA. */
+  --link: #1a5fcc;
   color-scheme: light;
 }
 
@@ -32,6 +34,7 @@
   --warning: #d29922;
   --danger: #f85149;
   --focus: #5b9bff;
+  --link: #6ea8ff;
   color-scheme: dark;
 }
 
@@ -88,7 +91,7 @@
     font-size: 1.25rem;
   }
   a {
-    color: var(--accent);
+    color: var(--link);
     text-underline-offset: 2px;
   }
   :focus-visible {

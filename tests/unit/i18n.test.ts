@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import en from '../../src/i18n/en.json';
-import hi from '../../src/i18n/hi.json';
-import enContent from '../../src/i18n/content/en.json';
-import hiContent from '../../src/i18n/content/hi.json';
+import en from '../../src/i18n/en.json' with { type: 'json' };
+import hi from '../../src/i18n/hi.json' with { type: 'json' };
+import enContent from '../../src/i18n/content/en.json' with { type: 'json' };
+import hiContent from '../../src/i18n/content/hi.json' with { type: 'json' };
 import {
   createT,
   flattenKeys,
@@ -23,7 +23,9 @@ describe('i18n dictionaries', () => {
     for (const key of flattenKeys(en as unknown as Dict)) {
       const value = lookup(hi as unknown as Dict, key);
       expect(typeof value, key).toBe('string');
-      expect(vars(value as string), key).toEqual(vars(lookup(en as unknown as Dict, key) as string));
+      expect(vars(value as string), key).toEqual(
+        vars(lookup(en as unknown as Dict, key) as string),
+      );
     }
   });
   it('spec-provided Hindi strings are used verbatim', () => {

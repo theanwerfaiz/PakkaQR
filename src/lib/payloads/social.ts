@@ -1,4 +1,4 @@
-import data from '../../data/social-platforms.json';
+import data from '../../data/social-platforms.json' with { type: 'json' };
 import { hostMatches, isBlank, result } from '../validate/common';
 import type { PayloadEncoder } from './types';
 

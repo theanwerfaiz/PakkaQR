@@ -373,7 +373,7 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
 
   return (
     <div
-      className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start"
+      className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start"
       data-testid="generator"
     >
       <div className="space-y-4 lg:col-start-1">

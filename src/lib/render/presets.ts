@@ -1,4 +1,4 @@
-import data from '../../data/presets.json';
+import data from '../../data/presets.json' with { type: 'json' };
 import { sanitizeDesign, type QrDesign } from './design';
 
 export interface Preset {

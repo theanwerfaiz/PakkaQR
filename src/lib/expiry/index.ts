@@ -1,4 +1,4 @@
-import data from '../../data/redirect-domains.json';
+import data from '../../data/redirect-domains.json' with { type: 'json' };
 import { detectType, type DetectedType } from './detect';
 
 export { detectType, parseWifi } from './detect';
