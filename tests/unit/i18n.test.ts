@@ -20,10 +20,10 @@ const lookup = (d: Dict, key: string) =>
 
 describe('i18n dictionaries', () => {
   it('Hindi has every English UI key with the same placeholders', () => {
-    for (const key of flattenKeys(en as Dict)) {
+    for (const key of flattenKeys(en as unknown as Dict)) {
       const value = lookup(hi as Dict, key);
       expect(typeof value, key).toBe('string');
-      expect(vars(value as string), key).toEqual(vars(lookup(en as Dict, key) as string));
+      expect(vars(value as string), key).toEqual(vars(lookup(en as unknown as Dict, key) as string));
     }
   });
   it('spec-provided Hindi strings are used verbatim', () => {
@@ -34,7 +34,7 @@ describe('i18n dictionaries', () => {
   });
   it('every page has title, description, h1 and intro in both languages', () => {
     for (const page of pages) {
-      for (const dict of [enContent, hiContent] as Dict[]) {
+      for (const dict of [enContent, hiContent] as unknown as Dict[]) {
         for (const field of ['title', 'description', 'h1', 'intro', 'linkText', 'blurb']) {
           const v = lookup(dict, `pages.${page.key}.${field}`);
           expect(typeof v, `${page.key}.${field}`).toBe('string');
