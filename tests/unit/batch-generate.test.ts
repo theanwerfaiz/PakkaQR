@@ -36,7 +36,9 @@ describe('batch generation', () => {
         .sort(),
     ).toEqual(['errors.csv', 'png/a.png', 'png/c.png', 'svg/a.svg', 'svg/c.svg']);
     expect(out.pngs.map((p) => p.caption)).toEqual(['a', 'c']);
-    const png = new Blob([await zip.file('png/c.png')!.async('arraybuffer')], { type: 'image/png' });
+    const png = new Blob([await zip.file('png/c.png')!.async('arraybuffer')], {
+      type: 'image/png',
+    });
     expect((await decodeBlob(png))?.text).toBe('https://c.example');
   });
   it('decodes a data-URL logo without fetch', async () => {
