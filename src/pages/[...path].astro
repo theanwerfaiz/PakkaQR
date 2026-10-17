@@ -53,10 +53,12 @@ if (faqs.length) jsonLd.push(faqPage(faqs, lang));
   {(page.kind === 'home' || page.kind === 'tool' || page.kind === 'usecase') && (
     <GeneratorPage locale={locale} page={page} />
   )}
-  {(page.kind === 'batch' || page.kind === 'scanner' || page.kind === 'expiry' || page.kind === 'print') && (
-    <ToolPage locale={locale} page={page} />
-  )}
-  {(page.kind === 'article' || page.kind === 'about' || page.kind === 'privacy' || page.kind === 'faq') && (
-    <InfoPage locale={locale} page={page} />
-  )}
+  {(page.kind === 'batch' ||
+    page.kind === 'scanner' ||
+    page.kind === 'expiry' ||
+    page.kind === 'print') && <ToolPage locale={locale} page={page} />}
+  {(page.kind === 'article' ||
+    page.kind === 'about' ||
+    page.kind === 'privacy' ||
+    page.kind === 'faq') && <InfoPage locale={locale} page={page} />}
 </BaseLayout>

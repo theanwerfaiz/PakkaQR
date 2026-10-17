@@ -236,7 +236,11 @@ function PrintApp() {
               {t('action.example')}
             </button>
           </div>
-          <TypeTabs value={state.type} onChange={(type) => dispatch({ kind: 'type', type })} />
+          <TypeTabs
+            value={state.type}
+            onChange={(type) => dispatch({ kind: 'type', type })}
+            hideHeading
+          />
           <ContentForm
             type={state.type}
             fields={fields}

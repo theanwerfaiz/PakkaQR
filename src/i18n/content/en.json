@@ -1,1 +1,1179 @@
-{}
+{
+  "common": {
+    "generatorRegion": "QR code generator",
+    "related": "More free tools",
+    "sourceLink": "Read the source code on GitHub"
+  },
+  "frameLabel": {
+    "menu": "Menu",
+    "venue": "Find the venue"
+  },
+  "home": {
+    "why": {
+      "title": "Why PakkaQR codes never stop working",
+      "p1": "Many free QR sites quietly create “dynamic” codes. The pattern you print doesn't contain your link — it contains their short link, which redirects to yours. When the free trial ends, they switch that redirect off and your printed menus, cards and posters stop working until you pay.",
+      "p2": "PakkaQR makes static codes. Your link, WiFi password or contact details are stored inside the pattern itself. There is no middleman server, so there is nothing to switch off.",
+      "tradeoffLabel": "One honest trade-off:",
+      "tradeoff": "a static code can't be edited after printing. Tip: if you might change the destination later, point the code to a page you control and update that page instead.",
+      "checkLink": "Check if your existing QR code will expire",
+      "articleLink": "Static vs dynamic QR codes, explained"
+    }
+  },
+  "diagram": {
+    "staticTitle": "PakkaQR (static)",
+    "staticAlt": "A static QR code leads straight to your website, with nothing in between.",
+    "staticCaption": "The code holds your link. Scans go straight to you, forever.",
+    "dynamicTitle": "Many “free” generators (dynamic)",
+    "dynamicAlt": "A dynamic QR code goes through the vendor's server first; when the trial ends the server stops redirecting and the code breaks.",
+    "dynamicCaption": "The code holds their link. When the trial ends, the redirect stops.",
+    "yourSite": "Your site",
+    "direct": "direct",
+    "theirServer": "Their server",
+    "trialEnds": "trial ends ✕"
+  },
+  "pages": {
+    "home": {
+      "title": "Free QR Code Generator That Never Expires · PakkaQR",
+      "description": "Make free QR codes that never expire — for links, WiFi, UPI, WhatsApp and contact cards. No signup, no tracking, no watermark. Runs in your browser.",
+      "h1": "Free QR Code Generator — Codes That Never Expire",
+      "intro": "No signup. No tracking. No watermark. Your code is made right here in your browser — and it works forever. Create QR codes for websites, WiFi, UPI payments, WhatsApp, contact cards, locations and events. Pick a style, add your logo and a “Scan me” frame, check that it scans, then download a sharp PNG, SVG or PDF. Nothing you type ever leaves your device.",
+      "linkText": "QR code generator",
+      "blurb": "Make any kind of QR code in seconds.",
+      "howToTitle": "How it works",
+      "steps": [
+        "Choose what your QR code should do.",
+        "Type your details — the code appears instantly.",
+        "Style it if you like: colors, logo, frame.",
+        "Download. Done — it works forever."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Do these QR codes really never expire?",
+          "a": "Yes. The data is stored inside the code itself. Nothing depends on our website — even if PakkaQR disappeared, your code would keep working."
+        },
+        {
+          "q": "Is it really free?",
+          "a": "Yes, completely. No trial, no limits, no watermark, no signup."
+        },
+        {
+          "q": "Do you see or store what I type?",
+          "a": "No. Everything happens in your browser. Nothing is uploaded. You can check the open-source code."
+        },
+        {
+          "q": "Can I edit a code after printing?",
+          "a": "No — that's the trade-off of a code that never expires. Point it to a page you control if you need flexibility."
+        },
+        {
+          "q": "Can I track how many people scanned it?",
+          "a": "Not with a static code. Tracking requires a redirect server, which is exactly what makes other codes expire."
+        },
+        {
+          "q": "Can I use the codes commercially?",
+          "a": "Yes, for anything. No attribution needed."
+        },
+        {
+          "q": "How do I check if my existing QR code will expire?",
+          "a": "Use our free expiry checker — upload a photo of the code."
+        },
+        {
+          "q": "Which format should I download for printing?",
+          "a": "SVG for printing at any size; PNG at 2048 px or more is also fine."
+        }
+      ]
+    },
+    "url": {
+      "title": "Free URL QR Code Generator (No Expiry) · PakkaQR",
+      "description": "Turn any website link into a QR code that never expires. Free, no signup, no watermark. Add your logo and download PNG, SVG or PDF.",
+      "h1": "Website / URL QR Code Generator",
+      "intro": "Paste a link and get a QR code that opens it — on any phone, with no app needed. Your link is stored directly in the code, not behind a redirect, so it keeps working for as long as your page exists. Use it for menus, product pages, forms, videos, documents or your online shop. Style it to match your brand, add a logo and a “Scan me” frame, and download a print-ready file in seconds.",
+      "linkText": "Website QR code",
+      "blurb": "Open any link with one scan.",
+      "howToTitle": "How to create a URL QR code",
+      "steps": [
+        "Paste your website address. We add https:// if needed.",
+        "Watch the code appear and check it says “Verified”.",
+        "Optional: pick a style, logo or frame.",
+        "Download PNG for screens or SVG for print."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Will my URL QR code stop working after a while?",
+          "a": "No. The link is stored inside the code, so there is no service that can switch it off. It works as long as your website is online."
+        },
+        {
+          "q": "Can I use a very long link?",
+          "a": "Yes, but long links make dense codes that are harder to scan when printed small. If you can, use a shorter page address. We'll warn you when a code is getting dense."
+        },
+        {
+          "q": "Can I change the code after printing it?",
+          "a": "No. A static code holds its data inside the pattern, so it can't be edited. If you might change the destination later, point the code to a page you control, like your own website, and update that page instead."
+        },
+        {
+          "q": "Should I use a link shortener?",
+          "a": "Usually not. Short links go through someone else's server, which can stop working or change. A direct link is the most reliable."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "wifi": {
+      "title": "Free WiFi QR Code Generator · Scan to Connect",
+      "description": "Let guests join your WiFi by scanning — no typing passwords. Free WiFi QR code generator, works on Android and iPhone. Nothing leaves your device.",
+      "h1": "WiFi QR Code Generator",
+      "intro": "Let guests join your WiFi by scanning — no more spelling out passwords. Perfect for homes, cafes, offices and Airbnbs. Enter your network name and password, choose the security type and download a code that Android and iPhone cameras recognise straight away. Your password never leaves your device: the code is made in your browser and nothing is uploaded. Print a WiFi card with the password written beside the code for older phones.",
+      "linkText": "WiFi QR code",
+      "blurb": "Guests join your WiFi with one scan.",
+      "howToTitle": "How to create a WiFi QR code",
+      "steps": [
+        "Type your network name (SSID) exactly as it appears.",
+        "Enter the password and choose the security type — WPA/WPA2/WPA3 for most routers.",
+        "Check the code says “Verified”, then download.",
+        "Print it, or use our WiFi card layout."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Which phones can scan a WiFi QR code?",
+          "a": "Most Android phones (Android 10 and later) and iPhones (iOS 11 and later) can join WiFi straight from the camera app."
+        },
+        {
+          "q": "Is it safe to put my WiFi password in a QR code?",
+          "a": "The code contains your password, so anyone who scans it can join — just like telling them the password. Use a guest network for public places. PakkaQR never sees or stores your password."
+        },
+        {
+          "q": "What if I change my WiFi password?",
+          "a": "Make a new code. A static code holds the old password and can't be updated."
+        },
+        {
+          "q": "My network has no password. Can I still make a code?",
+          "a": "Yes. Choose “None (open network)” as the security type."
+        },
+        {
+          "q": "What does “Hidden network” do?",
+          "a": "Tick it if your router doesn't broadcast its name. The phone will then look for the network even though it isn't listed."
+        }
+      ]
+    },
+    "upi": {
+      "title": "Free UPI QR Code Generator with Amount · PakkaQR",
+      "description": "Create a UPI payment QR code for any UPI ID — with or without a fixed amount. Works in Google Pay, PhonePe, Paytm and all UPI apps. Free, no signup.",
+      "h1": "UPI Payment QR Code Generator",
+      "intro": "Create a UPI QR to receive payments in any UPI app — Google Pay, PhonePe, Paytm, BHIM and your bank's app. Add a fixed amount for invoices, or leave it open for customers to enter. Add a note like an order number so you know who paid. The code is made in your browser and contains your UPI ID directly, so it never expires and no one takes a cut. Print a “Scan to pay” sticker or poster for your counter.",
+      "linkText": "UPI QR code",
+      "blurb": "Get paid in any UPI app.",
+      "howToTitle": "How to create a UPI QR code",
+      "steps": [
+        "Enter your UPI ID (like name@bank) and the name people should see.",
+        "Optional: add an amount and a note.",
+        "Check the code says “Verified”, then download.",
+        "Print a “Scan to pay” poster or sticker sheet."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Which apps can scan this UPI QR code?",
+          "a": "Any UPI app: Google Pay, PhonePe, Paytm, BHIM, Amazon Pay, WhatsApp Pay and banking apps."
+        },
+        {
+          "q": "Does PakkaQR charge a fee or take a cut?",
+          "a": "No. Money goes straight from the payer's bank to yours through UPI. PakkaQR is not involved in the payment at all."
+        },
+        {
+          "q": "Should I add a fixed amount?",
+          "a": "Add one for invoices or fixed prices. Leave it empty for a shop counter so customers can type the amount."
+        },
+        {
+          "q": "Is a UPI QR code safe?",
+          "a": "Always check the payee name in your UPI app before paying. As a seller, keep an eye on your own codes so no one covers them with a different one."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "whatsapp": {
+      "title": "Free WhatsApp QR Code Generator · PakkaQR",
+      "description": "Make a QR code that opens a WhatsApp chat with you — with an optional pre-filled message. Free, no signup, never expires. Add a logo and frame.",
+      "h1": "WhatsApp QR Code Generator",
+      "intro": "Customers scan and land straight in a chat with you, with an optional message already typed. Great for shops taking orders, service providers and support desks. Choose your country code, enter your WhatsApp number and add a greeting like “Hi, I want to order”. The code uses WhatsApp's official wa.me link and stores your number directly, so it keeps working for as long as your number does.",
+      "linkText": "WhatsApp QR code",
+      "blurb": "Start a WhatsApp chat with one scan.",
+      "howToTitle": "How to create a WhatsApp QR code",
+      "steps": [
+        "Choose your country code and enter your WhatsApp number.",
+        "Optional: type a message to pre-fill.",
+        "Pick a style — a “Chat with us” frame works well.",
+        "Download and print it on your counter, bags or flyers."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Does the person need to save my number first?",
+          "a": "No. Scanning opens a chat with you directly in WhatsApp."
+        },
+        {
+          "q": "Can I use a WhatsApp Business number?",
+          "a": "Yes. It works the same way for personal and Business accounts."
+        },
+        {
+          "q": "What format should my number be in?",
+          "a": "Pick your country code and type the rest of the number. Spaces and dashes are fine — we clean them up. You can also type the full number starting with +."
+        },
+        {
+          "q": "Can people change the pre-filled message?",
+          "a": "Yes. The message is only a suggestion; they can edit it before sending."
+        },
+        {
+          "q": "Do you see what I type?",
+          "a": "No. The code is made in your browser. Nothing you type or upload is sent anywhere — you can check the open-source code."
+        }
+      ]
+    },
+    "vcard": {
+      "title": "Free vCard QR Code for Business Cards · PakkaQR",
+      "description": "Put your contact details in a QR code: one scan saves your name, phone, email and website. Free vCard QR code generator, no signup, never expires.",
+      "h1": "Contact Card (vCard) QR Code Generator",
+      "intro": "Put your contact details on a business card. One scan and your number, email and website are saved — no typing, no spelling mistakes. Fill in only what you want to share: name, company, job title, phones, email, website, address and a short note. The code uses the standard vCard format that iPhone and Android contacts understand, and it never expires. Print 10-up business cards straight from our print tool.",
+      "linkText": "Contact card QR code",
+      "blurb": "Share your contact in one scan.",
+      "howToTitle": "How to create a vCard QR code",
+      "steps": [
+        "Fill in your name and the details you want to share.",
+        "Keep it short — fewer fields make an easier-to-scan code.",
+        "Check the code says “Verified”, then download SVG for print.",
+        "Add it to your business card, or print a 10-up sheet."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "What happens when someone scans it?",
+          "a": "Their phone shows your contact card with an “Add contact” or “Create new contact” button."
+        },
+        {
+          "q": "Why is my code so dense?",
+          "a": "Every field adds data. Leave out optional fields like the address or note to make the code simpler and easier to scan at small sizes."
+        },
+        {
+          "q": "What size should it be on a business card?",
+          "a": "At least 2 cm wide for a short contact card, more if you include many fields. We show a minimum size when a code gets dense."
+        },
+        {
+          "q": "Can I change the code after printing it?",
+          "a": "No. A static code holds its data inside the pattern, so it can't be edited. If you might change the destination later, point the code to a page you control, like your own website, and update that page instead."
+        },
+        {
+          "q": "Do you see what I type?",
+          "a": "No. The code is made in your browser. Nothing you type or upload is sent anywhere — you can check the open-source code."
+        }
+      ]
+    },
+    "text": {
+      "title": "Free Text QR Code Generator · PakkaQR",
+      "description": "Turn any text into a QR code — a message, instructions, a serial number or a poem. Works offline when scanned. Free, no signup, never expires.",
+      "h1": "Text QR Code Generator",
+      "intro": "Store any text in a QR code: a welcome message, short instructions, a product code, a riddle for a treasure hunt or a note on equipment. The text lives inside the code, so it shows up even when the phone has no internet. Hindi, emoji and other languages work too. Keep it short for an easy-to-scan code — we'll tell you when it's getting dense.",
+      "linkText": "Text QR code",
+      "blurb": "Hide a message in a code.",
+      "howToTitle": "How to create a text QR code",
+      "steps": [
+        "Type or paste your text.",
+        "Check the character count — shorter is easier to scan.",
+        "Style the code and download it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "How much text can a QR code hold?",
+          "a": "Up to about 2,900 characters of plain text, but anything over a few hundred characters makes a dense code that needs to be printed large."
+        },
+        {
+          "q": "Does scanning need the internet?",
+          "a": "No. The text is inside the code, so the phone shows it offline."
+        },
+        {
+          "q": "Can I use Hindi or emoji?",
+          "a": "Yes. We encode text as UTF-8, which phones read correctly."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "email": {
+      "title": "Free Email QR Code Generator · PakkaQR",
+      "description": "Create a QR code that opens a new email to you with the subject and message already filled in. Free, no signup, never expires.",
+      "h1": "Email QR Code Generator",
+      "intro": "Make it effortless to email you. Scanning this code opens the phone's email app with your address, a subject and even a message already filled in — people just tap send. Use it for feedback, support requests, event sign-ups or job applications. The details are stored inside the code, so it never expires and nothing passes through anyone else's server.",
+      "linkText": "Email QR code",
+      "blurb": "Open a ready-to-send email.",
+      "howToTitle": "How to create an email QR code",
+      "steps": [
+        "Enter the email address that should receive messages.",
+        "Optional: add a subject and a message.",
+        "Download and share or print it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Which email apps does it open?",
+          "a": "The phone's default email app — Gmail, Apple Mail, Outlook or whichever the person uses."
+        },
+        {
+          "q": "Can people change the message before sending?",
+          "a": "Yes. The subject and message are pre-filled, and they can edit them."
+        },
+        {
+          "q": "Can I add more than one recipient?",
+          "a": "Keep it to one address for the best support across phones."
+        },
+        {
+          "q": "Do you see what I type?",
+          "a": "No. The code is made in your browser. Nothing you type or upload is sent anywhere — you can check the open-source code."
+        }
+      ]
+    },
+    "sms": {
+      "title": "Free SMS QR Code Generator · PakkaQR",
+      "description": "Create a QR code that opens a text message to your number with the message pre-written. Free SMS QR code generator — no signup, never expires.",
+      "h1": "SMS QR Code Generator",
+      "intro": "This code opens the phone's messaging app with your number and a message already typed in. It's handy for keyword sign-ups, call-back requests, votes or quick feedback when people may not use WhatsApp. Choose your country code, enter the number and the message. The code uses the widely supported SMSTO format and stores everything inside it, so it keeps working forever.",
+      "linkText": "SMS QR code",
+      "blurb": "Open a pre-written text message.",
+      "howToTitle": "How to create an SMS QR code",
+      "steps": [
+        "Choose the country code and enter the phone number.",
+        "Type the message to pre-fill (optional).",
+        "Download and share it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Does sending the SMS cost money?",
+          "a": "The person scanning pays their normal SMS rate, if any. PakkaQR charges nothing."
+        },
+        {
+          "q": "Will it send automatically?",
+          "a": "No. The phone only opens the message; the person must tap send."
+        },
+        {
+          "q": "Does it work on iPhone and Android?",
+          "a": "Yes, both camera apps recognise SMS codes."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "phone": {
+      "title": "Free Phone Number QR Code Generator · PakkaQR",
+      "description": "Make a QR code that dials your phone number with one tap. Free click-to-call QR code generator, no signup, never expires.",
+      "h1": "Phone Call QR Code Generator",
+      "intro": "Let people call you without typing your number. Scanning shows your number with a call button — perfect for shop windows, delivery vans, property signs, posters and visiting cards. Choose your country code and type your number; we save it in the international format every phone understands, so it works for visitors from abroad too. The number lives inside the code, so it never expires.",
+      "linkText": "Phone call QR code",
+      "blurb": "Call you with one tap.",
+      "howToTitle": "How to create a phone QR code",
+      "steps": [
+        "Choose your country code.",
+        "Type your phone number — spaces and dashes are fine.",
+        "Download and print it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Does the phone call immediately?",
+          "a": "No. The phone shows the number and asks before calling."
+        },
+        {
+          "q": "Why do I need a country code?",
+          "a": "So the number works from anywhere, including for visitors with foreign SIM cards."
+        },
+        {
+          "q": "Can I use a landline number?",
+          "a": "Yes. Include the area code without the leading zero, after choosing the country code."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "location": {
+      "title": "Free Google Maps Location QR Code · PakkaQR",
+      "description": "Turn a Google Maps location into a QR code that opens directions on any phone. Paste a Maps link or enter coordinates. Free, never expires.",
+      "h1": "Location / Google Maps QR Code Generator",
+      "intro": "Help people find you. Paste a Google Maps link or type the latitude and longitude, and get a QR code that opens the spot in a map app, ready for directions. Use it on wedding invitations, shop flyers, event signs and delivery notes. By default we create a Google Maps link because it opens on almost every phone; you can also choose a geo: link that opens the phone's default map app.",
+      "linkText": "Location QR code",
+      "blurb": "Open directions on any phone.",
+      "howToTitle": "How to create a location QR code",
+      "steps": [
+        "Copy the link from Google Maps (Share → Copy link) and paste it, or type coordinates.",
+        "Check the coordinates we found.",
+        "Choose Google Maps or geo: format, then download."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Where do I find the coordinates?",
+          "a": "In Google Maps, press and hold on the spot. The coordinates appear at the top or in the search box; copy and paste them here."
+        },
+        {
+          "q": "Why didn't my short maps.app.goo.gl link give coordinates?",
+          "a": "Short links hide the coordinates. We'll still make a code with the link itself, or you can open it, copy the full address from the browser and paste that."
+        },
+        {
+          "q": "Google Maps link or geo: link?",
+          "a": "A Google Maps link works on nearly all phones, including iPhones. A geo: link opens the default map app but isn't supported everywhere."
+        },
+        {
+          "q": "Do you see what I type?",
+          "a": "No. The code is made in your browser. Nothing you type or upload is sent anywhere — you can check the open-source code."
+        }
+      ]
+    },
+    "event": {
+      "title": "Free Event QR Code Generator · PakkaQR",
+      "description": "Create a QR code that adds your event to the scanner's calendar — with date, time, time zone and venue. Free, no signup, never expires.",
+      "h1": "Calendar Event QR Code Generator",
+      "intro": "Make sure people remember your event. Scanning this code offers to add it to the phone's calendar with the title, start and end time, location and description. Times are converted to UTC so they show correctly in every time zone, and all-day events are supported. Use it for weddings, workshops, meetups, classes and appointments, and print it on invitations, tickets or posters.",
+      "linkText": "Event QR code",
+      "blurb": "Add an event to any calendar.",
+      "howToTitle": "How to create an event QR code",
+      "steps": [
+        "Enter the event name, start and end time.",
+        "Choose the time zone of the event (we pick yours by default).",
+        "Add the venue and a short description, then download."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Does it work with Google Calendar and Apple Calendar?",
+          "a": "Yes. Phones read the standard calendar format and offer to add the event."
+        },
+        {
+          "q": "What if guests are in another time zone?",
+          "a": "We store the time in UTC, so each phone shows it in its own local time."
+        },
+        {
+          "q": "Can I make an all-day event?",
+          "a": "Yes. Tick “All-day event” and pick the dates."
+        },
+        {
+          "q": "Can I change the code after printing it?",
+          "a": "No. A static code holds its data inside the pattern, so it can't be edited. If you might change the destination later, point the code to a page you control, like your own website, and update that page instead."
+        }
+      ]
+    },
+    "instagram": {
+      "title": "Free Instagram QR Code Generator · PakkaQR",
+      "description": "Make a QR code that opens your Instagram profile. Type your username or paste your profile link. Free, no signup, no watermark, never expires.",
+      "h1": "Instagram QR Code Generator",
+      "intro": "Grow your Instagram following from the real world. Type your username — or paste your profile link — and get a QR code that opens your Instagram profile in one scan. Put it on your shop counter, packaging, business card or event banner. The profile link is stored directly in the code, so it keeps working, and you can style it with your colors, a logo and a “Follow us” frame.",
+      "linkText": "Instagram QR code",
+      "blurb": "Open your Instagram profile in one scan.",
+      "howToTitle": "How to create a Instagram QR code",
+      "steps": [
+        "Type your Instagram username, or paste your profile link.",
+        "Check the link we built in the preview.",
+        "Add a style and a “Follow us” frame.",
+        "Download and print or share it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Can I paste my full profile link?",
+          "a": "Yes. Paste the link, @username or just the username — we turn them all into the same profile link."
+        },
+        {
+          "q": "Is this different from Instagram's own QR code?",
+          "a": "Instagram's code is a picture inside the app. Ours is a standard QR code you can style, print at any size and download as SVG."
+        },
+        {
+          "q": "Does it work if the person doesn't have the app?",
+          "a": "Yes. The profile opens in the browser if the app isn't installed."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "youtube": {
+      "title": "Free YouTube QR Code Generator · PakkaQR",
+      "description": "Make a QR code that opens your YouTube profile. Type your username or paste your profile link. Free, no signup, no watermark, never expires.",
+      "h1": "YouTube QR Code Generator",
+      "intro": "Grow your YouTube following from the real world. Type your username — or paste your profile link — and get a QR code that opens your YouTube profile in one scan. Put it on your shop counter, packaging, business card or event banner. The profile link is stored directly in the code, so it keeps working, and you can style it with your colors, a logo and a “Follow us” frame.",
+      "linkText": "YouTube QR code",
+      "blurb": "Open your YouTube profile in one scan.",
+      "howToTitle": "How to create a YouTube QR code",
+      "steps": [
+        "Type your YouTube username, or paste your profile link.",
+        "Check the link we built in the preview.",
+        "Add a style and a “Follow us” frame.",
+        "Download and print or share it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Can I paste my full profile link?",
+          "a": "Yes. Paste the link, @username or just the username — we turn them all into the same profile link."
+        },
+        {
+          "q": "Can I link to a channel handle?",
+          "a": "Yes. Enter your @handle and we build the youtube.com/@handle link."
+        },
+        {
+          "q": "Does it work if the person doesn't have the app?",
+          "a": "Yes. The profile opens in the browser if the app isn't installed."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "facebook": {
+      "title": "Free Facebook QR Code Generator · PakkaQR",
+      "description": "Make a QR code that opens your Facebook profile. Type your username or paste your profile link. Free, no signup, no watermark, never expires.",
+      "h1": "Facebook QR Code Generator",
+      "intro": "Grow your Facebook following from the real world. Type your username — or paste your profile link — and get a QR code that opens your Facebook profile in one scan. Put it on your shop counter, packaging, business card or event banner. The profile link is stored directly in the code, so it keeps working, and you can style it with your colors, a logo and a “Follow us” frame.",
+      "linkText": "Facebook QR code",
+      "blurb": "Open your Facebook profile in one scan.",
+      "howToTitle": "How to create a Facebook QR code",
+      "steps": [
+        "Type your Facebook username, or paste your profile link.",
+        "Check the link we built in the preview.",
+        "Add a style and a “Follow us” frame.",
+        "Download and print or share it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Can I paste my full profile link?",
+          "a": "Yes. Paste the link, @username or just the username — we turn them all into the same profile link."
+        },
+        {
+          "q": "Can I link to a Facebook Page?",
+          "a": "Yes. Use the Page's username (from facebook.com/username) or paste the Page link."
+        },
+        {
+          "q": "Does it work if the person doesn't have the app?",
+          "a": "Yes. The profile opens in the browser if the app isn't installed."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "linkedin": {
+      "title": "Free LinkedIn QR Code Generator · PakkaQR",
+      "description": "Make a QR code that opens your LinkedIn profile. Type your username or paste your profile link. Free, no signup, no watermark, never expires.",
+      "h1": "LinkedIn QR Code Generator",
+      "intro": "Grow your LinkedIn following from the real world. Type your username — or paste your profile link — and get a QR code that opens your LinkedIn profile in one scan. Put it on your shop counter, packaging, business card or event banner. The profile link is stored directly in the code, so it keeps working, and you can style it with your colors, a logo and a “Follow us” frame.",
+      "linkText": "LinkedIn QR code",
+      "blurb": "Open your LinkedIn profile in one scan.",
+      "howToTitle": "How to create a LinkedIn QR code",
+      "steps": [
+        "Type your LinkedIn username, or paste your profile link.",
+        "Check the link we built in the preview.",
+        "Add a style and a “Follow us” frame.",
+        "Download and print or share it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Can I paste my full profile link?",
+          "a": "Yes. Paste the link, @username or just the username — we turn them all into the same profile link."
+        },
+        {
+          "q": "Can I link to a company page?",
+          "a": "Yes. Choose “Company page”, or paste a linkedin.com/company/… link and we'll detect it."
+        },
+        {
+          "q": "Does it work if the person doesn't have the app?",
+          "a": "Yes. The profile opens in the browser if the app isn't installed."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "telegram": {
+      "title": "Free Telegram QR Code Generator · PakkaQR",
+      "description": "Make a QR code that opens your Telegram profile. Type your username or paste your profile link. Free, no signup, no watermark, never expires.",
+      "h1": "Telegram QR Code Generator",
+      "intro": "Grow your Telegram following from the real world. Type your username — or paste your profile link — and get a QR code that opens your Telegram profile in one scan. Put it on your shop counter, packaging, business card or event banner. The profile link is stored directly in the code, so it keeps working, and you can style it with your colors, a logo and a “Follow us” frame.",
+      "linkText": "Telegram QR code",
+      "blurb": "Open your Telegram profile in one scan.",
+      "howToTitle": "How to create a Telegram QR code",
+      "steps": [
+        "Type your Telegram username, or paste your profile link.",
+        "Check the link we built in the preview.",
+        "Add a style and a “Follow us” frame.",
+        "Download and print or share it."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Can I paste my full profile link?",
+          "a": "Yes. Paste the link, @username or just the username — we turn them all into the same profile link."
+        },
+        {
+          "q": "Can I link to a channel or group?",
+          "a": "Yes, if it has a public username. The code opens t.me/username."
+        },
+        {
+          "q": "Does it work if the person doesn't have the app?",
+          "a": "Yes. The profile opens in the browser if the app isn't installed."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "review": {
+      "title": "Free Google Review QR Code · PakkaQR",
+      "description": "Get more Google reviews: make a QR code that opens your review form. Paste your review link, print it at the counter. Free, never expires.",
+      "h1": "Google Review QR Code Generator",
+      "intro": "Happy customers are more likely to leave a review when it takes one scan. Paste your Google review link and get a QR code that opens the review form for your business. Print it on receipts, table tents or the counter. To find your link, open your Google Business Profile, choose “Ask for reviews” and copy the link it gives you.",
+      "linkText": "Google review QR code",
+      "blurb": "Collect more reviews with one scan.",
+      "howToTitle": "How to create a Google review QR code",
+      "steps": [
+        "In your Google Business Profile, choose “Ask for reviews” and copy the link.",
+        "Paste it here.",
+        "Add a “Review us” frame and download."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Where do I get my review link?",
+          "a": "Search for your business on Google while signed in, or open Google Business Profile, then choose “Ask for reviews” or “Share review form” and copy the link."
+        },
+        {
+          "q": "Is a g.page short link OK?",
+          "a": "Yes. It's Google's own short link and points to your business, so it won't expire like a QR service's redirect."
+        },
+        {
+          "q": "Can I offer something in return for reviews?",
+          "a": "Google's policies don't allow incentives for reviews. Simply ask happy customers."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "appstore": {
+      "title": "Free App Store / Play Store QR Code · PakkaQR",
+      "description": "Create a QR code that opens your app in Google Play or the App Store. Free app download QR code generator, no signup, never expires.",
+      "h1": "App Download QR Code Generator",
+      "intro": "Send people straight to your app's store page. Paste your Google Play link and your App Store link, choose which one the code should open, and download. A QR code can hold only one link, so if you need both stores, print two codes side by side — or point one code at a page on your website that links to both.",
+      "linkText": "App download QR code",
+      "blurb": "Open your app's store page.",
+      "howToTitle": "How to create an app download QR code",
+      "steps": [
+        "Paste your Google Play and App Store links.",
+        "Choose which link this code opens.",
+        "Download — make a second code for the other store if needed."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Can one QR code open the right store automatically?",
+          "a": "Not without a redirect server, which is what makes other codes expire. Use two codes, or link to a page on your own site that shows both store buttons."
+        },
+        {
+          "q": "Where do I find my app's store link?",
+          "a": "Open your app in the store on a computer and copy the address from the browser, or use the store's Share button."
+        },
+        {
+          "q": "Can I change the code after printing it?",
+          "a": "No. A static code holds its data inside the pattern, so it can't be edited. If you might change the destination later, point the code to a page you control, like your own website, and update that page instead."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "logo": {
+      "title": "Free QR Code with Logo (No Watermark) · PakkaQR",
+      "description": "Add your logo to a QR code for free — no watermark, no signup. We check it still scans before you download. PNG, SVG and PDF.",
+      "h1": "QR Code Generator with Logo",
+      "intro": "Put your logo in the middle of your QR code and match it to your brand colors — free, with no watermark. Upload a PNG, JPG, SVG or WebP image (or pick one of our simple icons), then adjust its size and the clear space around it. Error correction is raised automatically so the code can still be read, and our built-in scan test confirms it works before you download.",
+      "linkText": "QR code with logo",
+      "blurb": "Add your logo — no watermark.",
+      "howToTitle": "How to create a QR code with a logo",
+      "steps": [
+        "Enter your link or other content.",
+        "Open “Logo” and upload your image.",
+        "Adjust the size until the status says “Verified”.",
+        "Download as SVG for print or PNG for screens."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Will a logo stop my code from scanning?",
+          "a": "A logo covers part of the code. QR codes can repair some damage, so small logos are fine. We raise error correction to High and test every change — if it might not scan, we tell you and offer a fix."
+        },
+        {
+          "q": "How big can my logo be?",
+          "a": "Up to 30% of the code's width. 20–25% is a safe choice."
+        },
+        {
+          "q": "Is my logo uploaded anywhere?",
+          "a": "No. Your image is processed in your browser and never leaves your device."
+        },
+        {
+          "q": "Can I use an SVG logo?",
+          "a": "Yes. For safety, SVG logos are converted to a high-resolution image first, which removes any hidden scripts."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "batch": {
+      "title": "Free Bulk QR Code Generator from CSV · PakkaQR",
+      "description": "Make hundreds of QR codes at once from a CSV file. Download a ZIP of PNGs or SVGs, plus an optional PDF. Free, no signup, runs in your browser.",
+      "h1": "Bulk QR Code Generator (CSV)",
+      "intro": "Need a code for every table, product, employee or guest? Upload a CSV file (or paste rows from a spreadsheet), match your columns, and download a ZIP with one QR code per row — in PNG, SVG or both, plus an optional PDF with every code. Every code uses your chosen design. It all runs in your browser, so your list is never uploaded, and rows with mistakes are listed so you can fix them.",
+      "linkText": "Bulk QR codes",
+      "blurb": "Hundreds of codes from one CSV.",
+      "howToTitle": "How to make QR codes in bulk",
+      "steps": [
+        "Choose the QR type and download the example CSV if you need a template.",
+        "Upload your CSV or paste the rows.",
+        "Match each field to a column and check the preview.",
+        "Generate and download the ZIP."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "How many codes can I make at once?",
+          "a": "There is no limit. Up to 1,000 rows works well even on phones; larger files work on most computers."
+        },
+        {
+          "q": "Can I name each file?",
+          "a": "Yes. Add a “filename” column and map it to “File name”."
+        },
+        {
+          "q": "What happens to rows with errors?",
+          "a": "They're skipped and listed on screen, and an errors.csv file in the ZIP explains each one. The rest are generated."
+        },
+        {
+          "q": "Is my spreadsheet uploaded?",
+          "a": "No. The file is read and processed in your browser only."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "scanner": {
+      "title": "Free Online QR Code Scanner · PakkaQR",
+      "description": "Scan a QR code from an image, screenshot or your camera — right in your browser. See what's inside before you open it. Free and private.",
+      "h1": "Scan a QR Code from Image or Camera",
+      "intro": "Read any QR code without installing an app. Use your camera, upload a photo or screenshot, or paste an image. You'll see exactly what's inside — a link, WiFi details, a contact, a payment request — and we'll warn you about risky links before you open them. Links are never opened automatically. Decoding happens on your device: no image or video is uploaded.",
+      "linkText": "QR code scanner",
+      "blurb": "See what's inside any code.",
+      "howToTitle": "How to scan a QR code online",
+      "steps": [
+        "Tap “Scan with camera”, or upload or paste an image.",
+        "Read the content and the detected type.",
+        "Copy it, or open a link after checking the full address."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Do you upload my photo or camera video?",
+          "a": "No. Everything is decoded in your browser."
+        },
+        {
+          "q": "Why doesn't it open links automatically?",
+          "a": "QR codes can hide dangerous links. We show the full address and any warnings first, and open it only when you choose."
+        },
+        {
+          "q": "It can't find the code in my photo. What can I do?",
+          "a": "Use a sharper photo, closer to the code, with the whole code visible and good light. Screenshots usually work best."
+        },
+        {
+          "q": "Can it read WiFi codes?",
+          "a": "Yes. We show the network name and password so you can type them in if needed."
+        }
+      ]
+    },
+    "expiry": {
+      "title": "QR Code Expiry Checker · Is My QR Dynamic?",
+      "description": "Will your QR code stop working? Upload a photo and find out if it's static or goes through a dynamic QR service that can expire. Free and private.",
+      "h1": "Will My QR Code Expire?",
+      "intro": "Printed hundreds of menus or cards with a QR code from a “free” site? Find out if they could stop working. Upload a photo or screenshot of your code (or use your camera) and we'll tell you whether it's static — data stored inside the code — or goes through a known dynamic QR service or short link that can be switched off. We never open the link to check, so what you scan stays private.",
+      "linkText": "QR expiry checker",
+      "blurb": "Find out if a code can stop working.",
+      "howToTitle": "How to check if your QR code will expire",
+      "steps": [
+        "Upload a clear photo or screenshot of your QR code, or scan it with your camera.",
+        "Read the verdict: static, likely dynamic, or unknown short link.",
+        "If it may expire, recreate it as a forever code."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "How do you know if a code is dynamic?",
+          "a": "We read the code and compare the web address with a list of known dynamic QR services and link shorteners. The list is open source and each entry has a source."
+        },
+        {
+          "q": "Can you tell me where a short link really goes?",
+          "a": "No — finding out would mean visiting the link, which would reveal what you scanned. Open it yourself on your phone and copy the final address."
+        },
+        {
+          "q": "My code is dynamic. What should I do?",
+          "a": "Open it while it still works, copy the real destination, and make a new static code here. Replace the printed codes when you can."
+        },
+        {
+          "q": "Are all short links bad?",
+          "a": "Not always, but they depend on someone else's service. A direct link to your own site is the most reliable."
+        }
+      ]
+    },
+    "print": {
+      "title": "Print QR Code Stickers & Posters Free · PakkaQR",
+      "description": "Print QR codes as sticker sheets, table tents, posters, business cards and WiFi cards. Exact sizes, print-ready PDF. Free, no signup.",
+      "h1": "Print QR Stickers, Posters & Table Tents",
+      "intro": "Turn your QR code into something you can stick, stand or hang. Choose a layout — a sheet of stickers from 2 to 10 cm, an A4 table tent that folds in half, a poster with a big headline, 10 business cards per sheet, or WiFi cards with the password printed beside the code. You get a print-ready PDF with codes at the exact size you picked. Remember to print at 100% (“Actual size”).",
+      "linkText": "Print layouts",
+      "blurb": "Stickers, tents, posters and cards.",
+      "howToTitle": "How to print QR codes",
+      "steps": [
+        "Enter what the code should do.",
+        "Choose a layout and adjust size and text.",
+        "Download the PDF and print at 100% scale."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Why are my printed codes the wrong size?",
+          "a": "Your printer dialog is probably set to “Fit to page”. Choose “Actual size” or 100% scale."
+        },
+        {
+          "q": "What size should a QR code be?",
+          "a": "At least 2 cm for short links scanned up close. For posters read from further away, use about 1 cm of code per 10 cm of distance."
+        },
+        {
+          "q": "Can I print on sticker paper?",
+          "a": "Yes. Choose the sticker sheet, set the code size and gap to match your paper, and turn on cut lines if helpful."
+        },
+        {
+          "q": "Which fonts are used?",
+          "a": "Text is drawn with Inter and Noto Sans Devanagari, so Hindi prints correctly too."
+        }
+      ]
+    },
+    "restaurant": {
+      "title": "Free Restaurant Menu QR Code (Never Expires)",
+      "description": "Make a QR code for your restaurant menu that never expires — no monthly fee. Add your logo and a “Menu” frame, print table tents. Free.",
+      "h1": "QR Code for Restaurant Menu",
+      "intro": "Many restaurants learned the hard way that “free” menu QR codes stop working when a trial ends — right in the middle of dinner service. Make one that won't. Put your menu online (your website, a PDF in your cloud storage or a Google Doc), paste the link, and get a static QR code with a “Menu” frame ready for table tents. Add a WiFi code and a Google review code too.",
+      "linkText": "Restaurant menu QR",
+      "blurb": "Menus, WiFi and reviews for your tables.",
+      "howToTitle": "How to make a menu QR code",
+      "steps": [
+        "Put your menu online and copy its link.",
+        "Paste the link — we've added a “Menu” frame for you.",
+        "Match your brand colors and logo.",
+        "Print table tents from the Print page."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Where should I host my menu?",
+          "a": "Any page you control: your website, a shared PDF in Google Drive or Dropbox, or a Google Doc. Then you can update the menu without changing the code."
+        },
+        {
+          "q": "Will my menu QR code ever stop working?",
+          "a": "Not because of us. It works as long as the page it points to is online."
+        },
+        {
+          "q": "Can I put WiFi on the same card?",
+          "a": "Make a separate WiFi code and print both. One QR code can only do one thing."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "wedding": {
+      "title": "Free Wedding QR Codes · Location, RSVP, Photos",
+      "description": "QR codes for wedding invitations and venues: directions, calendar events, RSVP forms and photo albums. Free, never expire, add a beautiful frame.",
+      "h1": "QR Codes for Weddings & Events",
+      "intro": "Add a touch of convenience to your wedding cards and signage. Help guests find the venue with a location code, let them save the date with a calendar code, collect RSVPs with a form link, and gather everyone's photos with a shared album link. Choose elegant colors and a frame to match your invitation. Codes never expire, so they'll still work when you look back at your cards years later.",
+      "linkText": "Wedding QR codes",
+      "blurb": "Venue, RSVP, calendar and photos.",
+      "howToTitle": "How to make wedding QR codes",
+      "steps": [
+        "Start with the venue location (paste a Google Maps link).",
+        "Make more codes for the event date, RSVP form or photo album.",
+        "Pick a style that matches your invitation.",
+        "Download SVG for your card designer, or print from the Print page."
+      ],
+      "faqTitle": "Questions and answers",
+      "faq": [
+        {
+          "q": "Which codes are most useful on a wedding card?",
+          "a": "Venue location and an RSVP link. A calendar code for the date and a photo-album link are nice extras."
+        },
+        {
+          "q": "Will my printer accept the file?",
+          "a": "Yes. SVG and PDF keep the code perfectly sharp at any size."
+        },
+        {
+          "q": "Can I use Hindi text in the frame label?",
+          "a": "Yes. Labels support Hindi and other scripts."
+        },
+        {
+          "q": "Is it really free, with no watermark?",
+          "a": "Yes. There's no trial, no signup, no watermark and no download limit. PakkaQR is open source and free forever."
+        }
+      ]
+    },
+    "article": {
+      "title": "Static vs Dynamic QR Codes: Which Never Expire?",
+      "description": "The difference between static and dynamic QR codes, why dynamic codes can stop working, and how to make codes that last forever.",
+      "h1": "Static vs Dynamic QR Codes Explained",
+      "intro": "Two QR codes can look the same and behave very differently. One holds your information directly and works forever. The other holds someone else's link — and can stop working the day a subscription ends.",
+      "linkText": "Static vs dynamic QR codes",
+      "blurb": "Why some QR codes stop working.",
+      "faqTitle": "Questions and answers",
+      "sections": [
+        {
+          "h": "What is a static QR code?",
+          "p": [
+            "A static QR code stores your content directly in its pattern: the web address, the WiFi password, the contact details. A phone reads it and acts on it with no other server involved.",
+            "Because nothing sits in the middle, a static code can't be switched off. It works as long as the thing it points to exists — your website, your UPI ID, your phone number."
+          ]
+        },
+        {
+          "h": "What is a dynamic QR code?",
+          "p": [
+            "A dynamic QR code stores a short link owned by a QR company. When someone scans it, the company's server redirects them to your real destination.",
+            "That lets you change the destination later and count scans — but your printed codes now depend on that company. If the plan lapses, the trial ends, the company changes its prices or shuts down, the redirect stops and every printed code breaks."
+          ]
+        },
+        {
+          "h": "Why do so many “free” generators make dynamic codes?",
+          "p": [
+            "Because it locks you in. Many sites make dynamic codes by default, let you print them, and then ask for payment once your menus, flyers and packaging are out in the world."
+          ]
+        },
+        {
+          "h": "Which should you use?",
+          "list": [
+            "Use static codes for anything printed: menus, packaging, cards, signs, invitations.",
+            "Need to change the destination later? Point a static code to a page you own and update that page.",
+            "Need scan statistics? Use analytics on your own website instead of a QR company's redirect."
+          ]
+        },
+        {
+          "h": "How to check an existing code",
+          "p": [
+            "Upload a photo of the code to our expiry checker. We read it and compare the address with a list of known dynamic-QR services and link shorteners — without visiting the link."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Do static QR codes expire?",
+          "a": "No. There's no service behind them that can expire."
+        },
+        {
+          "q": "Can I convert a dynamic code into a static one?",
+          "a": "Not the printed code itself. Open it while it still works, copy the final address and make a new static code with it."
+        },
+        {
+          "q": "Can a static code be tracked?",
+          "a": "Not by itself. You can see visits in your own website's analytics."
+        }
+      ]
+    },
+    "about": {
+      "title": "About PakkaQR · Free, Open-Source QR Codes",
+      "description": "PakkaQR is a free, open-source QR code generator. Codes never expire, nothing leaves your device, and there's no signup, tracking or watermark.",
+      "h1": "About PakkaQR",
+      "intro": "Pakka (पक्का / پکا) means solid, guaranteed. PakkaQR makes QR codes that work — and keep working.",
+      "linkText": "About PakkaQR",
+      "blurb": "Why we built it and how it stays free.",
+      "sections": [
+        {
+          "h": "Why we built it",
+          "p": [
+            "Too many people print menus, cards and posters with a “free” QR code, only to find it stops working until they pay. PakkaQR fixes that by making static codes only: your data lives in the code, not on our server.",
+            "We also think a QR generator shouldn't need your email address, track you, or stamp a watermark on your logo."
+          ]
+        },
+        {
+          "h": "Our promises",
+          "list": [
+            "Codes never expire — static codes only.",
+            "Nothing leaves your device — no uploads, no tracking, no cookies.",
+            "No signup, no watermark, no paywall, no limits.",
+            "Open source, so anyone can check these promises."
+          ]
+        },
+        {
+          "h": "How it stays free",
+          "p": [
+            "PakkaQR is a static website with no servers to run, so it costs very little. If it helped you, you can star the project on GitHub or support it with a small donation. There are no ads."
+          ]
+        },
+        {
+          "h": "Get involved",
+          "p": [
+            "New QR types, translations, presets, frames and redirect-domain entries are all welcome. See CONTRIBUTING.md in the repository."
+          ]
+        }
+      ],
+      "faq": []
+    },
+    "privacy": {
+      "title": "Privacy · PakkaQR",
+      "description": "PakkaQR's privacy promise in plain language: nothing you type or upload leaves your device. No cookies, no analytics, no third-party requests.",
+      "h1": "Privacy, in plain language",
+      "intro": "Short version: we don't collect anything. Your QR codes are made on your device and nothing you type or upload is sent to us or anyone else.",
+      "linkText": "Privacy",
+      "blurb": "Nothing you type leaves your device.",
+      "sections": [
+        {
+          "h": "What happens to what I type?",
+          "p": [
+            "Everything — links, WiFi passwords, contact details, CSV files, logos, photos of codes — is processed by your browser on your device. It is never sent over the internet."
+          ]
+        },
+        {
+          "h": "Do you use cookies or analytics?",
+          "p": [
+            "No cookies, no analytics, no fingerprinting and no third-party scripts, fonts or CDNs. All files are served from this site."
+          ]
+        },
+        {
+          "h": "What is stored on my device?",
+          "list": [
+            "Your last design (colors, style, logo) so it's there next time — never your content.",
+            "Your theme and language choice.",
+            "Saved designs, if you save any.",
+            "Your recent codes, only if you turn on history. It's off by default and you can clear it any time."
+          ]
+        },
+        {
+          "h": "The camera",
+          "p": [
+            "The scanner uses your camera only while it's on, only after you allow it, and video frames never leave your device."
+          ]
+        },
+        {
+          "h": "Links in scanned codes",
+          "p": [
+            "We never open or check links on your behalf. The expiry checker compares addresses with a built-in list instead of visiting them."
+          ]
+        },
+        {
+          "h": "Hosting",
+          "p": [
+            "The site is plain static files. Like any website, the hosting provider may keep basic server logs (such as IP addresses) for security. Those logs never contain anything you type into PakkaQR."
+          ]
+        },
+        {
+          "h": "Verify it yourself",
+          "p": [
+            "PakkaQR is open source. You can read the code, or open your browser's developer tools and watch the Network tab: generating a code makes no requests."
+          ]
+        }
+      ],
+      "faq": []
+    },
+    "faq": {
+      "title": "QR Code FAQ · PakkaQR",
+      "description": "Answers about free QR codes that never expire: static vs dynamic, printing sizes, logos, WiFi, UPI, privacy and more.",
+      "h1": "Frequently asked questions",
+      "intro": "Everything people usually ask about PakkaQR and QR codes in general.",
+      "linkText": "FAQ",
+      "blurb": "Answers to common questions.",
+      "faqTitle": "All questions",
+      "sections": [],
+      "faq": [
+        {
+          "q": "Do these QR codes really never expire?",
+          "a": "Yes. The data is stored inside the code itself. Nothing depends on our website — even if PakkaQR disappeared, your code would keep working."
+        },
+        {
+          "q": "Is it really free?",
+          "a": "Yes, completely. No trial, no limits, no watermark, no signup."
+        },
+        {
+          "q": "Do you see or store what I type?",
+          "a": "No. Everything happens in your browser. Nothing is uploaded. You can check the open-source code."
+        },
+        {
+          "q": "Can I edit a code after printing?",
+          "a": "No — that's the trade-off of a code that never expires. Point it to a page you control if you need flexibility."
+        },
+        {
+          "q": "Can I track how many people scanned it?",
+          "a": "Not with a static code. Tracking requires a redirect server, which is exactly what makes other codes expire."
+        },
+        {
+          "q": "Can I use the codes commercially?",
+          "a": "Yes, for anything. No attribution needed."
+        },
+        {
+          "q": "How do I check if my existing QR code will expire?",
+          "a": "Use our free expiry checker — upload a photo of the code."
+        },
+        {
+          "q": "Which format should I download for printing?",
+          "a": "SVG for printing at any size; PNG at 2048 px or more is also fine."
+        },
+        {
+          "q": "What's the smallest size I can print?",
+          "a": "About 2 cm for a short link. Denser codes need more space; we show a minimum print size when a code gets dense."
+        },
+        {
+          "q": "Why does my code say “might be hard to scan”?",
+          "a": "Common reasons are low contrast, a large logo, a narrow white border or a lot of data. Each warning has a “Fix it” button."
+        },
+        {
+          "q": "Which formats can I download?",
+          "a": "PNG (256 to 4096 px), SVG, PDF, JPEG and WebP. You can also copy the image or share it on mobile."
+        },
+        {
+          "q": "Does PakkaQR work offline?",
+          "a": "Yes. After your first visit you can install it as an app, and it works without internet."
+        },
+        {
+          "q": "Is PakkaQR affiliated with NPCI or DENSO WAVE?",
+          "a": "No. QR Code is a registered trademark of DENSO WAVE INCORPORATED and UPI is a trademark of NPCI."
+        }
+      ]
+    },
+    "notFound": {
+      "title": "Page not found · PakkaQR",
+      "description": "This page doesn't exist. Make a free QR code that never expires instead.",
+      "h1": "This page doesn't exist",
+      "intro": "But your QR code can — forever. Head back to the generator.",
+      "home": "Go to the generator",
+      "homeHi": "हिन्दी में खोलें"
+    }
+  }
+}

@@ -6,10 +6,12 @@ import { useT } from '../common/i18n';
 interface Props {
   value: QrType;
   onChange: (type: QrType) => void;
+  /** Keep the heading for screen readers only (when a section heading already says it). */
+  hideHeading?: boolean;
 }
 
 /** Horizontal-scrolling chips (a radio group), with rarer types in a select. */
-export function TypeTabs({ value, onChange }: Props) {
+export function TypeTabs({ value, onChange, hideHeading = false }: Props) {
   const t = useT();
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
   const onKey = (e: KeyboardEvent, i: number) => {
@@ -23,7 +25,10 @@ export function TypeTabs({ value, onChange }: Props) {
   const isPrimary = primaryTypes.includes(value);
   return (
     <div>
-      <h2 id="qr-type-heading" className="mb-2 text-base font-semibold">
+      <h2
+        id="qr-type-heading"
+        className={hideHeading ? 'visually-hidden' : 'mb-2 text-base font-semibold'}
+      >
         {t('generator.chooseType')}
       </h2>
       <div className="flex items-start gap-2">
