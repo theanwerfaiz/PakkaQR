@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+# Builds the static site with the repository name as base path
+# (https://<owner>.github.io/<repo>/) and publishes it to GitHub Pages.
+# Enable it under Settings → Pages → Source: GitHub Actions.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
+          PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          PUBLIC_GITHUB_URL: ${{ vars.PUBLIC_GITHUB_URL || format('https://github.com/{0}', github.repository) }}
+          PUBLIC_SPONSOR_URL: ${{ vars.PUBLIC_SPONSOR_URL }}
+          PUBLIC_UPI_DONATE_ID: ${{ vars.PUBLIC_UPI_DONATE_ID }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
