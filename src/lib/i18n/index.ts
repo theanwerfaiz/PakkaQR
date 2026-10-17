@@ -22,7 +22,8 @@ export const localeInfo: Record<Locale, LocaleInfo> = {
 export type Dict = { [key: string]: string | Dict };
 export type Vars = Record<string, string | number>;
 
-const uiDicts: Record<Locale, Dict> = { en: en as Dict, hi: hi as Dict };
+// `_meta` holds a list (reviewed keys); lookups skip it.
+const uiDicts: Record<Locale, Dict> = { en: en as unknown as Dict, hi: hi as unknown as Dict };
 
 export function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && (locales as readonly string[]).includes(value);

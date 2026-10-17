@@ -6,7 +6,8 @@ import { createT, defaultLocale, type Dict, type Locale, type TFunction } from '
  * Long-form page copy. Only used at build time in .astro pages, so it
  * never ships in the JavaScript bundle.
  */
-const contentDicts: Record<Locale, Dict> = { en: en as Dict, hi: hi as Dict };
+// Content holds arrays (steps, FAQs) as well as strings; lookups go through createT or contentList.
+const contentDicts: Record<Locale, Dict> = { en: en as unknown as Dict, hi: hi as unknown as Dict };
 
 export function useContent(locale: Locale): TFunction {
   return createT(contentDicts[locale], contentDicts[defaultLocale]);
