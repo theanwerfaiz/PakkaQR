@@ -45,8 +45,8 @@ export function useFontsReady(): boolean {
     }
     let live = true;
     void Promise.all([
-      document.fonts.load('700 16px "Inter Variable"'),
-      document.fonts.load('700 16px "Noto Sans Devanagari"', 'क'),
+      document.fonts.load('700 16px "Anek Latin Variable"'),
+      document.fonts.load('700 16px "Anek Devanagari Variable"', 'क'),
     ])
       .catch(() => undefined)
       .then(() => document.fonts.ready)
@@ -79,4 +79,20 @@ export function isTyping(target: EventTarget | null): boolean {
   const el = target as HTMLElement | null;
   if (!el) return false;
   return el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName);
+}
+
+/**
+ * A short vibration for moments that matter (fixed, saved). Respects the
+ * Personalise switches; silently does nothing where vibration isn't
+ * supported (iPhone, desktop).
+ */
+export function buzz(pattern: number | number[]): void {
+  if (typeof navigator === 'undefined' || typeof navigator.vibrate !== 'function') return;
+  try {
+    if (localStorage.getItem('pakkaqr:haptics') === 'off') return;
+  } catch {
+    // Storage blocked: vibration stays on (the OS still controls it).
+  }
+  if (document.documentElement.dataset.motion === 'reduce') return;
+  navigator.vibrate(pattern);
 }

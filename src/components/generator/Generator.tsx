@@ -37,12 +37,20 @@ import { I18nProvider, useI18n } from '../common/i18n';
 import { ContentForm } from '../forms/ContentForm';
 import { CustomizePanel } from './CustomizePanel';
 import { ExportPanel, type ExportRequest } from './ExportPanel';
+import { PayloadBox } from './PayloadBox';
 import { Preview } from './Preview';
 import { SavedPanel } from './SavedPanel';
+import { ScanMe } from './ScanMe';
 import { ScanStatus } from './ScanStatus';
+import { ShareStudio } from './ShareStudio';
+import { SmartInput } from './SmartInput';
+import { SplitBill } from './SplitBill';
+import { Stamp, type StampStatus } from './Stamp';
+import { Starters } from './Starters';
 import { TypeTabs } from './TypeTabs';
 import {
   browserCanvas,
+  buzz,
   isTyping,
   measureContext,
   useDebounced,
@@ -58,6 +66,8 @@ export interface GeneratorProps {
   /** Use-case pages start with a frame (label already translated). */
   frame?: { id: string; label: string };
   openPanel?: Panel;
+  /** Home page: the paste-anything box and one-tap starters. */
+  hero?: boolean;
 }
 
 export default function Generator(props: GeneratorProps) {
@@ -79,7 +89,13 @@ const ALL_FIXES_ORDER: FixId[] = [
   'shrinkLogo',
 ];
 
-function GeneratorApp({ initialType, initialFields, frame, openPanel }: GeneratorProps) {
+function GeneratorApp({
+  initialType,
+  initialFields,
+  frame,
+  openPanel,
+  hero = false,
+}: GeneratorProps) {
   const { t } = useI18n();
   const toast = useToast();
   const [state, dispatch] = useReducer(reducer, undefined, () =>
@@ -96,6 +112,10 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
   const [helpOpen, setHelpOpen] = useState(false);
   const [historyVersion, setHistoryVersion] = useState(0);
   const [caps, setCaps] = useState({ copy: false, share: false });
+  const [splitOpen, setSplitOpen] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [scanMe, setScanMe] = useState(false);
+  const [spin, setSpin] = useState(0);
 
   // ------------------------------------------------------------ restore style
   useEffect(() => {
@@ -212,6 +232,18 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
   const issues: Issue[] = fresh ? [...staticIssues, ...decodeIssue(scan.ok)] : staticIssues;
   const status = !geometry ? 'idle' : fresh ? overallStatus(issues) : 'checking';
 
+  // The stamp only changes when a verdict settles, so typing doesn't make it flicker.
+  const [settled, setSettled] = useState<StampStatus | null>(null);
+  useEffect(() => {
+    if (status === 'idle') setSettled(null);
+    else if (status !== 'checking') {
+      setSettled((prev) => {
+        if ((prev === 'risky' || prev === 'fail') && status === 'great') buzz(18);
+        return status;
+      });
+    }
+  }, [status]);
+
   // ------------------------------------------------------------ export
   const defaultName = defaultFileName(type);
   const baseName = cleanFileName(fileName, defaultName);
@@ -319,8 +351,11 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
           await shareImage(await raster('png', request.size), withExtension(baseName, 'png'));
           break;
       }
-      if (request.action !== 'copy' && request.action !== 'share')
+      if (request.action !== 'copy' && request.action !== 'share') {
         await afterExport({ type, fields }, payload);
+        buzz([12, 60, 12]);
+        setScanMe(true);
+      }
     } catch (e) {
       if (!(e instanceof DOMException && e.name === 'AbortError')) {
         toast({
@@ -383,21 +418,65 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
       ? t('generator.fixErrors')
       : undefined;
 
+  const focusTypes = () =>
+    document
+      .querySelector<HTMLElement>('[aria-labelledby="qr-type-heading"] [tabindex="0"]')
+      ?.focus();
+  const focusForm = () =>
+    setTimeout(
+      () =>
+        document
+          .querySelector<HTMLElement>(
+            '#generator-form input:not([type=hidden]), #generator-form textarea',
+          )
+          ?.focus(),
+      50,
+    );
+  const magic = () => {
+    setSpin((n) => n + 1);
+    buzz([20, 40, 20, 40, 60]);
+    toast({ text: t('smart.magic'), tone: 'success' });
+  };
+  const headline = design.frame?.label || t(`frame.defaultLabel.${type}`);
+  const shownStamp: StampStatus | null = settled ?? (status === 'checking' ? 'checking' : null);
+
   return (
     <div
-      className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start"
+      className="grid grid-cols-[minmax(0,1fr)] gap-x-14 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:items-start"
       data-testid="generator"
     >
-      <div className="space-y-4 lg:col-start-1">
+      <div className="flex flex-col gap-7 lg:col-start-1">
+        {hero && (
+          <>
+            <SmartInput
+              onDetect={(content) => dispatch({ kind: 'content', content })}
+              onMagic={magic}
+              onChangeType={focusTypes}
+            />
+            <Starters
+              design={design}
+              onStart={(content, d, starter) => {
+                dispatch({ kind: 'content', content });
+                setDesign(d);
+                setSplitOpen(!!starter.split);
+                focusForm();
+              }}
+            />
+          </>
+        )}
         <TypeTabs value={type} onChange={(next) => dispatch({ kind: 'type', type: next })} />
-        <section id="generator-form" aria-labelledby="details-heading" className="card p-4 sm:p-5">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-            <h2 id="details-heading" className="text-lg font-bold">
+        <section
+          id="generator-form"
+          aria-labelledby="details-heading"
+          className="rounded-[20px] border border-border bg-surface p-5 sm:p-6"
+        >
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
+            <h2 id="details-heading" className="text-2xl">
               {t('generator.details')}
             </h2>
             <button
               type="button"
-              className="btn btn-secondary btn-sm"
+              className="btn btn-ghost btn-sm"
               onClick={() => dispatch({ kind: 'example' })}
               data-testid="try-example"
             >
@@ -421,7 +500,19 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
             />
           </form>
           {type === 'upi' && (
-            <p className="mt-4 rounded-[10px] bg-surface-2 p-3 text-sm">{t('upi.check')}</p>
+            <div className="mt-5 flex flex-col gap-4">
+              <p className="note text-[0.95rem]">{t('upi.check')}</p>
+              <SplitBill
+                open={splitOpen}
+                onToggle={setSplitOpen}
+                onUse={(amount, note) => {
+                  dispatch({ kind: 'field', name: 'am', value: amount });
+                  dispatch({ kind: 'field', name: 'tn', value: note });
+                  dispatch({ kind: 'touch', name: 'am' });
+                  toast({ text: t('split.applied', { amount }), tone: 'success' });
+                }}
+              />
+            </div>
           )}
           {payload && (
             <p className="mt-4 text-sm text-muted" data-testid="payload-length">
@@ -440,24 +531,35 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
 
       <aside
         aria-labelledby="preview-heading"
-        className="lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1"
+        className="lg:sticky lg:top-6 lg:col-start-2 lg:row-span-2 lg:row-start-1"
       >
-        <div className="card space-y-4 p-4 sm:p-5">
+        <div className="flex flex-col gap-6">
           <h2 id="preview-heading" className="visually-hidden">
             {t('generator.previewHeading')}
           </h2>
-          <Preview
-            geometry={geometry}
-            logo={logoImage}
-            alt={alt}
-            transparent={design.transparentBg}
-            message={previewMessage}
-          />
+          <figure className="sheet relative mt-10 flex flex-col items-center gap-4 px-6 pt-12 pb-6 sm:px-8">
+            <Preview
+              geometry={geometry}
+              logo={logoImage}
+              alt={alt}
+              transparent={design.transparentBg}
+              message={previewMessage}
+            />
+            {shownStamp && (
+              <Stamp
+                status={shownStamp}
+                stampKey={shownStamp}
+                spin={spin}
+                className="absolute -top-14 right-3 sm:right-6"
+              />
+            )}
+          </figure>
           <ScanStatus
             status={status}
             issues={issues}
             onFix={(fix) => setDesign(applyFix(design, fix))}
           />
+          <PayloadBox payload={livePayload} />
           <ExportPanel
             ref={pngButton}
             disabled={!geometry}
@@ -469,9 +571,50 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
             canCopy={caps.copy}
             canShare={caps.share}
           />
+          <div className="grid gap-2 sm:grid-cols-2">
+            <button
+              type="button"
+              className="btn btn-stamp"
+              disabled={!geometry}
+              onClick={() => setShareOpen(true)}
+              data-testid="open-share"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="6" y="2" width="12" height="20" rx="2.5" />
+                <path d="M9.5 9h5v5h-5z" />
+              </svg>
+              {t('share.open')}
+            </button>
+            <a className="btn btn-secondary" href="#style">
+              {t('generator.goStyle')}
+            </a>
+          </div>
+          {scanMe && (
+            <ScanMe
+              onWorked={() => {
+                setSpin((n) => n + 1);
+                buzz([20, 40, 20]);
+              }}
+              onFix={() => {
+                fixAll();
+                setScanMe(false);
+              }}
+              onDismiss={() => setScanMe(false)}
+            />
+          )}
           <button
             type="button"
-            className="btn btn-ghost btn-sm w-full"
+            className="btn btn-ghost btn-sm self-center"
             onClick={() => setHelpOpen(true)}
           >
             {t('shortcuts.open')}
@@ -498,12 +641,17 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
       </div>
 
       {/* Mobile: sticky download bar */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface/95 p-3 backdrop-blur lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface/95 px-4 py-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-xl items-center gap-3">
-          <span className="flex-1 truncate text-sm" aria-hidden="true">
-            {status === 'great' ? '✅' : status === 'risky' ? '⚠️' : status === 'fail' ? '❌' : ''}{' '}
-            {t(`type.${type}`)}
+          <span className="flex min-w-0 flex-1 flex-col leading-tight" aria-hidden="true">
+            <span className="truncate font-semibold">{t(`type.${type}`)}</span>
+            <span className="truncate text-sm text-muted">
+              {status === 'idle' ? t('generator.barIdle') : t(`status.short.${status}`)}
+            </span>
           </span>
+          <a className="btn btn-secondary btn-sm min-h-12" href="#style">
+            {t('generator.styleShort')}
+          </a>
           <button
             type="button"
             className="btn btn-primary"
@@ -514,6 +662,19 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
           </button>
         </div>
       </div>
+
+      <ShareStudio
+        open={shareOpen}
+        onClose={() => setShareOpen(false)}
+        geometry={geometry}
+        logo={logoImage}
+        codeColor={design.gradient ? design.gradient.colors[0] : design.fg}
+        transparent={design.transparentBg}
+        bg={design.bg}
+        defaultHeadline={headline}
+        defaultSubline={summary}
+        fileBase={baseName}
+      />
 
       <Modal
         open={pending !== null}

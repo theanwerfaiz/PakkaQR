@@ -17,6 +17,48 @@
       "tradeoff": "a static code can't be edited after printing. Tip: if you might change the destination later, point the code to a page you control and update that page instead.",
       "checkLink": "Check if your existing QR code will expire",
       "articleLink": "Static vs dynamic QR codes, explained"
+    },
+    "h1Em": "never",
+    "lead": "Paste a link, a UPI ID, a phone number or WiFi details. No account, no tracking, no watermark — and no server in between to switch it off.",
+    "rented": {
+      "kicker": "Static vs dynamic",
+      "title": "Most “free” QR codes are rented. Ours are yours.",
+      "body": "Many QR sites hand you a code that points at their server. When the trial ends, they switch it off — and the menus, cards and posters you printed stop working. A PakkaQR code holds your details inside the pattern, so there's nothing to switch off.",
+      "theirsTitle": "A rented code",
+      "theirs": [
+        "Goes through their server first",
+        "Stops when the trial or plan ends",
+        "Tracks every scan",
+        "Needs an account and a card"
+      ],
+      "oursTitle": "A Pakka code",
+      "ours": [
+        "Holds your link or details itself",
+        "Works for as long as the print lasts",
+        "No tracking — we never see it",
+        "No signup, no watermark, no limits"
+      ]
+    },
+    "tools": {
+      "title": "More tools, same promise",
+      "items": [
+        {
+          "title": "Will my QR code expire?",
+          "body": "Upload a photo of any QR code and find out if it is rented — then make a permanent replacement."
+        },
+        {
+          "title": "Hundreds of codes from one spreadsheet",
+          "body": "Bulk-create from a CSV: product tags, table numbers, ID cards. Download them all as a ZIP or PDF."
+        },
+        {
+          "title": "Print sheets that come out the right size",
+          "body": "Stickers, table tents, posters, business cards and WiFi cards — as exact-size PDFs."
+        },
+        {
+          "title": "Scan before you tap",
+          "body": "See exactly what a code holds — and get warned about look-alike links — before anything opens."
+        }
+      ]
     }
   },
   "diagram": {
@@ -35,7 +77,7 @@
     "home": {
       "title": "Free QR Code Generator That Never Expires · PakkaQR",
       "description": "Make free QR codes that never expire — for links, WiFi, UPI, WhatsApp and contact cards. No signup, no tracking, no watermark. Runs in your browser.",
-      "h1": "Free QR Code Generator — Codes That Never Expire",
+      "h1": "A free QR code that will never stop working.",
       "intro": "No signup. No tracking. No watermark. Your code is made right here in your browser — and it works forever. Create QR codes for websites, WiFi, UPI payments, WhatsApp, contact cards, locations and events. Pick a style, add your logo and a “Scan me” frame, check that it scans, then download a sharp PNG, SVG or PDF. Nothing you type ever leaves your device.",
       "linkText": "QR code generator",
       "blurb": "Make any kind of QR code in seconds.",

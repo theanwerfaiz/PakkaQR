@@ -13,12 +13,15 @@ Many "free" QR generators create **dynamic** codes. The printed pattern holds _t
 ## Features
 
 - **16 QR types:** website, text, WiFi, UPI payment, WhatsApp, phone, SMS, email, contact card (vCard), location, calendar event, social profiles (Instagram, YouTube, Facebook, LinkedIn, Telegram, X, TikTok, Threads, Snapchat, GitHub), app download, Google review, MeCard and crypto.
-- **Design:** colours, gradients, six dot styles, corner styles, your logo (or a built-in icon), six frames with a "Scan me" label, and 12 presets.
-- **Built-in scan test:** every change is rendered and decoded in the browser. You see ✅ Verified, ⚠️ Risky or ❌ Won't scan, with one-click fixes.
+- **Paste anything:** one box that recognises links, UPI IDs, phone numbers, WiFi details and more, plus one-tap starters (link in bio, pay me, split the bill, guest WiFi, playlist, party invite).
+- **Design:** colours, gradients, six dot styles, corner styles, your logo (or a built-in icon), nine frames including ticket, pill and round sticker, 18 presets, a Shuffle button that only makes scannable styles, and colours matched from your own photo.
+- **Built-in scan test:** every change is rendered and decoded in the browser. A stamp shows PAKKA, RISKY or DOES NOT SCAN, with one-click fixes.
 - **Downloads:** PNG (256–4096 px), SVG, PDF at an exact physical size, JPEG and WebP, plus copy to clipboard and the mobile share sheet.
 - **Bulk generator:** CSV to a ZIP of PNGs/SVGs (plus an optional PDF), generated in a Web Worker, with a report for any bad rows.
 - **Print layouts:** sticker sheets (2–10 cm), A4 table tents, posters, 10-up business cards and WiFi cards, as print-ready PDFs.
 - **QR scanner** (camera, upload or paste) with safe link handling, and a **"Will my QR code expire?" checker**.
+- **Share cards:** Instagram/WhatsApp story, post and square images, and a short animated video — all made on your device.
+- **Personalise:** theme, stamp colour, Big & clear text, less motion and vibration.
 - Saved designs, opt-in history and shareable style links. **English + हिन्दी**, light/dark theme, works offline (PWA).
 
 | Dark mode                                                     | Mobile, in Hindi                                  |

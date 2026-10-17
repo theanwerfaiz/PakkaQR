@@ -10,11 +10,11 @@
   },
   "nav": {
     "label": "Main",
-    "generator": "Generator",
-    "batch": "Bulk",
-    "scanner": "Scanner",
-    "expiry": "Expiry check",
-    "print": "Print",
+    "generator": "Create",
+    "batch": "Bulk from CSV",
+    "scanner": "Scan",
+    "expiry": "Will my QR expire?",
+    "print": "Print sheets",
     "skip": "Skip to main content",
     "menu": "Menu"
   },
@@ -40,7 +40,8 @@
     "tools": "Tools",
     "learn": "Learn",
     "project": "Project",
-    "upiDonate": "Donate with UPI"
+    "upiDonate": "Donate with UPI",
+    "promise": "Static · private · free forever"
   },
   "trust": {
     "forever": "Works forever",
@@ -71,7 +72,7 @@
     "chooseType": "What should your QR code do?",
     "moreTypes": "More types",
     "details": "Your details",
-    "customize": "Customise",
+    "customize": "Give it your style",
     "previewHeading": "Preview",
     "placeholder": "Your QR code will appear here",
     "alt": "QR code for {type}: {summary}",
@@ -85,7 +86,11 @@
     "optional": "optional",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "rendering": "Updating preview…"
+    "rendering": "Updating preview…",
+    "customizeKicker": "Colours · shape · logo · frame",
+    "goStyle": "Style it",
+    "styleShort": "Style",
+    "barIdle": "Fill in the details"
   },
   "field": {
     "url": {
@@ -418,7 +423,13 @@
     "minimal-dots": "Minimal Dots",
     "gold": "Gold",
     "apply": "Use the {name} style",
-    "invertedNote": "light on dark"
+    "invertedNote": "light on dark",
+    "ledger": "Ledger",
+    "neel": "Neel",
+    "mitti": "Mitti",
+    "tulsi": "Tulsi",
+    "raat": "Raat",
+    "jamun": "Jamun"
   },
   "dotStyle": {
     "square": "Square",
@@ -492,7 +503,10 @@
       "review": "Review us",
       "mecard": "Save my contact",
       "crypto": "Scan to pay"
-    }
+    },
+    "pill": "Pill label",
+    "ticket": "Ticket",
+    "sticker": "Round sticker"
   },
   "export": {
     "heading": "Download",
@@ -536,6 +550,12 @@
       "raiseEc": "Raise error correction to High",
       "shrinkLogo": "Make the logo smaller",
       "increaseMargin": "Use a 4-module quiet zone"
+    },
+    "short": {
+      "great": "Pakka — scan-tested",
+      "risky": "Risky — see the fix",
+      "fail": "Won't scan — fix it",
+      "checking": "Testing…"
     }
   },
   "modal": {
@@ -773,5 +793,234 @@
     "printNote": "When printing, choose “Actual size” or 100% scale — not “Fit to page” — so codes come out at exactly the size you picked.",
     "previewLabel": "Page preview",
     "designNote": "Uses your current design from the generator. Pick a preset here to change it."
+  },
+  "hero": {
+    "kicker": "Static QR · made on this device · free forever"
+  },
+  "personalise": {
+    "open": "Personalise",
+    "title": "Make it yours",
+    "intro": "Saved in this browser only.",
+    "theme": "Theme",
+    "accent": "Stamp colour",
+    "accents": {
+      "sindoor": "Sindoor",
+      "neel": "Neel",
+      "tulsi": "Tulsi",
+      "jamun": "Jamun"
+    },
+    "size": "Text size",
+    "sizes": {
+      "normal": "Normal",
+      "large": "Big & clear"
+    },
+    "sizeHint": "Bigger text and buttons everywhere — easier to read and tap.",
+    "motion": "Motion",
+    "motions": {
+      "auto": "Normal",
+      "reduce": "Less motion"
+    },
+    "haptics": "Vibrate when a code is fixed or saved (Android)",
+    "done": "Done"
+  },
+  "smart": {
+    "label": "What should the code open?",
+    "placeholder": "Paste a link, UPI ID, phone or WiFi details",
+    "go": "Make it",
+    "hint": "Paste anything — we'll work out the type.",
+    "change": "Change type",
+    "magic": "Pakka! You found the secret stamp.",
+    "reason": {
+      "wifi": "Looks like WiFi details — we filled the form in",
+      "upiLink": "Looks like a UPI payment link",
+      "upiId": "Looks like a UPI ID — now add the name people see",
+      "email": "Looks like an email address",
+      "phone": "Looks like a phone number",
+      "whatsapp": "Looks like a WhatsApp link",
+      "handle": "Looks like an Instagram handle",
+      "location": "Looks like map coordinates",
+      "url": "Looks like a website link",
+      "text": "We'll put this text in the code"
+    }
+  },
+  "starter": {
+    "heading": "Or start from",
+    "bio": {
+      "name": "Link in bio",
+      "label": "Follow me"
+    },
+    "payMe": {
+      "name": "Pay me (UPI)",
+      "label": "Scan to pay"
+    },
+    "split": {
+      "name": "Split the bill",
+      "label": "Pay your share"
+    },
+    "wifi": {
+      "name": "Guest WiFi",
+      "label": "Free WiFi"
+    },
+    "playlist": {
+      "name": "My playlist",
+      "label": "Press play"
+    },
+    "party": {
+      "name": "Party invite",
+      "label": "You're invited"
+    },
+    "card": {
+      "name": "Business card",
+      "label": "Save my number"
+    },
+    "review": {
+      "name": "Get reviews",
+      "label": "Rate us"
+    }
+  },
+  "stamp": {
+    "great": {
+      "top": "SCAN-TESTED",
+      "main": "PAKKA",
+      "hi": "पक्का",
+      "label": "Pakka: our scan test read this code back exactly"
+    },
+    "risky": {
+      "top": "CHECK IT",
+      "main": "RISKY",
+      "hi": "जोखिम",
+      "label": "Risky: some phones may not read this code"
+    },
+    "fail": {
+      "top": "DOES NOT",
+      "main": "SCAN",
+      "hi": "स्कैन नहीं",
+      "label": "Does not scan: fix it before you print"
+    },
+    "checking": {
+      "top": "TESTING",
+      "main": "· · ·",
+      "hi": "जाँच",
+      "label": "Testing that the code scans"
+    }
+  },
+  "festival": {
+    "diwali": "HAPPY DIWALI",
+    "holi": "HAPPY HOLI",
+    "independence": "JAI HIND",
+    "republic": "JAI HIND",
+    "newyear": "NEW YEAR",
+    "eid": "EID MUBARAK"
+  },
+  "split": {
+    "title": "Split a bill",
+    "kicker": "UPI",
+    "total": "Bill total (₹)",
+    "people": "People",
+    "fewer": "One person fewer",
+    "more": "One person more",
+    "each": "Each person pays",
+    "roundedUp": "Rounded up to the paisa — you collect ₹{collected}.",
+    "use": "Use this amount",
+    "note": "Your share ({count} people)",
+    "hint": "Enter the total to see each share.",
+    "applied": "Amount set to ₹{amount}. Everyone scans the same code."
+  },
+  "payload": {
+    "heading": "What's inside the code",
+    "copy": "Copy",
+    "copied": "Copied",
+    "read": "Read aloud"
+  },
+  "share": {
+    "open": "Story card & video",
+    "title": "Share card",
+    "format": "Size",
+    "formats": {
+      "story": "Story 9:16",
+      "post": "Post 4:5",
+      "square": "Square"
+    },
+    "theme": "Look",
+    "themes": {
+      "paper": "Paper",
+      "ink": "Ink",
+      "stamp": "Stamp",
+      "match": "Match my code"
+    },
+    "headline": "Headline",
+    "subline": "Small print",
+    "stamp": "Add the PAKKA stamp",
+    "credit": "Add a small “Made with PakkaQR” line (optional)",
+    "creditText": "Made with PakkaQR · free, never expires",
+    "previewAlt": "Preview of the share card",
+    "download": "Download image",
+    "share": "Share…",
+    "video": "Make a 4-second video",
+    "recording": "Recording…",
+    "videoError": "This browser couldn't make the video. Download the image instead.",
+    "private": "Made on your device. Nothing is uploaded.",
+    "saved": "Saved to your downloads"
+  },
+  "scanMe": {
+    "ask": {
+      "title": "Now scan it with your phone",
+      "step1": "Open your camera or Google Lens.",
+      "step2": "Point it at the code on this screen.",
+      "step3": "Check that it opens the right thing.",
+      "yes": "It worked",
+      "no": "It didn't scan"
+    },
+    "worked": {
+      "title": "Pakka!",
+      "body": "Your code works. Print it, share it, stick it anywhere — it will keep working."
+    },
+    "failed": {
+      "title": "Let's fix that",
+      "tip1": "Turn screen brightness up and avoid glare.",
+      "tip2": "Hold the phone 15–30 cm away.",
+      "tip3": "Plain dark-on-light codes scan best.",
+      "fix": "Fix the style automatically"
+    }
+  },
+  "remix": {
+    "title": "Shuffle",
+    "hint": "A new look on every tap — always one that scans.",
+    "lock": {
+      "colors": "Keep colours",
+      "shape": "Keep shape"
+    },
+    "shuffle": "Shuffle style"
+  },
+  "photo": {
+    "title": "Match a photo",
+    "hint": "Pick a photo of your shop, product or outfit and we'll pull matching colours. The photo never leaves your device.",
+    "pick": "Choose a photo",
+    "working": "Reading colours…",
+    "suggestions": "Colour pairs from your photo",
+    "use": "Use {fg} on {bg}"
+  },
+  "expiryShare": {
+    "button": "Share this check",
+    "title": "Is your QR code rented?",
+    "rented": "This QR code is rented — it can stop working.",
+    "safe": "This QR code is static — it won't expire.",
+    "unknown": "This code goes through a link we don't know.",
+    "subline": "Check yours free at PakkaQR"
+  },
+  "expiryStamp": {
+    "top": "CHECKED",
+    "static": {
+      "main": "PAKKA",
+      "hi": "पक्का"
+    },
+    "dynamic": {
+      "main": "RENTED",
+      "hi": "किराया"
+    },
+    "shortener": {
+      "main": "UNSURE",
+      "hi": "पता नहीं"
+    }
   }
 }

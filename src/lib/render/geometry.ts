@@ -1,6 +1,6 @@
 import { resolveEcLevel, type DotStyle, type QrDesign } from './design';
 import { isFinderModule, makeMatrix, type QrMatrix } from './matrix';
-import { circlePath, polygonPath, rectPath, type Radii } from './paths';
+import { circlePath, fmt, polygonPath, rectPath, type Radii } from './paths';
 
 export type Paint =
   | { type: 'solid'; color: string }
@@ -48,7 +48,7 @@ export interface Geometry {
 export type MeasureText = (text: string, fontSize: number) => number;
 
 export const FONT_STACK =
-  "Inter, 'Noto Sans Devanagari', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
+  "'Anek Latin Variable', 'Anek Devanagari Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
 export const FONT_WEIGHT = 700;
 
 /** Rough width estimate used when no real text measurer is available. */
@@ -147,6 +147,9 @@ export const frameIds = [
   'banner-top',
   'speech-bubble',
   'phone',
+  'pill',
+  'ticket',
+  'sticker',
 ] as const;
 export type FrameId = (typeof frameIds)[number];
 
@@ -275,6 +278,111 @@ function layoutFrame(design: QrDesign, s: number, measure: MeasureText): FrameLa
         ],
         after: [],
         texts: text(w / 2, top + s + bottom / 2, w - side * 3, frame.labelColor),
+      };
+    }
+    case 'pill': {
+      // Thin ring around the code with a pill-shaped label hanging below.
+      const pad = s * 0.05;
+      const ring = Math.max(1, s * 0.022);
+      const pillH = Math.max(labelH, s * 0.14) * 0.9;
+      const gap = s * 0.04;
+      const w = s + pad * 2;
+      const pillW = label ? Math.min(w, measure(label, baseFont) + s * 0.16) : w * 0.5;
+      const h = s + pad * 2 + gap + pillH;
+      const r = s * 0.07;
+      const box = s + pad * 2;
+      return {
+        width: w,
+        height: h,
+        qrX: pad,
+        qrY: pad,
+        qrRadius: s * 0.03,
+        before: design.transparentBg
+          ? []
+          : [{ d: rectPath(0, 0, box, box, [r, r, r, r]), paint: bg }],
+        after: [
+          {
+            d:
+              rectPath(0, 0, box, box, [r, r, r, r]) +
+              rectPath(ring, ring, box - ring * 2, box - ring * 2, [
+                r - ring,
+                r - ring,
+                r - ring,
+                r - ring,
+              ]),
+            paint: fc,
+            fillRule: 'evenodd',
+          },
+          {
+            d: rectPath((w - pillW) / 2, box + gap, pillW, pillH, [
+              pillH / 2,
+              pillH / 2,
+              pillH / 2,
+              pillH / 2,
+            ]),
+            paint: fc,
+          },
+        ],
+        texts: text(w / 2, box + gap + pillH / 2, pillW - s * 0.08, frame.labelColor),
+      };
+    }
+    case 'ticket': {
+      // Admit-one style: label stub below a perforation, with round notches.
+      const pad = s * 0.06;
+      const stub = Math.max(labelH, s * 0.12) + pad * 0.6;
+      const w = s + pad * 2;
+      const cut = s + pad * 2;
+      const h = cut + stub;
+      const r = s * 0.04;
+      const notch = s * 0.045;
+      // Half-disc notches cut into each side (drawn as inner half circles only).
+      let holes =
+        `M0 ${fmt(cut - notch)}A${fmt(notch)} ${fmt(notch)} 0 0 1 0 ${fmt(cut + notch)}Z` +
+        `M${fmt(w)} ${fmt(cut - notch)}A${fmt(notch)} ${fmt(notch)} 0 0 0 ${fmt(w)} ${fmt(cut + notch)}Z`;
+      const dash = s * 0.035;
+      for (let x = notch * 1.6; x + dash < w - notch * 1.6; x += dash * 2)
+        holes += rectPath(x, cut - t * 0.25, dash, t * 0.5);
+      return {
+        width: w,
+        height: h,
+        qrX: pad,
+        qrY: pad,
+        qrRadius: s * 0.02,
+        before: [{ d: rectPath(0, 0, w, h, [r, r, r, r]) + holes, paint: fc, fillRule: 'evenodd' }],
+        after: [],
+        texts: text(w / 2, cut + stub / 2, w - pad * 3, frame.labelColor),
+      };
+    }
+    case 'sticker': {
+      // Round die-cut sticker: a disc with the code inside and a label arc area below.
+      const qrSide = s;
+      const diameter = qrSide * Math.SQRT2 + s * 0.08;
+      const w = diameter;
+      const h = diameter;
+      const c = diameter / 2;
+      const qrX = c - qrSide / 2;
+      const qrY = c - qrSide / 2 - (label ? s * 0.05 : 0);
+      const bandH = s * 0.15;
+      const bandY = qrY + qrSide + s * 0.015;
+      return {
+        width: w,
+        height: h,
+        qrX,
+        qrY,
+        qrRadius: s * 0.03,
+        before: [{ d: circlePath(c, c, c), paint: fc }],
+        after: [],
+        texts: label
+          ? [
+              {
+                text: label,
+                cx: c,
+                cy: bandY + bandH / 2,
+                color: frame.labelColor,
+                fontSize: fitText(label, qrSide * 0.85, baseFont * 0.85, measure),
+              },
+            ]
+          : [],
       };
     }
     default:

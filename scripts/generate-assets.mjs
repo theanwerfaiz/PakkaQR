@@ -11,17 +11,21 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const pub = join(root, 'public');
 const fonts = join(root, 'node_modules');
 GlobalFonts.registerFromPath(
-  join(fonts, '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2'),
-  'Inter',
+  join(fonts, '@fontsource-variable/anek-latin/files/anek-latin-latin-wght-normal.woff2'),
+  'Anek Latin',
 );
 GlobalFonts.registerFromPath(
   join(
     fonts,
-    '@fontsource/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-700-normal.woff2',
+    '@fontsource-variable/anek-devanagari/files/anek-devanagari-devanagari-wght-normal.woff2',
   ),
-  'Noto Sans Devanagari',
+  'Anek Devanagari',
 );
-const FONT = 'Inter, "Noto Sans Devanagari"';
+const FONT = '"Anek Latin", "Anek Devanagari"';
+const PAPER = '#F4EFE6';
+const SHEET = '#FFFCF6';
+const INK = '#1A1712';
+const STAMP = '#C2321A';
 
 const content = {
   en: JSON.parse(readFileSync(join(root, 'src/i18n/content/en.json'), 'utf8')),
@@ -49,7 +53,7 @@ async function icons() {
     const c = createCanvas(size, size);
     const ctx = c.getContext('2d');
     if (pad) {
-      ctx.fillStyle = '#1F6FEB';
+      ctx.fillStyle = PAPER;
       ctx.fillRect(0, 0, size, size);
     }
     const inset = size * pad;
@@ -80,15 +84,44 @@ function drawQr(ctx, text, x, y, size) {
   qr.make();
   const n = qr.getModuleCount();
   const cell = size / (n + 8);
-  ctx.fillStyle = '#FFFFFF';
+  ctx.fillStyle = SHEET;
   ctx.beginPath();
   ctx.roundRect(x, y, size, size, 24);
   ctx.fill();
-  ctx.fillStyle = '#16181D';
+  ctx.strokeStyle = '#DCD3C2';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.fillStyle = INK;
   for (let r = 0; r < n; r++)
     for (let c = 0; c < n; c++)
       if (qr.isDark(r, c))
         ctx.fillRect(x + (c + 4) * cell, y + (r + 4) * cell, cell + 0.5, cell + 0.5);
+}
+
+function stamp(ctx, cx, cy) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate((-14 * Math.PI) / 180);
+  ctx.fillStyle = 'rgba(255,252,246,0.9)';
+  ctx.beginPath();
+  ctx.arc(0, 0, 70, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = STAMP;
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(0, 0, 58, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.fillStyle = STAMP;
+  ctx.textAlign = 'center';
+  ctx.font = `700 11px ${FONT}`;
+  ctx.fillText('SCAN-TESTED', 0, -22);
+  ctx.font = `800 34px ${FONT}`;
+  ctx.fillText('PAKKA', 0, 12);
+  ctx.font = `700 16px ${FONT}`;
+  ctx.fillText('पक्का', 0, 36);
+  ctx.restore();
 }
 
 async function ogImages() {
@@ -99,29 +132,29 @@ async function ogImages() {
     for (const page of pages) {
       const c = createCanvas(1200, 630);
       const ctx = c.getContext('2d');
-      const grad = ctx.createLinearGradient(0, 0, 1200, 630);
-      grad.addColorStop(0, '#0F1115');
-      grad.addColorStop(1, '#1B2a4a');
-      ctx.fillStyle = grad;
+      ctx.fillStyle = PAPER;
       ctx.fillRect(0, 0, 1200, 630);
-      ctx.drawImage(logo, 72, 64, 72, 72);
-      ctx.fillStyle = '#FFFFFF';
+      ctx.drawImage(logo, 72, 64, 64, 64);
+      ctx.fillStyle = INK;
       ctx.font = `700 40px ${FONT}`;
-      ctx.fillText('PakkaQR', 164, 114);
+      ctx.fillText('PakkaQR', 152, 110);
       const h1 = content[locale].pages[page.key]?.h1 ?? 'PakkaQR';
-      ctx.font = `700 60px ${FONT}`;
-      const lines = wrap(ctx, h1, 680).slice(0, 4);
-      lines.forEach((line, i) => ctx.fillText(line, 72, 250 + i * 76));
-      ctx.fillStyle = '#9DB7E8';
+      ctx.font = `700 62px ${FONT}`;
+      const lines = wrap(ctx, h1, 660).slice(0, 4);
+      lines.forEach((line, i) => ctx.fillText(line, 72, 240 + i * (locale === 'hi' ? 84 : 70)));
+      ctx.fillStyle = STAMP;
+      ctx.fillRect(72, 520, 120, 6);
+      ctx.fillStyle = '#4A4439';
       ctx.font = `600 30px ${FONT}`;
-      ctx.fillText(ui[locale].brand.tagline, 72, 560);
+      ctx.fillText(ui[locale].brand.tagline, 72, 572);
       drawQr(
         ctx,
         (process.env.PUBLIC_SITE_URL || 'https://pakkaqr.pages.dev').replace(/\/$/, ''),
-        820,
+        810,
         150,
         320,
       );
+      stamp(ctx, 1110, 165);
       const file = `${page.slug || 'home'}-${locale}.png`;
       writeFileSync(join(pub, 'og', file), c.toBuffer('image/png'));
       count++;

@@ -1,12 +1,12 @@
 ---
 import Generator from '../generator/Generator';
-import TrustRow from '../content/TrustRow.astro';
 import HowTo from '../content/HowTo.astro';
 import FaqList from '../content/FaqList.astro';
 import RelatedLinks from '../content/RelatedLinks.astro';
 import StaticDynamicDiagram from '../content/StaticDynamicDiagram.astro';
 import type { PageDef } from '../../data/pages';
-import { localePath, type Locale } from '../../lib/i18n';
+import { NAV } from '../../data/pages';
+import { getTranslator, localePath, type Locale } from '../../lib/i18n';
 import { contentList, useContent, type Faq } from '../../lib/i18n/content';
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
 }
 const { locale, page } = Astro.props;
 const c = useContent(locale);
+const t = getTranslator(locale);
 const k = (key: string) => `pages.${page.key}.${key}`;
 const steps = contentList(locale, k('steps'));
 const faqs = contentList<Faq>(locale, k('faq'));
@@ -25,53 +26,177 @@ const frame = gen.frame
 const base = import.meta.env.BASE_URL;
 const isHome = page.kind === 'home';
 const paragraphs = contentList(locale, k('body'));
+
+// Home headline: one word gets the ink underline.
+const h1 = c(k('h1'));
+const em = isHome ? c('home.h1Em') : '';
+const at = em ? h1.indexOf(em) : -1;
+const h1Parts = at >= 0 ? [h1.slice(0, at), em, h1.slice(at + em.length)] : null;
+const lead = isHome ? c('home.lead') : c(k('intro'));
+const theirs = contentList(locale, 'home.rented.theirs');
+const ours = contentList(locale, 'home.rented.ours');
+const tools = contentList<{ title: string; body: string }>(locale, 'home.tools.items');
+const toolSlugs = [NAV.expiry, NAV.batch, NAV.print, NAV.scanner];
 ---
 
-<section class="mx-auto max-w-6xl px-4 pt-8 pb-6">
-  <h1>{c(k('h1'))}</h1>
-  <p class="mt-3 max-w-3xl text-lg text-muted">{c(k('intro'))}</p>
-  <TrustRow locale={locale} />
+<section class="mx-auto max-w-[1360px] px-4 pt-10 pb-4 sm:px-8 sm:pt-14">
+  <p class="kicker">{t('hero.kicker')}</p>
+  <h1 class="mt-4 max-w-[16ch]">
+    {h1Parts ? (
+      <>
+        {h1Parts[0]}
+        <span class="ink-underline">{h1Parts[1]}</span>
+        {h1Parts[2]}
+      </>
+    ) : (
+      h1
+    )}
+  </h1>
+  <p class="mt-5 max-w-[46ch] text-[1.2rem] text-muted">{lead}</p>
 </section>
 
-<section class="mx-auto max-w-6xl px-4 pb-24 lg:pb-0" aria-label={c('common.generatorRegion')}>
+<section
+  class="mx-auto max-w-[1360px] px-4 pt-6 pb-28 sm:px-8 lg:pb-0"
+  aria-label={c('common.generatorRegion')}
+>
   <Generator
     client:load
     locale={locale}
     initialType={gen.type}
+    hero={isHome}
     {...(gen.fields ? { initialFields: gen.fields } : {})}
     {...(frame ? { frame } : {})}
     {...(gen.openPanel ? { openPanel: gen.openPanel } : {})}
   />
 </section>
 
-{paragraphs.length > 0 && (
-  <section class="prose-pakka mx-auto mt-14 max-w-3xl px-4">
-    <h2>{c(k('bodyTitle'))}</h2>
-    {paragraphs.map((p) => (
-      <p>{p}</p>
-    ))}
+{isHome && (
+  <section class="mt-24 bg-[#141210] text-[#EFE8DA]" aria-labelledby="rented-heading">
+    <div class="mx-auto grid max-w-[1360px] gap-12 px-4 py-20 sm:px-8 lg:grid-cols-[1.1fr_1fr]">
+      <div class="flex flex-col gap-5">
+        <p class="kicker !text-[#B9AE99]">{c('home.rented.kicker')}</p>
+        <h2 id="rented-heading" class="!text-[clamp(2.2rem,1.6rem+2.6vw,4rem)]">
+          {c('home.rented.title')}
+        </h2>
+        <p class="max-w-[46ch] text-[1.15rem] text-[#CFC5B2]">{c('home.rented.body')}</p>
+        <p class="flex flex-wrap gap-x-6 gap-y-2">
+          <a
+            class="text-[#EFE8DA] decoration-[#F0603F] hover:text-[#F0603F]"
+            href={localePath(locale, 'qr-code-expiry-checker', base)}
+          >
+            {c('home.why.checkLink')}
+          </a>
+          <a
+            class="text-[#EFE8DA] decoration-[#F0603F] hover:text-[#F0603F]"
+            href={localePath(locale, 'static-vs-dynamic-qr-codes', base)}
+          >
+            {c('home.why.articleLink')}
+          </a>
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-[20px] border border-[#3A342B] p-6">
+          <h3 class="text-[#B9AE99]">{c('home.rented.theirsTitle')}</h3>
+          <ul class="mt-4 space-y-3 text-[#CFC5B2]">
+            {theirs.map((item) => (
+              <li class="flex gap-3">
+                <span aria-hidden="true" class="mt-2.5 h-0.5 w-3 shrink-0 bg-[#7F735F]" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-[20px] border-2 border-[#F0603F] p-6">
+          <h3>{c('home.rented.oursTitle')}</h3>
+          <ul class="mt-4 space-y-3">
+            {ours.map((item) => (
+              <li class="flex gap-3">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  class="mt-1 shrink-0"
+                  fill="none"
+                  stroke="#F0603F"
+                  stroke-width="2.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 12.5l5 5L20 6.5" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 )}
 
 {isHome && (
-  <section class="mx-auto mt-14 max-w-6xl px-4" aria-labelledby="why-heading">
+  <section class="mx-auto mt-20 max-w-[1360px] px-4 sm:px-8" aria-labelledby="why-heading">
     <h2 id="why-heading">{c('home.why.title')}</h2>
-    <div class="prose-pakka mt-4 max-w-3xl">
+    <div class="prose-pakka mt-5">
       <p>{c('home.why.p1')}</p>
       <p>{c('home.why.p2')}</p>
       <p>
         <strong>{c('home.why.tradeoffLabel')}</strong> {c('home.why.tradeoff')}
       </p>
     </div>
-    <div class="mt-6">
+    <div class="mt-8">
       <StaticDynamicDiagram locale={locale} />
     </div>
-    <p class="mt-4">
-      <a href={localePath(locale, 'qr-code-expiry-checker', base)}>{c('home.why.checkLink')}</a> ·{' '}
-      <a href={localePath(locale, 'static-vs-dynamic-qr-codes', base)}>
-        {c('home.why.articleLink')}
-      </a>
-    </p>
+  </section>
+)}
+
+{isHome && (
+  <section class="mx-auto mt-20 max-w-[1360px] px-4 sm:px-8" aria-labelledby="tools-heading">
+    <h2 id="tools-heading">{c('home.tools.title')}</h2>
+    <ul class="mt-6 border-t border-border">
+      {tools.map((tool, i) => (
+        <li class="border-b border-border">
+          <a
+            href={localePath(locale, toolSlugs[i] ?? '', base)}
+            class="group grid grid-cols-[3rem_minmax(0,1fr)_auto] items-center gap-4 py-6 no-underline sm:grid-cols-[4rem_minmax(0,1fr)_auto]"
+          >
+            <span class="font-mono text-muted" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="flex flex-col gap-1">
+              <span class="text-[1.5rem] leading-tight font-bold [font-stretch:85%] group-hover:text-stamp">
+                {tool.title}
+              </span>
+              <span class="text-muted">{tool.body}</span>
+            </span>
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="transition-transform group-hover:translate-x-1"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+{paragraphs.length > 0 && (
+  <section class="prose-pakka mx-auto mt-20 max-w-[1360px] px-4 sm:px-8">
+    <h2>{c(k('bodyTitle'))}</h2>
+    {paragraphs.map((p) => (
+      <p>{p}</p>
+    ))}
   </section>
 )}
 

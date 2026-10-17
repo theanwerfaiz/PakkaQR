@@ -97,6 +97,21 @@ function ScannerApp() {
           <button type="button" className="btn btn-secondary" onClick={() => void copy()}>
             {t('scanner.copy')}
           </button>
+          {'speechSynthesis' in window && (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => {
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = locale === 'hi' ? 'hi-IN' : 'en-IN';
+                u.rate = 0.9;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(u);
+              }}
+            >
+              {t('payload.read')}
+            </button>
+          )}
           {openable ? (
             <button type="button" className="btn btn-secondary" onClick={() => setConfirming(true)}>
               {t('scanner.open')}

@@ -4,6 +4,66 @@
   },
   "presets": [
     {
+      "id": "ledger",
+      "design": {
+        "fg": "#1A1712",
+        "bg": "#FFFCF6",
+        "dotStyle": "square",
+        "cornerSquareStyle": "square",
+        "cornerDotStyle": "square"
+      }
+    },
+    {
+      "id": "neel",
+      "design": {
+        "fg": "#20345E",
+        "bg": "#FFFFFF",
+        "dotStyle": "dots",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "mitti",
+      "design": {
+        "fg": "#7A2412",
+        "bg": "#FBEFE8",
+        "dotStyle": "rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "square"
+      }
+    },
+    {
+      "id": "tulsi",
+      "design": {
+        "fg": "#14492F",
+        "bg": "#EEF6F0",
+        "dotStyle": "classy-rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "raat",
+      "design": {
+        "fg": "#EFE8DA",
+        "bg": "#1C1915",
+        "dotStyle": "rounded",
+        "cornerSquareStyle": "extra-rounded",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
+      "id": "jamun",
+      "design": {
+        "fg": "#4A1F44",
+        "bg": "#FAF0F7",
+        "dotStyle": "extra-rounded",
+        "cornerSquareStyle": "dot",
+        "cornerDotStyle": "dot"
+      }
+    },
+    {
       "id": "classic",
       "design": {
         "fg": "#000000",
@@ -28,7 +88,11 @@
       "design": {
         "fg": "#0B4F9C",
         "bg": "#FFFFFF",
-        "gradient": { "kind": "linear", "colors": ["#0B4F9C", "#0E7490"], "angle": 45 },
+        "gradient": {
+          "kind": "linear",
+          "colors": ["#0B4F9C", "#0E7490"],
+          "angle": 45
+        },
         "dotStyle": "rounded",
         "cornerSquareStyle": "extra-rounded",
         "cornerDotStyle": "dot"
@@ -39,7 +103,11 @@
       "design": {
         "fg": "#C2410C",
         "bg": "#FFFFFF",
-        "gradient": { "kind": "linear", "colors": ["#C2410C", "#BE185D"], "angle": 135 },
+        "gradient": {
+          "kind": "linear",
+          "colors": ["#C2410C", "#BE185D"],
+          "angle": 135
+        },
         "dotStyle": "classy-rounded",
         "cornerSquareStyle": "extra-rounded",
         "cornerDotStyle": "dot"

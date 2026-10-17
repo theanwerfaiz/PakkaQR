@@ -131,3 +131,29 @@ The accent `#1F6FEB` on the page background is 4.45:1, just under WCAG AA for bo
 ## D-32 · Lighthouse performance
 
 To keep total blocking time low, QR matrices are cached, preset thumbnails draw at idle time, and the decoder (jsQR/ZXing) loads on first use. Initial JS on generator pages is about 127 KB gzipped (budget 200 KB).
+
+## D-33 · "Ink & Stamp" redesign
+
+The first version looked generic (Inter, default blue, a card around every section, emoji status icons). The redesign uses paper, ink and a rubber stamp — things a shop owner already trusts:
+
+- **Colour:** paper `#F4EFE6`, sheet `#FFFCF6`, ink `#1A1712` and one stamp colour (sindoor `#C2321A` by default). Primary buttons are ink; the stamp colour is kept for verified results, focus rings and link underlines. Contrast of every text pair is checked in `tests/unit/smart/tokens.test.ts`.
+- **Type:** one family for both scripts — Anek Latin and Anek Devanagari (variable width and weight), with JetBrains Mono for payloads. Hindi gets taller line height so matras never clip. All three are self-hosted; the bundler never inlines font files because the CSP only allows `font-src 'self'`.
+- **Status:** emoji were replaced by the stamp — PAKKA (solid ring), RISKY (dashed, tilted the other way) and DOES NOT SCAN (hatched). States differ by words and line style, not just colour, and each has a spoken label.
+- **Stamp placement:** on screen the stamp sits on the sheet's top edge, outside the code's modules. On share cards it is placed entirely above the code (unit-tested), so it never affects scanning.
+
+## D-34 · Engagement features without tracking
+
+Features chosen from the Gen Z / all-ages research (story cards, link-in-bio, split the bill, frames, shuffle, photo palette, scan-me check, big & clear mode) all run on the device. Things that need a server or tracking were left out on purpose: public galleries, likes, streaks, leaderboards and cloud AI art.
+
+- **Story cards and video:** drawn on a canvas; the video uses the browser's own `MediaRecorder` (MP4 or WebM, whichever the browser supports) — no encoder library. The button only appears when recording is supported.
+- **"Made with PakkaQR" credit line:** optional and off by default, because the product promises no watermark.
+- **Photo palette:** the photo is downscaled to 64 px on a local canvas; colours are darkened until they reach 7:1 contrast so suggestions always scan.
+- **Shuffle:** picks from curated ink/paper pairs (all ≥ 7:1) and the supported shapes; logo, frame, quiet zone and error correction are kept.
+- **Split the bill:** each share is rounded up to the next paisa so the group is never short; one code is shared by everyone.
+- **Haptics:** a short vibration when a risky code is fixed or a file is saved. Off with Personalise → vibration or "less motion"; silently unavailable on iPhone.
+- **Festival stamps:** the stamp's top line changes on a few national/festival days. Lunar dates are listed ahead in `src/lib/smart/festival.ts` and need a yearly update.
+- **Personalise:** theme, stamp colour, text size (Big & clear scales the whole UI via the root font size), motion and vibration — stored in localStorage and applied before first paint by `public/theme.js`.
+
+## D-35 · Smart paste detection
+
+The home page's "What should the code open?" box guesses the type from what was pasted (WiFi string, UPI link or ID, email, phone, WhatsApp link, @handle, coordinates, URL, else text) and fills the normal form. A bare `name@bank` without a dot is treated as a UPI ID, `name@domain.tld` as an email. Detection is a pure function with unit tests and never touches the network.

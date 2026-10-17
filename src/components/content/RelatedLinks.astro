@@ -20,14 +20,16 @@ const links = slugs
   }));
 ---
 
-<nav class="mx-auto mt-14 max-w-6xl px-4" aria-labelledby="related-heading">
+<nav class="mx-auto mt-20 max-w-[1360px] px-4 sm:px-8" aria-labelledby="related-heading">
   <h2 id="related-heading">{title}</h2>
-  <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+  <ul class="mt-6 grid gap-x-8 border-t border-border sm:grid-cols-2 lg:grid-cols-3">
     {links.map((l) => (
-      <li>
-        <a href={l.href} class="card block h-full p-4 no-underline hover:border-accent">
-          <span class="font-semibold text-text">{l.label}</span>
-          <span class="mt-1 block text-sm text-muted">{l.blurb}</span>
+      <li class="border-b border-border">
+        <a href={l.href} class="group block h-full py-5 no-underline">
+          <span class="text-[1.2rem] font-semibold text-text group-hover:text-stamp">
+            {l.label}
+          </span>
+          <span class="mt-1 block text-muted">{l.blurb}</span>
         </a>
       </li>
     ))}

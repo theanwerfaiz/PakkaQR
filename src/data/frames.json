@@ -8,6 +8,9 @@
     { "id": "rounded-bottom" },
     { "id": "banner-top" },
     { "id": "speech-bubble" },
-    { "id": "phone" }
+    { "id": "phone" },
+    { "id": "pill" },
+    { "id": "ticket" },
+    { "id": "sticker" }
   ]
 }

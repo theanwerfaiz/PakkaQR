@@ -4,25 +4,26 @@ Every dependency is pinned to an exact version (see `package.json` and `package-
 
 ## Shipped to users (runtime)
 
-| Package                          | Version | Licence                   | Purpose                                              |
-| -------------------------------- | ------- | ------------------------- | ---------------------------------------------------- |
-| @astrojs/react                   | 7.0.0   | MIT                       | React islands for Astro                              |
-| @astrojs/sitemap                 | 3.7.4   | MIT                       | sitemap.xml with hreflang                            |
-| @fontsource-variable/inter       | 5.3.0   | OFL-1.1                   | Self-hosted Inter font                               |
-| @fontsource/noto-sans-devanagari | 5.3.0   | OFL-1.1                   | Self-hosted Devanagari font                          |
-| @tailwindcss/vite                | 4.3.3   | MIT                       | Tailwind build plugin                                |
-| @zxing/library                   | 0.23.0  | Apache-2.0                | QR decoding fallback (lazy-loaded)                   |
-| astro                            | 7.3.5   | MIT                       | Static site framework                                |
-| idb-keyval                       | 6.3.0   | Apache-2.0                | IndexedDB for saved designs and opt-in history       |
-| jspdf                            | 4.2.1   | MIT                       | PDF export and print layouts (lazy-loaded)           |
-| jsqr                             | 1.4.0   | Apache-2.0                | QR decoding (fast path)                              |
-| jszip                            | 3.10.2  | (MIT OR GPL-3.0-or-later) | Batch ZIP export (used under its MIT licence option) |
-| papaparse                        | 5.7.0   | MIT                       | CSV parsing for batch                                |
-| qrcode-generator                 | 2.0.4   | MIT                       | QR matrix encoding (UTF-8 byte mode)                 |
-| react                            | 19.3.0  | MIT                       | UI                                                   |
-| react-dom                        | 19.3.0  | MIT                       | UI                                                   |
-| svg2pdf.js                       | 2.8.1   | MIT                       | Vector QR codes in PDFs (lazy-loaded)                |
-| tailwindcss                      | 4.3.3   | MIT                       | Styling                                              |
+| Package                              | Version | Licence                   | Purpose                                              |
+| ------------------------------------ | ------- | ------------------------- | ---------------------------------------------------- |
+| @astrojs/react                       | 7.0.0   | MIT                       | React islands for Astro                              |
+| @astrojs/sitemap                     | 3.7.4   | MIT                       | sitemap.xml with hreflang                            |
+| @fontsource-variable/anek-devanagari | 5.3.0   | OFL-1.1                   | Self-hosted Anek Devanagari (Hindi UI)               |
+| @fontsource-variable/anek-latin      | 5.3.0   | OFL-1.1                   | Self-hosted Anek Latin (UI and headlines)            |
+| @fontsource-variable/jetbrains-mono  | 5.3.0   | OFL-1.1                   | Self-hosted mono font for payloads and labels        |
+| @tailwindcss/vite                    | 4.3.3   | MIT                       | Tailwind build plugin                                |
+| @zxing/library                       | 0.23.0  | Apache-2.0                | QR decoding fallback (lazy-loaded)                   |
+| astro                                | 7.3.5   | MIT                       | Static site framework                                |
+| idb-keyval                           | 6.3.0   | Apache-2.0                | IndexedDB for saved designs and opt-in history       |
+| jspdf                                | 4.2.1   | MIT                       | PDF export and print layouts (lazy-loaded)           |
+| jsqr                                 | 1.4.0   | Apache-2.0                | QR decoding (fast path)                              |
+| jszip                                | 3.10.2  | (MIT OR GPL-3.0-or-later) | Batch ZIP export (used under its MIT licence option) |
+| papaparse                            | 5.7.0   | MIT                       | CSV parsing for batch                                |
+| qrcode-generator                     | 2.0.4   | MIT                       | QR matrix encoding (UTF-8 byte mode)                 |
+| react                                | 19.3.0  | MIT                       | UI                                                   |
+| react-dom                            | 19.3.0  | MIT                       | UI                                                   |
+| svg2pdf.js                           | 2.8.1   | MIT                       | Vector QR codes in PDFs (lazy-loaded)                |
+| tailwindcss                          | 4.3.3   | MIT                       | Styling                                              |
 
 ## Development, test and build only (not shipped)
 
@@ -53,7 +54,7 @@ Every dependency is pinned to an exact version (see `package.json` and `package-
 
 ## Licence exceptions
 
-- **Fonts — SIL Open Font License 1.1** (`@fontsource-variable/inter`, `@fontsource/noto-sans-devanagari`). OFL is the standard licence for open fonts and allows bundling and redistribution with software of any licence. CLAUDE.md lists MIT/Apache-2.0/BSD/ISC for code dependencies; fonts are not code, and no permissively licensed alternative covers Devanagari as well. See docs/DECISIONS.md (D-04).
+- **Fonts — SIL Open Font License 1.1** (`@fontsource-variable/anek-latin`, `@fontsource-variable/anek-devanagari`, `@fontsource-variable/jetbrains-mono`). OFL is the standard licence for open fonts and allows bundling and redistribution with software of any licence. CLAUDE.md lists MIT/Apache-2.0/BSD/ISC for code dependencies; fonts are not code, and no permissively licensed alternative covers Devanagari as well. See docs/DECISIONS.md (D-04, D-33). Inter and Noto Sans Devanagari were removed in the redesign.
 - **jszip — dual MIT OR GPL-3.0-or-later.** We use it under the MIT option.
 - **axe-core and @axe-core/playwright — MPL-2.0.** Used only in the test suite, never shipped or modified. See docs/DECISIONS.md (D-05).
 - **Tools used during development but not installed as dependencies:** Lighthouse 13.5.0 (Apache-2.0), run with `npx` for audits.

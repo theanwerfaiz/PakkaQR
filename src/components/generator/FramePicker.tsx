@@ -18,6 +18,9 @@ const ICONS: Record<string, string> = {
   'banner-top': 'M4 3h16v18H4zM4 8h16',
   'speech-bubble': 'M4 3h16v12H4zM9 18h6M12 15v2M5 18h14v3H5z',
   phone: 'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM10 4h4',
+  pill: 'M5 2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 20h8',
+  ticket: 'M4 3h16v12a2 2 0 0 0 0 4v2H4v-2a2 2 0 0 0 0-4zM7 17h10',
+  sticker: 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20zM8 7h8v8H8z',
 };
 
 export function FramePicker({ design, defaultLabel, onChange }: Props) {

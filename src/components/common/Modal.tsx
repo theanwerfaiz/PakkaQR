@@ -6,10 +6,12 @@ interface Props {
   title: string;
   onClose: () => void;
   children: ReactNode;
+  /** Wider dialog for studios with a preview. */
+  wide?: boolean;
 }
 
 /** Native <dialog>: traps focus, closes on Esc, restores focus on close. */
-export function Modal({ open, title, onClose, children }: Props) {
+export function Modal({ open, title, onClose, children, wide = false }: Props) {
   const t = useT();
   const ref = useRef<HTMLDialogElement>(null);
   const id = useId();
@@ -28,10 +30,12 @@ export function Modal({ open, title, onClose, children }: Props) {
         e.preventDefault();
         onClose();
       }}
-      className="card m-auto w-[min(32rem,calc(100vw-2rem))] p-0 text-text backdrop:bg-black/50"
+      className={`m-auto max-h-[calc(100dvh-2rem)] rounded-[24px] border border-border bg-surface p-0 text-text backdrop:bg-black/55 ${
+        wide ? 'w-[min(60rem,calc(100vw-2rem))]' : 'w-[min(34rem,calc(100vw-2rem))]'
+      }`}
     >
-      <div className="flex items-start justify-between gap-4 border-b border-border p-4">
-        <h2 id={id} className="text-lg font-bold">
+      <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
+        <h2 id={id} className="text-2xl">
           {title}
         </h2>
         <button
@@ -54,7 +58,7 @@ export function Modal({ open, title, onClose, children }: Props) {
           </svg>
         </button>
       </div>
-      <div className="p-4">{children}</div>
+      <div className="p-5">{children}</div>
     </dialog>
   );
 }

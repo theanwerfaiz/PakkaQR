@@ -16,39 +16,57 @@ const navItems = (Object.keys(NAV) as Array<keyof typeof NAV>).map((key) => ({
   current: NAV[key] === slug,
 }));
 const otherLocales = locales.filter((l) => l !== locale);
+const accents = [
+  { id: 'sindoor', color: '#C2321A' },
+  { id: 'neel', color: '#2B4C9B' },
+  { id: 'tulsi', color: '#1E6B47' },
+  { id: 'jamun', color: '#6B2D5C' },
+];
+const icon = {
+  fill: 'none',
+  stroke: 'currentColor',
+  'stroke-width': '2',
+  'stroke-linecap': 'round',
+  'stroke-linejoin': 'round',
+  'aria-hidden': 'true',
+} as const;
 ---
 
-<header class="border-b border-border bg-surface">
+<header class="border-b border-border">
   <a
     href="#main"
     class="visually-hidden focus:not-sr-only focus:static focus:block focus:p-3 focus:w-auto focus:h-auto focus:m-0 focus:[clip:auto]"
   >
     {t('nav.skip')}
   </a>
-  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2">
+  <div class="mx-auto flex max-w-[1360px] flex-wrap items-center gap-x-6 gap-y-1 px-4 py-3 sm:px-8">
     <a
       href={localePath(locale, '', base)}
-      class="flex min-h-11 items-center gap-2 font-bold text-text no-underline"
+      class="flex min-h-11 items-center gap-2.5 text-text no-underline hover:text-text"
       aria-label={t('brand.logoAlt')}
     >
-      <LogoMark />
-      <span class="text-lg">PakkaQR</span>
+      <LogoMark size={32} />
+      <span
+        class="text-[1.6rem] leading-none font-[750] [font-stretch:80%]"
+        lang="en"
+        aria-hidden="true"
+      >
+        Pakka<span class="font-normal">QR</span>
+      </span>
     </a>
     <nav
       aria-label={t('nav.label')}
-      class="order-3 w-full overflow-x-auto sm:order-none sm:w-auto sm:flex-1"
+      class="order-3 -mx-4 w-[calc(100%+2rem)] overflow-x-auto px-4 md:order-none md:mx-0 md:w-auto md:flex-1 md:px-0"
     >
-      <ul class="flex gap-1 whitespace-nowrap">
+      <ul class="flex gap-5 whitespace-nowrap md:gap-6">
         {navItems.map((item) => (
           <li>
             <a
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               class:list={[
-                'inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium no-underline',
-                item.current
-                  ? 'bg-surface-2 text-text'
-                  : 'text-muted hover:bg-surface-2 hover:text-text',
+                'inline-flex min-h-11 items-center text-[0.98rem]',
+                item.current ? 'font-semibold underline' : 'no-underline hover:underline',
               ]}
             >
               {t(`nav.${item.key}`)}
@@ -57,13 +75,13 @@ const otherLocales = locales.filter((l) => l !== locale);
         ))}
       </ul>
     </nav>
-    <div class="ml-auto flex items-center gap-1">
+    <div class="ml-auto flex items-center gap-2">
       {otherLocales.map((l) => (
         <a
           href={localePath(l, slug, base)}
           hreflang={localeInfo[l].tag}
           lang={localeInfo[l].tag}
-          class="btn btn-ghost btn-sm min-h-11"
+          class="chip min-h-11 no-underline"
           data-lang-link={l}
         >
           {localeInfo[l].nativeName}
@@ -71,7 +89,7 @@ const otherLocales = locales.filter((l) => l !== locale);
       ))}
       <button
         type="button"
-        class="btn btn-ghost btn-sm min-h-11 min-w-11"
+        class="btn btn-ghost min-h-11 min-w-11 rounded-full border border-border p-0"
         data-theme-toggle
         data-label-template={t('theme.toggle')}
         data-label-system={t('theme.system')}
@@ -80,59 +98,135 @@ const otherLocales = locales.filter((l) => l !== locale);
         aria-label={t('theme.toggle', { mode: t('theme.system') })}
       >
         <span data-icon="system">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="3" y="4" width="18" height="12" rx="2"></rect>
-            <path d="M8 20h8M12 16v4"></path>
+          <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="M12 3.5v17A8.5 8.5 0 0 0 12 3.5z" fill="currentColor"></path>
           </svg>
         </span>
         <span data-icon="light" hidden>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+          <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
+            <circle cx="12" cy="12" r="4.5"></circle>
+            <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"></path>
           </svg>
         </span>
         <span data-icon="dark" hidden>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+          <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
+            <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path>
           </svg>
         </span>
       </button>
+      <button
+        type="button"
+        class="btn btn-ghost min-h-11 min-w-11 rounded-full border border-border p-0"
+        data-personalise-open
+        aria-haspopup="dialog"
+        aria-controls="personalise"
+        aria-label={t('personalise.open')}
+        title={t('personalise.open')}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
+          <path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path>
+          <circle cx="16" cy="7" r="2.2"></circle>
+          <circle cx="10" cy="17" r="2.2"></circle>
+        </svg>
+      </button>
     </div>
   </div>
+
+  <dialog
+    id="personalise"
+    aria-labelledby="personalise-title"
+    class="m-auto w-[min(32rem,calc(100%-2rem))] rounded-[24px] border border-border bg-surface p-0 text-text backdrop:bg-black/50"
+  >
+    <form method="dialog" class="flex flex-col gap-6 p-6">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h2 id="personalise-title" class="text-3xl">
+            {t('personalise.title')}
+          </h2>
+          <p class="hint mt-1">{t('personalise.intro')}</p>
+        </div>
+        <button
+          class="btn btn-ghost min-h-11 min-w-11 rounded-full p-0"
+          value="close"
+          aria-label={t('modal.close')}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+
+      <fieldset class="flex flex-col gap-2">
+        <legend class="label">{t('personalise.theme')}</legend>
+        <div class="flex flex-wrap gap-2">
+          {['system', 'light', 'dark'].map((v) => (
+            <label class="chip has-[:checked]:bg-accent has-[:checked]:text-accent-contrast has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-[var(--focus)]">
+              <input type="radio" name="pref-theme" value={v} class="visually-hidden" />
+              {t(`theme.${v}`)}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="flex flex-col gap-2">
+        <legend class="label">{t('personalise.accent')}</legend>
+        <div class="flex flex-wrap gap-2">
+          {accents.map((a) => (
+            <label class="chip has-[:checked]:border-2 has-[:checked]:border-text has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-[var(--focus)]">
+              <input type="radio" name="pref-accent" value={a.id} class="visually-hidden" />
+              <span
+                class="inline-block h-4 w-4 rounded-full"
+                style={`background:${a.color}`}
+                aria-hidden="true"
+              ></span>
+              {t(`personalise.accents.${a.id}`)}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="flex flex-col gap-2">
+        <legend class="label">{t('personalise.size')}</legend>
+        <div class="flex flex-wrap gap-2">
+          {['normal', 'large'].map((v) => (
+            <label class="chip has-[:checked]:bg-accent has-[:checked]:text-accent-contrast has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-[var(--focus)]">
+              <input type="radio" name="pref-size" value={v} class="visually-hidden" />
+              {t(`personalise.sizes.${v}`)}
+            </label>
+          ))}
+        </div>
+        <p class="hint">{t('personalise.sizeHint')}</p>
+      </fieldset>
+
+      <fieldset class="flex flex-col gap-2">
+        <legend class="label">{t('personalise.motion')}</legend>
+        <div class="flex flex-wrap gap-2">
+          {['auto', 'reduce'].map((v) => (
+            <label class="chip has-[:checked]:bg-accent has-[:checked]:text-accent-contrast has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-[var(--focus)]">
+              <input type="radio" name="pref-motion" value={v} class="visually-hidden" />
+              {t(`personalise.motions.${v}`)}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <label class="flex min-h-11 cursor-pointer items-center gap-3 font-medium">
+        <input type="checkbox" name="pref-haptics" class="h-5 w-5" />
+        {t('personalise.haptics')}
+      </label>
+
+      <div class="flex justify-end">
+        <button class="btn btn-primary" value="close">
+          {t('personalise.done')}
+        </button>
+      </div>
+    </form>
+  </dialog>
 </header>
 
 <script>
-  import { writeLocal } from '../../lib/storage/local';
+  import { readLocal, writeLocal } from '../../lib/storage/local';
 
   const order = ['system', 'light', 'dark'] as const;
   type Pref = (typeof order)[number];
@@ -153,12 +247,74 @@ const otherLocales = locales.filter((l) => l !== locale);
         icon.toggleAttribute('hidden', icon.dataset.icon !== pref);
       }
     }
+    syncForm();
   }
 
   const current = (): Pref => {
     const p = root.dataset.themePref;
     return p === 'light' || p === 'dark' ? p : 'system';
   };
+
+  // ------------------------------------------------------------ personalise
+  const dialog = document.getElementById('personalise') as HTMLDialogElement | null;
+  const form = dialog?.querySelector('form');
+
+  function setRadio(name: string, value: string) {
+    const input = form?.querySelector<HTMLInputElement>(`input[name="${name}"][value="${value}"]`);
+    if (input) input.checked = true;
+  }
+
+  function syncForm() {
+    if (!form) return;
+    setRadio('pref-theme', current());
+    setRadio('pref-accent', root.dataset.accent ?? 'sindoor');
+    setRadio('pref-size', root.dataset.size === 'large' ? 'large' : 'normal');
+    setRadio('pref-motion', root.dataset.motion === 'reduce' ? 'reduce' : 'auto');
+    const haptics = form.querySelector<HTMLInputElement>('input[name="pref-haptics"]');
+    if (haptics) haptics.checked = readLocal('pakkaqr:haptics') !== 'off';
+  }
+
+  function setAttr(name: 'accent' | 'size' | 'motion', value: string | null) {
+    if (value) root.dataset[name] = value;
+    else delete root.dataset[name];
+  }
+
+  form?.addEventListener('change', (event) => {
+    const input = event.target as HTMLInputElement;
+    switch (input.name) {
+      case 'pref-theme':
+        writeLocal('pakkaqr:theme', input.value);
+        apply(input.value as Pref);
+        break;
+      case 'pref-accent':
+        writeLocal('pakkaqr:accent', input.value);
+        setAttr('accent', input.value === 'sindoor' ? null : input.value);
+        break;
+      case 'pref-size':
+        writeLocal('pakkaqr:size', input.value);
+        setAttr('size', input.value === 'large' ? 'large' : null);
+        break;
+      case 'pref-motion':
+        writeLocal('pakkaqr:motion', input.value);
+        setAttr('motion', input.value === 'reduce' ? 'reduce' : null);
+        break;
+      case 'pref-haptics':
+        writeLocal('pakkaqr:haptics', input.checked ? 'on' : 'off');
+        break;
+    }
+    document.dispatchEvent(new CustomEvent('pakkaqr:prefs'));
+  });
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-personalise-open]')) {
+    button.addEventListener('click', () => {
+      syncForm();
+      dialog?.showModal();
+    });
+  }
+  dialog?.addEventListener('click', (event) => {
+    // Click on the backdrop closes it.
+    if (event.target === dialog) dialog.close();
+  });
 
   apply(current());
   media.addEventListener('change', () => apply(current()));

@@ -9,14 +9,12 @@ const { title, faqs, headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
 ---
 
-<section class="mx-auto mt-14 max-w-3xl px-4" aria-labelledby="faq-heading">
-  <Heading id="faq-heading" class="text-2xl font-bold">
-    {title}
-  </Heading>
-  <div class="mt-5 space-y-3">
+<section class="mx-auto mt-20 max-w-[1360px] px-4 sm:px-8" aria-labelledby="faq-heading">
+  <Heading id="faq-heading">{title}</Heading>
+  <div class="mt-6 max-w-4xl border-t border-border">
     {faqs.map((f) => (
-      <details class="card group p-0">
-        <summary class="flex min-h-12 items-center justify-between gap-3 px-4 py-3 font-semibold">
+      <details class="group border-b border-border">
+        <summary class="flex min-h-14 items-center justify-between gap-3 py-4 text-[1.15rem] font-semibold">
           <span>{f.q}</span>
           <svg
             width="18"
@@ -32,7 +30,7 @@ const Heading = headingLevel;
             <path d="M6 9l6 6 6-6" />
           </svg>
         </summary>
-        <p class="px-4 pb-4 text-muted">{f.a}</p>
+        <p class="max-w-[68ch] pb-5 text-muted">{f.a}</p>
       </details>
     ))}
   </div>

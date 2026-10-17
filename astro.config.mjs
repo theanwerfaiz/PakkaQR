@@ -48,5 +48,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     worker: { format: 'es' },
+    // Fonts are always separate files: the CSP allows font-src 'self', not data: URIs.
+    build: { assetsInlineLimit: (file) => (/\.woff2?$/.test(file) ? false : undefined) },
   },
 });
