@@ -1,7 +1,7 @@
 import type { Geometry } from '../render/geometry';
 import { geometryToSvg } from '../render/svg';
 import { canvasFont, type Ctx2D } from '../render/canvas';
-import { context2d, makeCanvas } from '../decode';
+import { context2d, makeCanvas } from '../decode/canvas';
 import { canvasToBlob } from './index';
 
 export const MM_PER_INCH = 25.4;

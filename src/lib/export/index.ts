@@ -1,4 +1,4 @@
-import { context2d, makeCanvas } from '../decode';
+import { context2d, makeCanvas } from '../decode/canvas';
 import { drawGeometry, pixelHeight } from '../render/canvas';
 import type { Geometry } from '../render/geometry';
 import { geometryToSvg } from '../render/svg';

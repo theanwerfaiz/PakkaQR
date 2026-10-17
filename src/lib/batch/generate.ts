@@ -4,7 +4,7 @@ import type { QrDesign } from '../render/design';
 import { buildGeometry } from '../render/geometry';
 import { geometryToSvg } from '../render/svg';
 import { canvasToBlob, renderCanvas } from '../export';
-import { context2d, makeCanvas } from '../decode';
+import { context2d, makeCanvas } from '../decode/canvas';
 import type { BatchItem } from './index';
 
 export interface BatchOptions {

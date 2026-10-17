@@ -11,19 +11,29 @@ const THUMB = 72;
 const Thumb = memo(function Thumb({ preset }: { preset: Preset }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
-    const c = ref.current;
-    const ctx = c?.getContext('2d');
-    if (!c || !ctx) return;
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
-    c.width = THUMB * dpr;
-    c.height = THUMB * dpr;
-    const g = buildGeometry(SAMPLE, {
-      ...defaultDesign,
-      ...preset.design,
-      margin: 2,
-      ecLevel: 'L',
-    });
-    drawGeometry(ctx, g, { width: THUMB * dpr });
+    // Thumbnails are decorative: draw them when the browser is idle so they
+    // never delay the first interaction.
+    const draw = () => {
+      const c = ref.current;
+      const ctx = c?.getContext('2d');
+      if (!c || !ctx) return;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      c.width = THUMB * dpr;
+      c.height = THUMB * dpr;
+      const g = buildGeometry(SAMPLE, {
+        ...defaultDesign,
+        ...preset.design,
+        margin: 2,
+        ecLevel: 'L',
+      });
+      drawGeometry(ctx, g, { width: THUMB * dpr });
+    };
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(draw, { timeout: 2000 });
+      return () => cancelIdleCallback(id);
+    }
+    const id = setTimeout(draw, 50);
+    return () => clearTimeout(id);
   }, [preset]);
   return (
     <canvas

@@ -1,4 +1,3 @@
-import { decodePixelsRobust } from '../decode';
 import { drawGeometry, pixelHeight, type Ctx2D } from '../render/canvas';
 import type { Geometry } from '../render/geometry';
 
@@ -36,6 +35,8 @@ export async function runScanTest(
     g,
     logo ? { width, logo, underlay: '#FFFFFF' } : { width, underlay: '#FFFFFF' },
   );
+  // The decoder is loaded on first use so it stays out of the initial bundle.
+  const { decodePixelsRobust } = await import('../decode');
   const result = await decodePixelsRobust(canvas.getPixels(), width, height);
   return { ok: result?.text === payload, decoded: result?.text ?? null };
 }

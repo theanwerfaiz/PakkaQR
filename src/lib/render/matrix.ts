@@ -21,8 +21,23 @@ const encoder = new TextEncoder();
 // Byte mode with UTF-8, so Hindi, emoji and accents round-trip.
 const utf8Bytes = (s: string): number[] => Array.from(encoder.encode(s));
 
-/** Byte-mode capacity per version (1–40) at each EC level. */
+// Mask selection makes encoding the most expensive step; previews, presets
+// and the scan test ask for the same matrix repeatedly, so keep a few.
+const cache = new Map<string, QrMatrix>();
+const CACHE_SIZE = 8;
+
+/** Encodes a payload as a QR module matrix (cached). */
 export function makeMatrix(payload: string, ecLevel: EcLevel): QrMatrix {
+  const key = `${ecLevel}\u0000${payload}`;
+  const hit = cache.get(key);
+  if (hit) return hit;
+  const matrix = encodeMatrix(payload, ecLevel);
+  cache.set(key, matrix);
+  if (cache.size > CACHE_SIZE) cache.delete(cache.keys().next().value!);
+  return matrix;
+}
+
+function encodeMatrix(payload: string, ecLevel: EcLevel): QrMatrix {
   const previous = qrcode.stringToBytes;
   qrcode.stringToBytes = utf8Bytes;
   try {

@@ -1,4 +1,4 @@
-import { context2d, loadImageElement, makeCanvas } from '../decode';
+import { context2d, loadImageElement, makeCanvas } from '../decode/canvas';
 import { canvasToBlob } from '../export';
 
 export const LOGO_TYPES = ['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'];

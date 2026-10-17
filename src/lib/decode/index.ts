@@ -1,4 +1,7 @@
 import jsQR from 'jsqr';
+import { context2d, loadImageElement, makeCanvas } from './canvas';
+
+export { context2d, loadImageElement, makeCanvas } from './canvas';
 
 export interface DecodeResult {
   text: string;
@@ -40,22 +43,6 @@ export async function decodePixelsRobust(
   return zxingDecode(data, width, height);
 }
 
-type AnyCanvas = HTMLCanvasElement | OffscreenCanvas;
-
-export function makeCanvas(width: number, height: number): AnyCanvas {
-  if (typeof OffscreenCanvas !== 'undefined') return new OffscreenCanvas(width, height);
-  const c = document.createElement('canvas');
-  c.width = width;
-  c.height = height;
-  return c;
-}
-
-export function context2d(canvas: AnyCanvas): CanvasRenderingContext2D {
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  if (!ctx) throw new Error('Canvas 2D is not available');
-  return ctx as CanvasRenderingContext2D;
-}
-
 /**
  * Decodes a QR code from an image source (bitmap, image, canvas or video).
  * Photos are tried at a few sizes because jsQR is sensitive to scale.
@@ -95,20 +82,4 @@ export async function decodeBlob(blob: Blob): Promise<DecodeResult | null> {
   } finally {
     bitmap.close();
   }
-}
-
-export function loadImageElement(blob: Blob): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(blob);
-    const img = new Image();
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-      resolve(img);
-    };
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      reject(new Error('errors.image.unreadable'));
-    };
-    img.src = url;
-  });
 }

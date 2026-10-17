@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { CanvasFactory } from '../../lib/scannability/scan-test';
 import type { Ctx2D } from '../../lib/render/canvas';
-import { context2d, makeCanvas } from '../../lib/decode';
+import { context2d, makeCanvas } from '../../lib/decode/canvas';
 
 export function useDebounced<T>(value: T, ms: number): T {
   const [debounced, setDebounced] = useState(value);
