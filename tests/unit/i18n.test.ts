@@ -21,7 +21,7 @@ const lookup = (d: Dict, key: string) =>
 describe('i18n dictionaries', () => {
   it('Hindi has every English UI key with the same placeholders', () => {
     for (const key of flattenKeys(en as unknown as Dict)) {
-      const value = lookup(hi as Dict, key);
+      const value = lookup(hi as unknown as Dict, key);
       expect(typeof value, key).toBe('string');
       expect(vars(value as string), key).toEqual(vars(lookup(en as unknown as Dict, key) as string));
     }
