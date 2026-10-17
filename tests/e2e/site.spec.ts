@@ -44,7 +44,11 @@ test('Hindi pages render Hindi with no missing-key placeholders', async ({ page 
   }
 });
 
-test('works offline after the first visit', async ({ page, context }) => {
+test('works offline after the first visit', async ({ page, context, browserName }) => {
+  // Playwright's WebKit build can't navigate to service-worker-served pages while
+  // offline ("WebKit encountered an internal error"), a known automation limit, not
+  // a Safari one. Offline on iOS/macOS Safari is checked by hand in DEVICE_TESTS.md.
+  test.skip(browserName === 'webkit', 'Playwright WebKit cannot load service-worker pages offline');
   await page.goto('/');
   await page.evaluate(async () => {
     const reg = await navigator.serviceWorker.ready;

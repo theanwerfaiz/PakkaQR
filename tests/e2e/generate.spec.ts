@@ -74,7 +74,8 @@ test.describe('generate, download and decode', () => {
     await open(page, '/upi-qr-code-generator');
     await expect(page.getByTestId('qr-placeholder')).toBeVisible();
     await page.getByLabel('UPI ID').fill('not-a-vpa');
-    await page.getByLabel('UPI ID').blur();
+    // A real Tab moves focus (and fires React's blur) in every engine; locator.blur() is unreliable in WebKit.
+    await page.getByLabel('UPI ID').press('Tab');
     await expect(page.getByText('UPI ID should look like name@bank.')).toBeVisible();
     await expect(page.getByTestId('download-png')).toBeDisabled();
   });
