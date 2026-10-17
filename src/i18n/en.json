@@ -1,1 +1,616 @@
-{ "_meta": {} }
+{
+  "_meta": {
+    "locale": "en",
+    "name": "English"
+  },
+  "brand": {
+    "name": "PakkaQR",
+    "tagline": "QR codes that work. Pakka.",
+    "logoAlt": "PakkaQR home"
+  },
+  "nav": {
+    "label": "Main",
+    "generator": "Generator",
+    "batch": "Bulk",
+    "scanner": "Scanner",
+    "expiry": "Expiry check",
+    "print": "Print",
+    "skip": "Skip to main content",
+    "menu": "Menu"
+  },
+  "theme": {
+    "toggle": "Colour theme: {mode}. Change theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "lang": {
+    "label": "Language",
+    "switchTo": "हिन्दी में देखें"
+  },
+  "footer": {
+    "tagline": "PakkaQR is free and open source. Made for everyone who's tired of QR codes that stop working.",
+    "trademark": "QR Code is a registered trademark of DENSO WAVE INCORPORATED. UPI is a trademark of NPCI. PakkaQR is not affiliated with either.",
+    "about": "About",
+    "privacy": "Privacy",
+    "faq": "FAQ",
+    "staticVsDynamic": "Static vs dynamic QR codes",
+    "source": "Source code",
+    "sponsor": "Support PakkaQR",
+    "tools": "Tools",
+    "learn": "Learn",
+    "project": "Project"
+  },
+  "trust": {
+    "forever": "Works forever",
+    "free": "100% free",
+    "private": "Nothing leaves your device",
+    "opensource": "Open source"
+  },
+  "type": {
+    "url": "Website",
+    "text": "Text",
+    "wifi": "WiFi",
+    "upi": "UPI payment",
+    "whatsapp": "WhatsApp",
+    "phone": "Phone call",
+    "sms": "SMS",
+    "email": "Email",
+    "vcard": "Contact card",
+    "location": "Location",
+    "event": "Event",
+    "social": "Social profile",
+    "appstore": "App download",
+    "review": "Google review",
+    "mecard": "MeCard",
+    "crypto": "Crypto"
+  },
+  "generator": {
+    "label": "QR code generator",
+    "chooseType": "What should your QR code do?",
+    "moreTypes": "More types",
+    "details": "Your details",
+    "customize": "Customise",
+    "previewHeading": "Preview",
+    "placeholder": "Your QR code will appear here",
+    "alt": "QR code for {type}: {summary}",
+    "altFramed": "QR code for {type}: {summary}. Label: {label}",
+    "length": "{count} characters in the code",
+    "dense": "This is a lot of data, so the code will be dense and harder to scan. Tip: {tip}.",
+    "denseTipUrl": "shorten the link",
+    "denseTipOther": "remove optional fields",
+    "tooLong": "Too much data for one QR code. Please shorten it.",
+    "fixErrors": "Fill in the highlighted fields to see your code.",
+    "optional": "optional",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "rendering": "Updating preview…"
+  },
+  "field": {
+    "url": {
+      "url": "Website address"
+    },
+    "text": {
+      "text": "Your text"
+    },
+    "wifi": {
+      "ssid": "Network name (SSID)",
+      "password": "Password",
+      "security": "Security",
+      "hidden": "Hidden network"
+    },
+    "upi": {
+      "pa": "UPI ID",
+      "pn": "Payee name",
+      "am": "Amount (₹)",
+      "tn": "Note"
+    },
+    "whatsapp": {
+      "countryCode": "Country code",
+      "number": "WhatsApp number",
+      "message": "Pre-filled message"
+    },
+    "phone": {
+      "countryCode": "Country code",
+      "number": "Phone number"
+    },
+    "sms": {
+      "countryCode": "Country code",
+      "number": "Phone number",
+      "message": "Message"
+    },
+    "email": {
+      "to": "Email address",
+      "subject": "Subject",
+      "body": "Message"
+    },
+    "vcard": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "org": "Company",
+      "title": "Job title",
+      "mobile": "Mobile",
+      "work": "Work phone",
+      "email": "Email",
+      "website": "Website",
+      "street": "Street",
+      "city": "City",
+      "region": "State / region",
+      "postcode": "PIN / postcode",
+      "country": "Country",
+      "note": "Note"
+    },
+    "location": {
+      "mapsLink": "Paste a Google Maps link",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "format": "Open as"
+    },
+    "event": {
+      "title": "Event name",
+      "allDay": "All-day event",
+      "start": "Starts",
+      "end": "Ends",
+      "timezone": "Time zone",
+      "location": "Location",
+      "description": "Description"
+    },
+    "social": {
+      "platform": "Platform",
+      "username": "Username or profile link",
+      "linkedinKind": "Profile type"
+    },
+    "appstore": {
+      "store": "Link to encode",
+      "playUrl": "Google Play link",
+      "appleUrl": "App Store link"
+    },
+    "review": {
+      "url": "Review link"
+    },
+    "mecard": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "email": "Email",
+      "url": "Website",
+      "address": "Address",
+      "note": "Note"
+    },
+    "crypto": {
+      "coin": "Currency",
+      "address": "Wallet address",
+      "amount": "Amount",
+      "chainId": "Chain ID"
+    }
+  },
+  "hint": {
+    "url": {
+      "url": "We add https:// if you leave it out."
+    },
+    "wifi": {
+      "password": "Spaces count, so type it exactly as it is."
+    },
+    "upi": {
+      "pa": "Looks like name@bank, e.g. ravi@okaxis.",
+      "am": "Leave empty to let the payer enter any amount.",
+      "tn": "Up to 80 characters."
+    },
+    "whatsapp": {
+      "number": "Type the number without the country code, or include it with +."
+    },
+    "phone": {
+      "number": "Type the number without the country code, or include it with +."
+    },
+    "sms": {
+      "number": "Type the number without the country code, or include it with +."
+    },
+    "location": {
+      "mapsLink": "We pull the coordinates out of the link. Or type them below.",
+      "format": "Google Maps links open on almost every phone; geo: opens the phone's default map app."
+    },
+    "event": {
+      "timezone": "The time is converted for people in other time zones."
+    },
+    "social": {
+      "username": "@name, name, or the full profile link all work."
+    },
+    "review": {
+      "url": "In Google Business Profile, choose “Ask for reviews” and copy the link. Short g.page links work too."
+    },
+    "appstore": {
+      "store": "A QR code can hold one link. Choose which store to send people to."
+    },
+    "crypto": {
+      "amount": "Optional. In BTC or ETH, not in rupees or dollars.",
+      "chainId": "Optional. 1 is Ethereum mainnet."
+    }
+  },
+  "placeholder": {
+    "url": {
+      "url": "example.com/menu"
+    },
+    "text": {
+      "text": "Type anything…"
+    },
+    "wifi": {
+      "ssid": "Cafe Guest"
+    },
+    "upi": {
+      "pa": "name@bank",
+      "pn": "Ravi Stores",
+      "am": "150",
+      "tn": "Order 12"
+    },
+    "whatsapp": {
+      "number": "98765 43210",
+      "message": "Hi, I want to order"
+    },
+    "phone": {
+      "number": "98765 43210"
+    },
+    "sms": {
+      "number": "98765 43210"
+    },
+    "email": {
+      "to": "hello@example.com"
+    },
+    "location": {
+      "mapsLink": "https://maps.google.com/…",
+      "lat": "12.9716",
+      "lng": "77.5946"
+    },
+    "event": {
+      "title": "Wedding reception"
+    },
+    "social": {
+      "username": "@yourname"
+    },
+    "review": {
+      "url": "https://g.page/r/…/review"
+    },
+    "appstore": {
+      "playUrl": "https://play.google.com/store/apps/details?id=…",
+      "appleUrl": "https://apps.apple.com/app/…"
+    }
+  },
+  "option": {
+    "wifi": {
+      "WPA": "WPA / WPA2 / WPA3",
+      "WEP": "WEP (old)",
+      "nopass": "None (open network)"
+    },
+    "location": {
+      "maps": "Google Maps link",
+      "geo": "geo: link"
+    },
+    "linkedinKind": {
+      "in": "Personal profile",
+      "company": "Company page"
+    },
+    "store": {
+      "play": "Google Play",
+      "apple": "App Store"
+    },
+    "coin": {
+      "btc": "Bitcoin (BTC)",
+      "eth": "Ethereum (ETH)"
+    }
+  },
+  "errors": {
+    "required": "Please fill this in.",
+    "invalid": "Please choose a valid option.",
+    "url": {
+      "invalid": "This doesn't look like a web address. Try something like example.com/menu.",
+      "scheme": "Only http:// and https:// links are allowed."
+    },
+    "phone": {
+      "invalid": "Please enter a valid phone number.",
+      "countryCode": "Choose a country code, or type the number with +."
+    },
+    "email": {
+      "invalid": "Please enter a valid email address, like name@example.com."
+    },
+    "wifi": {
+      "ssidLength": "Network names can be at most 32 bytes long.",
+      "wpaLength": "WPA passwords are 8 to 63 characters long."
+    },
+    "upi": {
+      "vpa": "UPI ID should look like name@bank.",
+      "amount": "Enter an amount like 150 or 99.50 — no commas or ₹ sign.",
+      "noteLength": "Keep the note to 80 characters or fewer."
+    },
+    "vcard": {
+      "name": "Enter a first or last name."
+    },
+    "location": {
+      "lat": "Latitude must be between -90 and 90.",
+      "lng": "Longitude must be between -180 and 180.",
+      "required": "Paste a Google Maps link or enter coordinates."
+    },
+    "event": {
+      "start": "Please enter a valid start date.",
+      "end": "Please enter a valid end date.",
+      "order": "The end must be after the start.",
+      "timezone": "Please choose a time zone."
+    },
+    "social": {
+      "username": "Usernames can only use letters, numbers, dots, dashes and underscores."
+    },
+    "crypto": {
+      "address": "This doesn't look like a valid wallet address for this currency.",
+      "amount": "Enter a plain number, like 0.001.",
+      "chainId": "Chain ID must be a whole number."
+    },
+    "tooLong": "Too much data for one QR code. Please shorten it.",
+    "image": {
+      "unreadable": "We couldn't read that image. Try a PNG, JPG or WebP file.",
+      "noCode": "We couldn't find a QR code in this image. Try a sharper, closer photo."
+    },
+    "logo": {
+      "type": "Please choose a PNG, JPG, SVG or WebP image.",
+      "size": "That image is too large. Please use one under 5 MB."
+    },
+    "export": "Something went wrong while creating the file. Please try again.",
+    "templates": {
+      "file": "This isn't a PakkaQR designs file."
+    },
+    "clipboard": "Your browser didn't allow copying. Try downloading instead."
+  },
+  "warnings": {
+    "location": {
+      "noCoords": "We couldn't find coordinates in this link (short links hide them), so the code will hold the link itself."
+    },
+    "appstore": {
+      "host": "This isn't a Google Play or App Store link. It will still work as a normal link."
+    },
+    "review": {
+      "host": "This doesn't look like a Google review link. It will still work as a normal link."
+    }
+  },
+  "upi": {
+    "check": "Always check the payee name in your UPI app before paying."
+  },
+  "design": {
+    "presets": "Presets",
+    "colors": "Colors",
+    "shape": "Shape",
+    "logo": "Logo",
+    "frame": "Frame & label",
+    "advanced": "Advanced",
+    "reset": "Reset design",
+    "fg": "Code color",
+    "bg": "Background color",
+    "hex": "{name} hex value",
+    "picker": "Pick {name}",
+    "transparent": "Transparent background",
+    "transparentHint": "PNG and SVG only. Place it on a light background.",
+    "gradient": "Gradient",
+    "gradientKind": "Gradient type",
+    "linear": "Linear",
+    "radial": "Radial",
+    "gradientStart": "Gradient start",
+    "gradientEnd": "Gradient end",
+    "angle": "Angle",
+    "dotStyle": "Dots",
+    "cornerSquare": "Corner squares",
+    "cornerDot": "Corner dots",
+    "cornerColor": "Separate corner color",
+    "cornerColorValue": "Corner color",
+    "margin": "Quiet zone",
+    "marginHint": "White space around the code, in modules. 4 is recommended.",
+    "ecLevel": "Error correction",
+    "ecHint": "Higher levels survive damage and logos better, but make the code denser.",
+    "modules": "{count} modules"
+  },
+  "preset": {
+    "classic": "Classic",
+    "rounded-ink": "Rounded Ink",
+    "ocean": "Ocean",
+    "sunset": "Sunset",
+    "forest": "Forest",
+    "royal": "Royal",
+    "mint": "Mint",
+    "midnight": "Midnight",
+    "coffee": "Coffee",
+    "cherry": "Cherry",
+    "minimal-dots": "Minimal Dots",
+    "gold": "Gold",
+    "apply": "Use the {name} style",
+    "invertedNote": "light on dark"
+  },
+  "dotStyle": {
+    "square": "Square",
+    "rounded": "Rounded",
+    "dots": "Dots",
+    "classy": "Classy",
+    "classy-rounded": "Classy rounded",
+    "extra-rounded": "Extra rounded"
+  },
+  "cornerSquare": {
+    "square": "Square",
+    "dot": "Circle",
+    "extra-rounded": "Rounded"
+  },
+  "cornerDot": {
+    "square": "Square",
+    "dot": "Dot"
+  },
+  "ec": {
+    "auto": "Auto (recommended)",
+    "L": "Low – 7%",
+    "M": "Medium – 15%",
+    "Q": "Quartile – 25%",
+    "H": "High – 30%",
+    "autoNow": "Auto is using {level} right now."
+  },
+  "logo": {
+    "upload": "Upload a logo",
+    "drop": "Drag and drop, paste, or click to choose an image",
+    "builtIn": "Or use an icon",
+    "remove": "Remove logo",
+    "size": "Logo size",
+    "margin": "Space around logo",
+    "hideDots": "Clear dots behind the logo",
+    "current": "Current logo",
+    "icon": {
+      "whatsapp": "Chat bubble",
+      "wifi": "WiFi",
+      "upi": "Rupee",
+      "instagram": "Camera",
+      "phone": "Phone",
+      "email": "Envelope",
+      "location": "Map pin"
+    }
+  },
+  "frame": {
+    "style": "Frame style",
+    "label": "Label text",
+    "labelColor": "Label color",
+    "frameColor": "Frame color",
+    "none": "No frame",
+    "box-bottom": "Box with label",
+    "rounded-bottom": "Rounded card",
+    "banner-top": "Top banner",
+    "speech-bubble": "Speech bubble",
+    "phone": "Phone",
+    "defaultLabel": {
+      "url": "Scan me",
+      "text": "Scan me",
+      "wifi": "Scan to join WiFi",
+      "upi": "Scan to pay",
+      "whatsapp": "Chat with us",
+      "phone": "Call us",
+      "sms": "Text us",
+      "email": "Email us",
+      "vcard": "Save my contact",
+      "location": "Find us",
+      "event": "Add to calendar",
+      "social": "Follow us",
+      "appstore": "Get the app",
+      "review": "Review us",
+      "mecard": "Save my contact",
+      "crypto": "Scan to pay"
+    }
+  },
+  "export": {
+    "heading": "Download",
+    "size": "PNG size",
+    "sizeOption": "{size} × {size} px",
+    "fileName": "File name",
+    "png": "Download PNG",
+    "svg": "SVG",
+    "svgLong": "Download SVG",
+    "more": "More formats",
+    "jpeg": "Download JPEG",
+    "webp": "Download WebP",
+    "pdf": "Download PDF",
+    "pdfWidth": "Printed width",
+    "unitCm": "cm",
+    "copy": "Copy image",
+    "copied": "Image copied.",
+    "share": "Share…",
+    "promise": "Works forever · No tracking · No watermark",
+    "working": "Preparing your file…",
+    "svgTip": "SVG stays sharp at any size — best for printing."
+  },
+  "status": {
+    "great": "Verified — this code scans correctly.",
+    "risky": "This code might be hard to scan. {reason}",
+    "fail": "This code probably won't scan. {reason}",
+    "checking": "Checking that your code scans…",
+    "label": "Scan check",
+    "fix": "Fix it",
+    "reason": {
+      "contrast": "Colors are too similar.",
+      "inverted": "Light code on dark background — some cameras struggle.",
+      "logo": "Logo is too big.",
+      "quietZone": "Add more white space around the code.",
+      "density": "Too much data for a small print — shorten it, or print it at least {cm} cm wide.",
+      "decode": "Our test scanner couldn't read it."
+    },
+    "fixes": {
+      "darkerColors": "Use a dark code color",
+      "swapColors": "Swap colors",
+      "raiseEc": "Raise error correction to High",
+      "shrinkLogo": "Make the logo smaller",
+      "increaseMargin": "Use a 4-module quiet zone"
+    }
+  },
+  "modal": {
+    "close": "Close",
+    "notScannable": {
+      "title": "This code may not scan",
+      "body": "Our test couldn't read this code reliably. People might not be able to scan it.",
+      "fix": "Fix automatically",
+      "anyway": "Download anyway",
+      "cancel": "Go back"
+    }
+  },
+  "toast": {
+    "saved": "Saved! This code will work forever.",
+    "support": "PakkaQR is free forever. If it helped, star us on GitHub or buy us a coffee.",
+    "star": "Star on GitHub",
+    "coffee": "Buy us a coffee",
+    "dismiss": "Dismiss"
+  },
+  "shortcuts": {
+    "open": "Keyboard shortcuts",
+    "title": "Keyboard shortcuts",
+    "png": "Download PNG",
+    "svg": "Download SVG",
+    "help": "Show this help",
+    "enter": "In a field: jump to Download"
+  },
+  "saved": {
+    "title": "My designs & history",
+    "intro": "Saved designs and history stay in this browser only. Nothing is uploaded.",
+    "name": "Design name",
+    "namePlaceholder": "My shop style",
+    "includeContent": "Also save the content (not just the style)",
+    "save": "Save design",
+    "savedOk": "Design saved.",
+    "apply": "Use",
+    "delete": "Delete {name}",
+    "empty": "No saved designs yet.",
+    "styleOnly": "Style only",
+    "withContent": "Style + content",
+    "export": "Export designs",
+    "import": "Import designs",
+    "imported": "{count} designs imported.",
+    "historyToggle": "Remember my last 30 codes",
+    "historyNote": "Off by default. Stored only on this device.",
+    "historyEmpty": "Nothing here yet. Codes you download will appear here.",
+    "historyClear": "Clear history",
+    "historyUse": "Open",
+    "recent": "Recent codes",
+    "shareLink": "Copy style link",
+    "shareLinkCopied": "Style link copied. It holds your style only — never your content.",
+    "shareLinkNote": "Share your look with others. The link holds the style only, never your content or logo.",
+    "appliedFromLink": "We applied the style from the link you opened."
+  },
+  "install": {
+    "prompt": "Install PakkaQR? It works offline, too.",
+    "install": "Install",
+    "dismiss": "Not now"
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "copied": "Copied",
+    "loading": "Loading…",
+    "or": "or",
+    "yes": "Yes",
+    "no": "No",
+    "open": "Open",
+    "remove": "Remove",
+    "learnMore": "Learn more",
+    "newTab": "(opens in a new tab)"
+  },
+  "action": {
+    "download": "Download",
+    "example": "Try an example",
+    "reset": "Reset"
+  }
+}

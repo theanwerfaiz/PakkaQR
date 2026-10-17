@@ -28,6 +28,7 @@ export default defineConfig({
   site,
   base,
   output: 'static',
+  markdown: { syntaxHighlight: false },
   trailingSlash: 'never',
   build: { format: 'file', inlineStylesheets: 'never' },
   integrations: [

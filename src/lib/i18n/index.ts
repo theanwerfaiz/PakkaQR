@@ -61,7 +61,7 @@ export function hasKey(dict: Dict, key: string): boolean {
   return lookup(dict, key) !== undefined;
 }
 
-export function useTranslations(locale: Locale): TFunction {
+export function getTranslator(locale: Locale): TFunction {
   return createT(uiDicts[locale], uiDicts[defaultLocale]);
 }
 

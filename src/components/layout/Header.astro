@@ -1,0 +1,176 @@
+---
+import LogoMark from './LogoMark.astro';
+import { NAV } from '../../data/pages';
+import { localePath, localeInfo, locales, getTranslator, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  slug: string;
+}
+const { locale, slug } = Astro.props;
+const t = getTranslator(locale);
+const base = import.meta.env.BASE_URL;
+const navItems = (Object.keys(NAV) as Array<keyof typeof NAV>).map((key) => ({
+  key,
+  href: localePath(locale, NAV[key], base),
+  current: NAV[key] === slug,
+}));
+const otherLocales = locales.filter((l) => l !== locale);
+---
+
+<header class="border-b border-border bg-surface">
+  <a
+    href="#main"
+    class="visually-hidden focus:not-sr-only focus:static focus:block focus:p-3 focus:w-auto focus:h-auto focus:m-0 focus:[clip:auto]"
+  >
+    {t('nav.skip')}
+  </a>
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2">
+    <a
+      href={localePath(locale, '', base)}
+      class="flex min-h-11 items-center gap-2 font-bold text-text no-underline"
+      aria-label={t('brand.logoAlt')}
+    >
+      <LogoMark />
+      <span class="text-lg">PakkaQR</span>
+    </a>
+    <nav
+      aria-label={t('nav.label')}
+      class="order-3 w-full overflow-x-auto sm:order-none sm:w-auto sm:flex-1"
+    >
+      <ul class="flex gap-1 whitespace-nowrap">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={item.current ? 'page' : undefined}
+              class:list={[
+                'inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium no-underline',
+                item.current
+                  ? 'bg-surface-2 text-text'
+                  : 'text-muted hover:bg-surface-2 hover:text-text',
+              ]}
+            >
+              {t(`nav.${item.key}`)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="ml-auto flex items-center gap-1">
+      {otherLocales.map((l) => (
+        <a
+          href={localePath(l, slug, base)}
+          hreflang={localeInfo[l].tag}
+          lang={localeInfo[l].tag}
+          class="btn btn-ghost btn-sm min-h-11"
+          data-lang-link={l}
+        >
+          {localeInfo[l].nativeName}
+        </a>
+      ))}
+      <button
+        type="button"
+        class="btn btn-ghost btn-sm min-h-11 min-w-11"
+        data-theme-toggle
+        data-label-template={t('theme.toggle')}
+        data-label-system={t('theme.system')}
+        data-label-light={t('theme.light')}
+        data-label-dark={t('theme.dark')}
+        aria-label={t('theme.toggle', { mode: t('theme.system') })}
+      >
+        <svg
+          data-icon="system"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+          <path d="M8 20h8M12 16v4"></path>
+        </svg>
+        <svg
+          data-icon="light"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          hidden
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg
+          data-icon="dark"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          hidden
+        >
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { writeLocal } from '../../lib/storage/local';
+
+  const order = ['system', 'light', 'dark'] as const;
+  type Pref = (typeof order)[number];
+  const root = document.documentElement;
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function apply(pref: Pref) {
+    const dark = pref === 'dark' || (pref === 'system' && media.matches);
+    root.dataset.theme = dark ? 'dark' : 'light';
+    root.dataset.themePref = pref;
+    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')) {
+      const name = button.dataset[`label${pref[0]!.toUpperCase()}${pref.slice(1)}`] ?? pref;
+      button.setAttribute(
+        'aria-label',
+        (button.dataset.labelTemplate ?? '').replace('{mode}', name),
+      );
+      for (const icon of button.querySelectorAll<SVGElement>('[data-icon]')) {
+        icon.toggleAttribute('hidden', icon.dataset.icon !== pref);
+      }
+    }
+  }
+
+  const current = (): Pref => {
+    const p = root.dataset.themePref;
+    return p === 'light' || p === 'dark' ? p : 'system';
+  };
+
+  apply(current());
+  media.addEventListener('change', () => apply(current()));
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')) {
+    button.addEventListener('click', () => {
+      const next = order[(order.indexOf(current()) + 1) % order.length]!;
+      writeLocal('pakkaqr:theme', next);
+      apply(next);
+    });
+  }
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-lang-link]')) {
+    link.addEventListener('click', () =>
+      writeLocal('pakkaqr:locale', link.dataset.langLink ?? null),
+    );
+  }
+</script>

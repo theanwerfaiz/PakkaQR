@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GeneratorPage from '../components/pages/GeneratorPage.astro';
+import { pages, type PageDef } from '../data/pages';
+import { defaultLocale, localeInfo, localePath, locales, type Locale } from '../lib/i18n';
+import { contentList, useContent, type Faq } from '../lib/i18n/content';
+import { faqPage, howTo, webApplication } from '../lib/seo';
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) =>
+    pages.map((page) => {
+      const parts = [locale === defaultLocale ? '' : locale, page.slug].filter(Boolean);
+      return {
+        params: { path: parts.length ? parts.join('/') : undefined },
+        props: { locale, page },
+      };
+    }),
+  );
+}
+
+interface Props {
+  locale: Locale;
+  page: PageDef;
+}
+const { locale, page } = Astro.props;
+const c = useContent(locale);
+const k = (key: string) => `pages.${page.key}.${key}`;
+const lang = localeInfo[locale].tag;
+const url = new URL(localePath(locale, page.slug, import.meta.env.BASE_URL), Astro.site).href;
+const jsonLd: object[] = [];
+if (page.kind === 'home') {
+  jsonLd.push(
+    webApplication({ name: 'PakkaQR', url, description: c(k('description')), inLanguage: lang }),
+  );
+}
+if (page.howTo) {
+  const steps = contentList(locale, k('steps'));
+  if (steps.length) jsonLd.push(howTo({ name: c(k('howToTitle')), steps, inLanguage: lang }));
+}
+const faqs = contentList<Faq>(locale, k('faq'));
+if (faqs.length) jsonLd.push(faqPage(faqs, lang));
+---
+
+<BaseLayout
+  locale={locale}
+  slug={page.slug}
+  title={c(k('title'))}
+  description={c(k('description'))}
+  jsonLd={jsonLd}
+>
+  {(page.kind === 'home' || page.kind === 'tool' || page.kind === 'usecase') && (
+    <GeneratorPage locale={locale} page={page} />
+  )}
+</BaseLayout>

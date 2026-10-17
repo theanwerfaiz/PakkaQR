@@ -1,0 +1,35 @@
+---
+import { pageBySlug } from '../../data/pages';
+import { localePath, type Locale } from '../../lib/i18n';
+import { useContent } from '../../lib/i18n/content';
+interface Props {
+  locale: Locale;
+  slugs: string[];
+  title: string;
+}
+const { locale, slugs, title } = Astro.props;
+const c = useContent(locale);
+const base = import.meta.env.BASE_URL;
+const links = slugs
+  .map((slug) => pageBySlug.get(slug))
+  .filter((p) => p !== undefined)
+  .map((p) => ({
+    href: localePath(locale, p.slug, base),
+    label: c(`pages.${p.key}.linkText`),
+    blurb: c(`pages.${p.key}.blurb`),
+  }));
+---
+
+<nav class="mx-auto mt-14 max-w-6xl px-4" aria-labelledby="related-heading">
+  <h2 id="related-heading">{title}</h2>
+  <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {links.map((l) => (
+      <li>
+        <a href={l.href} class="card block h-full p-4 no-underline hover:border-accent">
+          <span class="font-semibold text-text">{l.label}</span>
+          <span class="mt-1 block text-sm text-muted">{l.blurb}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

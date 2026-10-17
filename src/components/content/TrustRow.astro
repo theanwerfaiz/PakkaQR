@@ -1,0 +1,29 @@
+---
+import { getTranslator, type Locale } from '../../lib/i18n';
+interface Props {
+  locale: Locale;
+}
+const t = getTranslator(Astro.props.locale);
+const items = ['forever', 'free', 'private', 'opensource'];
+---
+
+<ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-muted">
+  {items.map((key) => (
+    <li class="flex items-center gap-1.5">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        fill="none"
+        stroke="var(--success)"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 12l5 5 9-10" />
+      </svg>
+      {t(`trust.${key}`)}
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,86 @@
+---
+import Generator from '../generator/Generator';
+import TrustRow from '../content/TrustRow.astro';
+import HowTo from '../content/HowTo.astro';
+import FaqList from '../content/FaqList.astro';
+import RelatedLinks from '../content/RelatedLinks.astro';
+import StaticDynamicDiagram from '../content/StaticDynamicDiagram.astro';
+import type { PageDef } from '../../data/pages';
+import { localePath, type Locale } from '../../lib/i18n';
+import { contentList, useContent, type Faq } from '../../lib/i18n/content';
+
+interface Props {
+  locale: Locale;
+  page: PageDef;
+}
+const { locale, page } = Astro.props;
+const c = useContent(locale);
+const k = (key: string) => `pages.${page.key}.${key}`;
+const steps = contentList(locale, k('steps'));
+const faqs = contentList<Faq>(locale, k('faq'));
+const gen = page.generator!;
+const frame = gen.frame
+  ? { id: gen.frame.id, label: c(gen.frame.labelKey.replace(/^content\./, '')) }
+  : undefined;
+const base = import.meta.env.BASE_URL;
+const isHome = page.kind === 'home';
+const paragraphs = contentList(locale, k('body'));
+---
+
+<section class="mx-auto max-w-6xl px-4 pt-8 pb-6">
+  <h1>{c(k('h1'))}</h1>
+  <p class="mt-3 max-w-3xl text-lg text-muted">{c(k('intro'))}</p>
+  <TrustRow locale={locale} />
+</section>
+
+<section class="mx-auto max-w-6xl px-4 pb-24 lg:pb-0" aria-label={c('common.generatorRegion')}>
+  <Generator
+    client:load
+    locale={locale}
+    initialType={gen.type}
+    {...(gen.fields ? { initialFields: gen.fields } : {})}
+    {...(frame ? { frame } : {})}
+    {...(gen.openPanel ? { openPanel: gen.openPanel } : {})}
+  />
+</section>
+
+{paragraphs.length > 0 && (
+  <section class="prose-pakka mx-auto mt-14 max-w-3xl px-4">
+    <h2>{c(k('bodyTitle'))}</h2>
+    {paragraphs.map((p) => (
+      <p>{p}</p>
+    ))}
+  </section>
+)}
+
+{isHome && (
+  <section class="mx-auto mt-14 max-w-6xl px-4" aria-labelledby="why-heading">
+    <h2 id="why-heading">{c('home.why.title')}</h2>
+    <div class="prose-pakka mt-4 max-w-3xl">
+      <p>{c('home.why.p1')}</p>
+      <p>{c('home.why.p2')}</p>
+      <p>
+        <strong>{c('home.why.tradeoffLabel')}</strong> {c('home.why.tradeoff')}
+      </p>
+    </div>
+    <div class="mt-6">
+      <StaticDynamicDiagram locale={locale} />
+    </div>
+    <p class="mt-4">
+      <a href={localePath(locale, 'qr-code-expiry-checker', base)}>{c('home.why.checkLink')}</a> ·{' '}
+      <a href={localePath(locale, 'static-vs-dynamic-qr-codes', base)}>
+        {c('home.why.articleLink')}
+      </a>
+    </p>
+  </section>
+)}
+
+<HowTo title={c(k('howToTitle'))} steps={steps} />
+<FaqList title={c(k('faqTitle'))} faqs={faqs} />
+<RelatedLinks
+  locale={locale}
+  slugs={[...page.related, 'qr-code-expiry-checker', 'static-vs-dynamic-qr-codes']
+    .filter((s, i, a) => a.indexOf(s) === i && s !== page.slug)
+    .slice(0, 6)}
+  title={c('common.related')}
+/>
