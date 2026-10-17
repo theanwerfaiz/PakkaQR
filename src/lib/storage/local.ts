@@ -31,3 +31,17 @@ export function writeSession(key: string, value: string): void {
     // Best-effort.
   }
 }
+
+/** sessionStorage key the generator reads on load ("recreate as forever code"). */
+export const HANDOFF_KEY = 'pakkaqr:handoff';
+
+/** Reads and removes a sessionStorage value. */
+export function takeSession(key: string): string | null {
+  try {
+    const value = sessionStorage.getItem(key);
+    sessionStorage.removeItem(key);
+    return value;
+  } catch {
+    return null;
+  }
+}

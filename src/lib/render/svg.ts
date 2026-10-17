@@ -31,6 +31,8 @@ export interface SvgOptions {
   /** Output width/height attributes in px; the viewBox stays in modules. */
   pixelWidth?: number;
   title?: string;
+  /** Turn the whole image upside down (folded table tents). */
+  rotate180?: boolean;
 }
 
 /** Serialises geometry to a standalone, vector SVG document. */
@@ -73,7 +75,9 @@ export function geometryToSvg(g: Geometry, options: SvgOptions = {}): string {
     `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${fmt(g.width)} ${fmt(g.height)}" shape-rendering="geometricPrecision">` +
     title +
     (defs.length ? `<defs>${defs.join('')}</defs>` : '') +
-    body.join('') +
+    (options.rotate180
+      ? `<g transform="rotate(180 ${fmt(g.width / 2)} ${fmt(g.height / 2)})">${body.join('')}</g>`
+      : body.join('')) +
     '</svg>'
   );
 }

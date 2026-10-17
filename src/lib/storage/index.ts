@@ -64,7 +64,7 @@ export const newId = (): string =>
     ? crypto.randomUUID()
     : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 
-function sanitizeContent(input: unknown): QrContent | undefined {
+export function sanitizeContent(input: unknown): QrContent | undefined {
   if (typeof input !== 'object' || input === null) return undefined;
   const c = input as Record<string, unknown>;
   if (!isQrType(c.type) || typeof c.fields !== 'object' || c.fields === null) return undefined;

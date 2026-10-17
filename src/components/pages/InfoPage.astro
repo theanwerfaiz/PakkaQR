@@ -1,0 +1,67 @@
+---
+import FaqList from '../content/FaqList.astro';
+import RelatedLinks from '../content/RelatedLinks.astro';
+import StaticDynamicDiagram from '../content/StaticDynamicDiagram.astro';
+import type { PageDef } from '../../data/pages';
+import { localePath, type Locale } from '../../lib/i18n';
+import { contentList, useContent, type Faq } from '../../lib/i18n/content';
+import { siteConfig } from '../../lib/site';
+
+interface Props {
+  locale: Locale;
+  page: PageDef;
+}
+const { locale, page } = Astro.props;
+const c = useContent(locale);
+const k = (key: string) => `pages.${page.key}.${key}`;
+interface Block {
+  h?: string;
+  p?: string[];
+  list?: string[];
+}
+const blocks = contentList<Block>(locale, k('sections'));
+const faqs = contentList<Faq>(locale, k('faq'));
+const base = import.meta.env.BASE_URL;
+---
+
+<article class="mx-auto max-w-3xl px-4 pt-8">
+  <h1>{c(k('h1'))}</h1>
+  <p class="mt-3 text-lg text-muted">{c(k('intro'))}</p>
+  {page.kind === 'article' && (
+    <div class="mt-8">
+      <StaticDynamicDiagram locale={locale} />
+    </div>
+  )}
+  <div class="prose-pakka mt-8">
+    {blocks.map((b) => (
+      <>
+        {b.h && <h2>{b.h}</h2>}
+        {(b.p ?? []).map((p) => (
+          <p>{p}</p>
+        ))}
+        {b.list && (
+          <ul>
+            {b.list.map((li) => (
+              <li>{li}</li>
+            ))}
+          </ul>
+        )}
+      </>
+    ))}
+    {(page.kind === 'about' || page.kind === 'privacy') && (
+      <p>
+        <a href={siteConfig.githubUrl} rel="noopener">
+          {c('common.sourceLink')}
+        </a>
+      </p>
+    )}
+    {page.kind === 'article' && (
+      <p>
+        <a href={localePath(locale, 'qr-code-expiry-checker', base)}>{c('home.why.checkLink')}</a>
+      </p>
+    )}
+  </div>
+</article>
+
+{faqs.length > 0 && <FaqList title={c(k('faqTitle'))} faqs={faqs} />}
+<RelatedLinks locale={locale} slugs={page.related} title={c('common.related')} />

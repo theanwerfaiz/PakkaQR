@@ -14,21 +14,46 @@ export async function loadPdfLib() {
   return jsPDF;
 }
 
+export interface TextImageOptions {
+  text: string;
+  /** Font size in mm. */
+  sizeMm: number;
+  color: string;
+  /** Box width in mm. */
+  widthMm: number;
+  bold?: boolean;
+  align?: 'center' | 'left';
+  rotate180?: boolean;
+}
+
 /**
  * Text is drawn as a high-resolution image rather than PDF text: PDF base
  * fonts cannot shape Devanagari or emoji, while the browser's canvas can.
+ * The font shrinks to fit the box width.
  */
-async function textImage(text: string, fontSizeMm: number, color: string, widthMm: number) {
+export async function textImage(o: TextImageOptions) {
   const pxPerMm = 600 / MM_PER_INCH;
-  const w = Math.max(1, Math.ceil(widthMm * pxPerMm));
-  const h = Math.max(1, Math.ceil(fontSizeMm * 1.6 * pxPerMm));
+  const w = Math.max(1, Math.ceil(o.widthMm * pxPerMm));
+  let fontPx = o.sizeMm * pxPerMm;
+  const h = Math.max(1, Math.ceil(fontPx * 1.6));
   const canvas = makeCanvas(w, h);
   const ctx = context2d(canvas) as unknown as Ctx2D;
-  ctx.font = canvasFont(fontSizeMm * pxPerMm);
-  ctx.fillStyle = color;
-  ctx.textAlign = 'center';
+  const font = (px: number) => (o.bold ? canvasFont(px) : canvasFont(px).replace(/^\d+/, '500'));
+  ctx.font = font(fontPx);
+  const measured = ctx.measureText(o.text).width;
+  if (measured > w) {
+    fontPx = (fontPx * w) / measured;
+    ctx.font = font(fontPx);
+  }
+  const c = ctx as unknown as CanvasRenderingContext2D;
+  if (o.rotate180) {
+    c.translate(w, h);
+    c.rotate(Math.PI);
+  }
+  ctx.fillStyle = o.color;
+  ctx.textAlign = o.align === 'left' ? 'left' : 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, w / 2, h / 2);
+  ctx.fillText(o.text, o.align === 'left' ? 0 : w / 2, h / 2);
   const blob = await canvasToBlob(canvas, 'image/png');
   const bytes = new Uint8Array(await blob.arrayBuffer());
   return { bytes, w: w / pxPerMm, h: h / pxPerMm };
@@ -44,10 +69,11 @@ export async function placeCode(
   x: number,
   y: number,
   widthMm: number,
+  rotate180 = false,
 ): Promise<void> {
   const scale = widthMm / g.width;
   const vectorOnly: Geometry = { ...g, texts: [] };
-  const svgText = geometryToSvg(vectorOnly, { pixelWidth: 1000 });
+  const svgText = geometryToSvg(vectorOnly, { pixelWidth: 1000, rotate180 });
   const svg = new DOMParser().parseFromString(svgText, 'image/svg+xml').documentElement;
   // svg2pdf needs the element in a document to resolve styles.
   const holder = document.createElement('div');
@@ -60,12 +86,21 @@ export async function placeCode(
     holder.remove();
   }
   for (const t of g.texts) {
-    const img = await textImage(t.text, t.fontSize * scale, t.color, g.width * scale);
+    const img = await textImage({
+      text: t.text,
+      sizeMm: t.fontSize * scale,
+      color: t.color,
+      widthMm: g.width * scale,
+      bold: true,
+      rotate180,
+    });
+    const cx = rotate180 ? g.width - t.cx : t.cx;
+    const cy = rotate180 ? g.height - t.cy : t.cy;
     doc.addImage(
       img.bytes,
       'PNG',
-      x + t.cx * scale - img.w / 2,
-      y + t.cy * scale - img.h / 2,
+      x + cx * scale - img.w / 2,
+      y + cy * scale - img.h / 2,
       img.w,
       img.h,
     );

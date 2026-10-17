@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "description": "Hostnames used by dynamic QR code services and general URL shorteners. A code pointing here sends people through someone else's server, which can stop redirecting (for example when a paid plan ends). Matching includes subdomains. Community additions welcome: add an entry with a source link that shows what the domain is.",
+    "categories": {
+      "dynamic-qr": "Redirect domain of a dynamic QR code service. Usually stops working when the plan or trial ends.",
+      "shortener": "General URL shortener. The destination is hidden and can change or disappear."
+    },
+    "updated": "2026-10-17"
+  },
+  "domains": [
+    {
+      "domain": "qrco.de",
+      "category": "dynamic-qr",
+      "service": "QR Code Generator (Bitly)",
+      "source": "https://support.qr-code-generator.com/hc/en-us/articles/7664232533133"
+    },
+    {
+      "domain": "l.ead.me",
+      "category": "dynamic-qr",
+      "service": "QR Code Generator / Uniqode",
+      "source": "https://support.qr-code-generator.com/hc/en-us/articles/7664232533133"
+    },
+    {
+      "domain": "scnv.io",
+      "category": "dynamic-qr",
+      "service": "Scanova",
+      "source": "https://support.scanova.io/hc/en-us/articles/38649069650201-Custom-Short-URL"
+    },
+    {
+      "domain": "qrs.ly",
+      "category": "dynamic-qr",
+      "service": "QRStuff",
+      "source": "https://www.qrstuff.com/blog/qr-code-basics/dynamic-qr-codes/"
+    },
+    {
+      "domain": "qr1.be",
+      "category": "dynamic-qr",
+      "service": "QR TIGER",
+      "source": "https://www.qrcode-tiger.com/short-url-generator"
+    },
+    {
+      "domain": "bit.ly",
+      "category": "shortener",
+      "service": "Bitly",
+      "source": "https://bitly.com/"
+    },
+    {
+      "domain": "bitly.com",
+      "category": "shortener",
+      "service": "Bitly",
+      "source": "https://bitly.com/"
+    },
+    {
+      "domain": "tinyurl.com",
+      "category": "shortener",
+      "service": "TinyURL",
+      "source": "https://tinyurl.com/"
+    },
+    {
+      "domain": "t.co",
+      "category": "shortener",
+      "service": "X (Twitter) link wrapper",
+      "source": "https://help.x.com/en/using-x/url-shortener"
+    },
+    {
+      "domain": "goo.gl",
+      "category": "shortener",
+      "service": "Google URL Shortener (shut down; maps.app.goo.gl links are still served by Google Maps)",
+      "source": "https://developers.googleblog.com/en/google-url-shortener-links-will-no-longer-be-available/"
+    },
+    {
+      "domain": "ow.ly",
+      "category": "shortener",
+      "service": "Hootsuite",
+      "source": "https://www.hootsuite.com/"
+    },
+    {
+      "domain": "buff.ly",
+      "category": "shortener",
+      "service": "Buffer",
+      "source": "https://buffer.com/"
+    },
+    { "domain": "is.gd", "category": "shortener", "service": "is.gd", "source": "https://is.gd/" },
+    { "domain": "v.gd", "category": "shortener", "service": "v.gd", "source": "https://v.gd/" },
+    {
+      "domain": "rebrand.ly",
+      "category": "shortener",
+      "service": "Rebrandly",
+      "source": "https://www.rebrandly.com/"
+    },
+    {
+      "domain": "cutt.ly",
+      "category": "shortener",
+      "service": "Cuttly",
+      "source": "https://cutt.ly/"
+    },
+    {
+      "domain": "shorturl.at",
+      "category": "shortener",
+      "service": "ShortURL",
+      "source": "https://www.shorturl.at/"
+    },
+    {
+      "domain": "tiny.cc",
+      "category": "shortener",
+      "service": "tiny.cc",
+      "source": "https://tiny.cc/"
+    },
+    {
+      "domain": "rb.gy",
+      "category": "shortener",
+      "service": "Rebrandly (rb.gy)",
+      "source": "https://free-url-shortener.rb.gy/"
+    },
+    { "domain": "t.ly", "category": "shortener", "service": "T.LY", "source": "https://t.ly/" },
+    {
+      "domain": "short.io",
+      "category": "shortener",
+      "service": "Short.io",
+      "source": "https://short.io/"
+    },
+    { "domain": "dub.sh", "category": "shortener", "service": "Dub", "source": "https://dub.co/" },
+    { "domain": "s.id", "category": "shortener", "service": "S.id", "source": "https://s.id/" },
+    {
+      "domain": "lnkd.in",
+      "category": "shortener",
+      "service": "LinkedIn link wrapper",
+      "source": "https://www.linkedin.com/help/linkedin/answer/a700000"
+    },
+    {
+      "domain": "bl.ink",
+      "category": "shortener",
+      "service": "BL.INK",
+      "source": "https://www.bl.ink/"
+    }
+  ],
+  "safeShortHosts": {
+    "_comment": "First-party short hosts that point to the owner's own content and do not expire with a QR plan.",
+    "hosts": [
+      "maps.app.goo.gl",
+      "wa.me",
+      "t.me",
+      "youtu.be",
+      "g.page",
+      "g.co",
+      "amzn.to",
+      "fb.me",
+      "instagr.am"
+    ]
+  }
+}

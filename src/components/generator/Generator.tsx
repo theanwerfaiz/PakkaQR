@@ -28,8 +28,8 @@ import {
   shareImage,
   withExtension,
 } from '../../lib/export';
-import { loadLastDesign, recordHistory, saveLastDesign } from '../../lib/storage';
-import { readSession, writeSession } from '../../lib/storage/local';
+import { loadLastDesign, recordHistory, sanitizeContent, saveLastDesign } from '../../lib/storage';
+import { HANDOFF_KEY, readSession, takeSession, writeSession } from '../../lib/storage/local';
 import { siteConfig } from '../../lib/site';
 import { Modal } from '../common/Modal';
 import { ToastProvider, useToast } from '../common/Toast';
@@ -118,6 +118,15 @@ function GeneratorApp({ initialType, initialFields, frame, openPanel }: Generato
       toast({ text: t('saved.appliedFromLink') });
     }
     setDesign(d);
+    const handoff = takeSession(HANDOFF_KEY);
+    if (handoff) {
+      try {
+        const content = sanitizeContent(JSON.parse(handoff));
+        if (content) dispatch({ kind: 'content', content });
+      } catch {
+        // Ignore a malformed hand-off.
+      }
+    }
     setCaps({ copy: canCopyImage(), share: canShareFiles() });
     loaded.current = true;
     // Runs once on mount by design.

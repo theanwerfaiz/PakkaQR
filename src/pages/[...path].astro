@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GeneratorPage from '../components/pages/GeneratorPage.astro';
+import ToolPage from '../components/pages/ToolPage.astro';
+import InfoPage from '../components/pages/InfoPage.astro';
 import { pages, type PageDef } from '../data/pages';
 import { defaultLocale, localeInfo, localePath, locales, type Locale } from '../lib/i18n';
 import { contentList, useContent, type Faq } from '../lib/i18n/content';
@@ -50,5 +52,11 @@ if (faqs.length) jsonLd.push(faqPage(faqs, lang));
 >
   {(page.kind === 'home' || page.kind === 'tool' || page.kind === 'usecase') && (
     <GeneratorPage locale={locale} page={page} />
+  )}
+  {(page.kind === 'batch' || page.kind === 'scanner' || page.kind === 'expiry' || page.kind === 'print') && (
+    <ToolPage locale={locale} page={page} />
+  )}
+  {(page.kind === 'article' || page.kind === 'about' || page.kind === 'privacy' || page.kind === 'faq') && (
+    <InfoPage locale={locale} page={page} />
   )}
 </BaseLayout>

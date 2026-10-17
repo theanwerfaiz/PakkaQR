@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { localePath } from '../lib/i18n';
+import { useContent } from '../lib/i18n/content';
+
+const c = useContent('en');
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  locale="en"
+  slug="404"
+  title={c('pages.notFound.title')}
+  description={c('pages.notFound.description')}
+  noindex
+  alternates={false}
+>
+  <section class="mx-auto max-w-2xl px-4 py-16 text-center">
+    <p class="text-6xl font-bold text-accent" aria-hidden="true">
+      404
+    </p>
+    <h1 class="mt-4">{c('pages.notFound.h1')}</h1>
+    <p class="mt-3 text-muted">{c('pages.notFound.intro')}</p>
+    <p class="mt-6 flex flex-wrap justify-center gap-3">
+      <a class="btn btn-primary" href={localePath('en', '', base)}>
+        {c('pages.notFound.home')}
+      </a>
+      <a class="btn btn-secondary" href={localePath('hi', '', base)} lang="hi">
+        {c('pages.notFound.homeHi')}
+      </a>
+    </p>
+  </section>
+</BaseLayout>

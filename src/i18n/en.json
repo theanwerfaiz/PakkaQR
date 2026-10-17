@@ -606,11 +606,171 @@
     "open": "Open",
     "remove": "Remove",
     "learnMore": "Learn more",
-    "newTab": "(opens in a new tab)"
+    "newTab": "(opens in a new tab)",
+    "download": "Download"
   },
   "action": {
     "download": "Download",
     "example": "Try an example",
     "reset": "Reset"
+  },
+  "capture": {
+    "upload": "Upload an image",
+    "drop": "Drag and drop a photo or screenshot of a QR code, paste it (Ctrl/⌘ + V), or choose a file.",
+    "camera": "Scan with camera",
+    "stopCamera": "Stop camera",
+    "cameraLabel": "Camera view",
+    "cameraHint": "Point your camera at a QR code. The video never leaves your device.",
+    "cameraDenied": "We couldn't use your camera. To allow it, click the camera icon in your browser's address bar (or check your phone's settings), then try again. You can also upload a photo of the code instead.",
+    "cameraUnavailable": "Your browser or device doesn't offer a camera here. Upload a photo of the code instead.",
+    "reading": "Reading the code…",
+    "notFound": "We couldn't find a QR code in this image. Try a sharper, closer photo with the whole code visible."
+  },
+  "scanner": {
+    "resultTitle": "What's in this code",
+    "type": "Type",
+    "content": "Content",
+    "copy": "Copy text",
+    "copied": "Copied to clipboard.",
+    "open": "Open link…",
+    "confirmTitle": "Open this link?",
+    "confirmBody": "Check the full address carefully before you continue:",
+    "confirmOpen": "Open in a new tab",
+    "cancel": "Cancel",
+    "notOpenable": "This isn't a web link, so we won't open it. You can copy the text instead.",
+    "wifi": {
+      "ssid": "Network",
+      "password": "Password",
+      "security": "Security",
+      "hidden": "Hidden network"
+    },
+    "warning": {
+      "dangerousScheme": "Danger: this is not a normal web link. It could run code or open a local file. Don't open it.",
+      "punycode": "The address uses special characters that can imitate another website (a look-alike domain). Check it very carefully.",
+      "mixedScript": "The address mixes letters from different alphabets — a common trick to look like a real site.",
+      "notHttps": "This link isn't secure (http, not https). Don't enter passwords or payment details there.",
+      "credentials": "The link contains a username or password, which is unusual and can be used to disguise the real site.",
+      "ipHost": "The link points to a bare IP address instead of a website name."
+    },
+    "expiry": "Will this code expire?",
+    "scanAnother": "Scan another code",
+    "privacy": "Decoding happens entirely in your browser. Images and camera video are never uploaded."
+  },
+  "expiry": {
+    "verdict": {
+      "static": {
+        "title": "Static & safe — this code won't expire",
+        "body": "The information is stored inside the code itself. No server is involved, so nothing can switch it off."
+      },
+      "staticUrl": {
+        "title": "Static & safe — this code goes straight to a website",
+        "body": "It points directly at {host}. It will keep working as long as that website does — no QR company sits in the middle."
+      },
+      "dynamic": {
+        "title": "Likely dynamic — this code may expire",
+        "body": "This code goes through {service} ({host}), a dynamic QR service. If the plan or free trial behind it ends, the redirect can be switched off and the code will stop working."
+      },
+      "shortener": {
+        "title": "Unknown short link — we can't be sure",
+        "body": "This code points to a short link at {host}. Short links hide the real destination and depend on someone else's service. It may be fine, or it may stop working one day."
+      }
+    },
+    "source": "How we know",
+    "noNetwork": "We don't open the link to check where it leads — that would reveal what you scanned. So we can't know the final destination.",
+    "recreateTitle": "Recreate it as a forever code",
+    "recreateBody": "Open the link on your phone, copy the address of the page it lands on, and paste it here. We'll make a static code that points there directly.",
+    "destination": "Real destination address",
+    "recreate": "Create forever code",
+    "decoded": "Content of the code",
+    "checkAnother": "Check another code"
+  },
+  "batch": {
+    "type": "QR type for every row",
+    "step1": "1. Add your data",
+    "step2": "2. Match your columns",
+    "step3": "3. Choose formats and generate",
+    "upload": "Upload CSV file",
+    "drop": "Drag and drop a CSV file, or choose one.",
+    "paste": "Or paste rows (first row = column names)",
+    "example": "Download example CSV",
+    "rows": "{count} rows found.",
+    "tooMany": "That's {count} rows. Over 1,000 rows may be slow or run out of memory on phones. It's fine on most computers.",
+    "mapping": "Which column holds each field?",
+    "notMapped": "— not used —",
+    "fileNameField": "File name",
+    "preview": "Preview of the first 5 rows",
+    "row": "Row",
+    "payload": "Code content",
+    "status": "Status",
+    "ok": "OK",
+    "formats": "Formats",
+    "png": "PNG images",
+    "svg": "SVG images",
+    "pdf": "Also make one PDF with every code",
+    "size": "PNG size",
+    "design": "Design",
+    "designNote": "Every code uses your current design from the generator. Pick a preset to change it, or customise it in the generator first.",
+    "generate": "Generate {count} codes",
+    "progress": "Generating {done} of {total}…",
+    "progressLabel": "Generation progress",
+    "done": "Done! {count} codes are in your ZIP file.",
+    "downloadZip": "Download ZIP again",
+    "downloadPdf": "Download PDF again",
+    "errorsTitle": "{count} rows were skipped",
+    "errorsNote": "The rest were generated. The ZIP includes errors.csv with these rows.",
+    "noValid": "No valid rows yet. Check your column matching.",
+    "workerFallback": "Your browser can't use a background worker here, so generating may briefly slow the page."
+  },
+  "print": {
+    "content": "1. What should the code do?",
+    "layout": "2. Choose a layout",
+    "options": "3. Adjust and download",
+    "layouts": {
+      "stickers": "Sticker sheet",
+      "tent": "Table tent",
+      "poster": "Poster",
+      "cards": "Business cards",
+      "wifi": "WiFi cards"
+    },
+    "layoutHint": {
+      "stickers": "Fill a page with codes to cut out or print on sticker paper.",
+      "tent": "Fold an A4 sheet in half to stand it on a table.",
+      "poster": "One big code with a headline.",
+      "cards": "10 business cards per sheet.",
+      "wifi": "Four cards with the network name and password printed beside the code."
+    },
+    "paper": "Paper",
+    "papers": {
+      "a4": "A4",
+      "letter": "US Letter",
+      "a3": "A3"
+    },
+    "stickerSize": "Code size",
+    "gap": "Gap between codes",
+    "headline": "Headline",
+    "subtext": "Small text",
+    "templates": "Quick text",
+    "template": {
+      "pay": "Scan to pay",
+      "menu": "Scan for our menu",
+      "wifi": "Scan to join our WiFi",
+      "review": "Loved it? Leave us a review",
+      "follow": "Follow us"
+    },
+    "cardSize": "Card size",
+    "cardSizes": {
+      "eu": "85 × 55 mm",
+      "us": "3.5 × 2 in"
+    },
+    "name": "Name",
+    "title": "Job title / tagline",
+    "cutLines": "Show cut lines",
+    "network": "Network",
+    "password": "Password",
+    "download": "Download print-ready PDF",
+    "working": "Creating PDF…",
+    "printNote": "When printing, choose “Actual size” or 100% scale — not “Fit to page” — so codes come out at exactly the size you picked.",
+    "previewLabel": "Page preview",
+    "designNote": "Uses your current design from the generator. Pick a preset here to change it."
   }
 }
