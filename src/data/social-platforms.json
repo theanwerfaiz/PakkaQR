@@ -1,0 +1,63 @@
+{
+  "_meta": {
+    "description": "Profile URL templates for the Social profiles QR type. {u} is replaced by the username."
+  },
+  "platforms": [
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "template": "https://instagram.com/{u}",
+      "hosts": ["instagram.com", "instagr.am"]
+    },
+    {
+      "id": "facebook",
+      "name": "Facebook",
+      "template": "https://facebook.com/{u}",
+      "hosts": ["facebook.com", "fb.com", "fb.me"]
+    },
+    { "id": "x", "name": "X", "template": "https://x.com/{u}", "hosts": ["x.com", "twitter.com"] },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "template": "https://linkedin.com/in/{u}",
+      "companyTemplate": "https://linkedin.com/company/{u}",
+      "hosts": ["linkedin.com"]
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "template": "https://youtube.com/@{u}",
+      "hosts": ["youtube.com", "youtu.be"]
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram",
+      "template": "https://t.me/{u}",
+      "hosts": ["t.me", "telegram.me"]
+    },
+    {
+      "id": "snapchat",
+      "name": "Snapchat",
+      "template": "https://snapchat.com/add/{u}",
+      "hosts": ["snapchat.com"]
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "template": "https://tiktok.com/@{u}",
+      "hosts": ["tiktok.com"]
+    },
+    {
+      "id": "threads",
+      "name": "Threads",
+      "template": "https://threads.net/@{u}",
+      "hosts": ["threads.net", "threads.com"]
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "template": "https://github.com/{u}",
+      "hosts": ["github.com"]
+    }
+  ]
+}
