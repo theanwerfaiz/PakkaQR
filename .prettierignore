@@ -1,0 +1,10 @@
+dist
+.astro
+coverage
+node_modules
+package-lock.json
+docs/spec
+test-results
+playwright-report
+public/og
+CLAUDE.md
