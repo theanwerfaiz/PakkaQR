@@ -25,6 +25,10 @@
   --link: #1a1712;
   --dot-grid: #dcd3c2;
   --shadow-sheet: 0 1px 0 #dcd3c2, 0 30px 60px -32px rgb(60 40 10 / 0.35);
+  --soft: #ebe3d4;
+  --soft-hover: #e2d9c8;
+  --shadow-card: 0 1px 0 rgb(26 23 18 / 0.05), 0 22px 44px -30px rgb(60 40 10 / 0.3);
+  --header-bg: rgb(244 239 230 / 0.82);
   color-scheme: light;
 }
 
@@ -60,6 +64,10 @@
   --link: #efe8da;
   --dot-grid: #2c2721;
   --shadow-sheet: 0 1px 0 #3a342b, 0 30px 60px -32px rgb(0 0 0 / 0.7);
+  --soft: #2a251f;
+  --soft-hover: #332d26;
+  --shadow-card: 0 0 0 1px #2c2721, 0 22px 44px -30px rgb(0 0 0 / 0.7);
+  --header-bg: rgb(20 18 16 / 0.82);
   color-scheme: dark;
 }
 [data-theme='dark'][data-accent='neel'] {
@@ -92,13 +100,14 @@
   --color-accent-contrast: var(--accent-contrast);
   --color-stamp: var(--stamp);
   --color-stamp-soft: var(--stamp-soft);
+  --color-soft: var(--soft);
+  --color-soft-hover: var(--soft-hover);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-warning-soft: var(--warning-soft);
   --color-danger: var(--danger);
   --radius-control: 12px;
   --radius-card: 20px;
-  --shadow-card: none;
   --font-sans:
     'Anek Latin Variable', 'Anek Devanagari Variable', system-ui, -apple-system, 'Segoe UI', Roboto,
     sans-serif;
@@ -239,8 +248,8 @@
 @layer components {
   .card {
     background: var(--surface);
-    border: 1px solid var(--border);
     border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
   }
   .sheet {
     background: var(--surface);
@@ -320,19 +329,25 @@
     background: color-mix(in srgb, var(--stamp) 88%, black);
   }
   .btn-secondary {
-    background: transparent;
+    background: var(--soft);
     color: var(--text);
-    border-color: var(--text);
   }
   .btn-secondary:hover:not(:disabled) {
-    background: var(--surface-2);
+    background: var(--soft-hover);
   }
   .btn-ghost {
     background: transparent;
     color: var(--text);
   }
   .btn-ghost:hover:not(:disabled) {
-    background: var(--surface-2);
+    background: var(--soft);
+  }
+  .btn-soft {
+    background: var(--soft);
+    color: var(--text);
+  }
+  .btn-soft:hover:not(:disabled) {
+    background: var(--soft-hover);
   }
   .btn-link {
     background: transparent;
@@ -361,16 +376,19 @@
     min-height: 44px;
     padding: 0 1rem;
     border-radius: 999px;
-    border: 1px solid var(--border-strong);
-    background: transparent;
+    border: 0;
+    background: var(--soft);
     color: var(--text);
     font-weight: 600;
     font-size: 0.95rem;
     white-space: nowrap;
     cursor: pointer;
+    transition:
+      background-color 0.15s,
+      color 0.15s;
   }
   .chip:hover {
-    background: var(--surface-2);
+    background: var(--soft-hover);
   }
   .chip[aria-checked='true'],
   .chip[aria-pressed='true'],
@@ -409,13 +427,19 @@
     align-items: center;
     gap: 0.75rem;
     background: var(--surface);
-    border: 2px solid var(--text);
-    border-radius: 16px;
-    padding: 0.35rem 0.4rem 0.35rem 1.1rem;
-    box-shadow: 4px 4px 0 var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    padding: 0.4rem 0.4rem 0.4rem 1.1rem;
+    box-shadow: 0 10px 24px -18px rgb(26 23 18 / 0.45);
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s;
   }
   .hero-input:focus-within {
-    box-shadow: 4px 4px 0 var(--stamp);
+    border-color: var(--text);
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--stamp) 35%, transparent),
+      0 10px 24px -18px rgb(26 23 18 / 0.45);
   }
   .label {
     display: block;
@@ -601,4 +625,282 @@
     'Segoe UI',
     Roboto,
     sans-serif;
+}
+
+/* ------------------------------------------------------------------
+   Custom controls (unlayered so they win over utility sizes).
+   ------------------------------------------------------------------ */
+
+/* Every checkbox is an on/off setting here, so it is drawn as a switch. */
+input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 44px !important;
+  height: 26px !important;
+  border-radius: 999px;
+  background: var(--border-strong);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.18s;
+  margin: 0;
+}
+input[type='checkbox']::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fffcf6;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  transition: transform 0.18s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+input[type='checkbox']:checked {
+  background: var(--accent);
+}
+input[type='checkbox']:checked::after {
+  transform: translateX(18px);
+}
+[data-theme='dark'] input[type='checkbox']:checked::after {
+  background: #141210;
+}
+input[type='checkbox']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input[type='range'] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  height: 32px;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--soft-hover);
+}
+input[type='range']::-moz-range-track {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--soft-hover);
+}
+input[type='range']::-moz-range-progress {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--accent);
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -8px;
+  border-radius: 999px;
+  background: #fffcf6;
+  border: 2px solid var(--accent);
+  box-shadow: 0 2px 6px rgb(26 23 18 / 0.25);
+}
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #fffcf6;
+  border: 2px solid var(--accent);
+  box-shadow: 0 2px 6px rgb(26 23 18 / 0.25);
+}
+
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C5548' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  cursor: pointer;
+}
+[data-theme='dark'] select.input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23B9AE99' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E");
+}
+
+input[type='color'] {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  padding: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: none;
+}
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type='color']::-webkit-color-swatch {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.15);
+}
+input[type='color']::-moz-color-swatch {
+  border: 0;
+  border-radius: 12px;
+}
+
+/* Segmented control: soft track, raised selection. */
+.seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 14px;
+  background: var(--soft);
+}
+.seg > button {
+  min-height: 38px;
+  padding: 0 0.9rem;
+  border-radius: 11px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+.seg > button:hover {
+  color: var(--text);
+}
+.seg > button[aria-checked='true'],
+.seg > button[aria-pressed='true'],
+.seg > button[aria-selected='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgb(26 23 18 / 0.14);
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border-radius: 6px;
+  padding: 1px 6px;
+  color: var(--text-muted);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+/* Smooth cross-page transitions where supported (no JS needed). */
+@view-transition {
+  navigation: auto;
+}
+:root[data-motion='reduce'] {
+  view-transition-name: none;
+}
+
+/* ------------------------------------------------------------------
+   Preview stage: plain sheet or a real-looking setting.
+   ------------------------------------------------------------------ */
+.stage {
+  position: relative;
+  border-radius: 22px;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.75rem 1.25rem 1.5rem;
+  overflow: clip;
+}
+.stage-stamp {
+  position: absolute;
+  top: 0.85rem;
+  right: 1.1rem;
+}
+.stage-code {
+  width: 100%;
+}
+.stage-caption {
+  font-weight: 760;
+  font-stretch: 80%;
+  font-size: 1.15rem;
+  text-align: center;
+  line-height: 1.15;
+}
+.stage-plain {
+  background: var(--surface);
+  box-shadow: var(--shadow-sheet);
+}
+.stage-plain .stage-object {
+  width: 100%;
+  max-width: 360px;
+}
+.stage-tent {
+  background: linear-gradient(180deg, #e9e1d2 0 64%, #8b6a4a 64% 100%);
+  align-items: flex-end;
+  padding-bottom: 2.75rem;
+}
+[data-theme='dark'] .stage-tent {
+  background: linear-gradient(180deg, #2a251f 0 64%, #4d3a28 64% 100%);
+}
+.stage-tent .stage-object {
+  width: min(78%, 290px);
+  background: #fffcf6;
+  color: #1a1712;
+  clip-path: polygon(7% 0, 93% 0, 100% 100%, 0 100%);
+  padding: 1.75rem 2.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  filter: drop-shadow(0 18px 18px rgb(0 0 0 / 0.25));
+}
+.stage-phone {
+  background: radial-gradient(circle at 50% 35%, var(--soft), var(--soft-hover));
+}
+.stage-phone .stage-object {
+  width: min(70%, 250px);
+  aspect-ratio: 1 / 2;
+  border-radius: 40px;
+  background: #fffcf6;
+  color: #1a1712;
+  box-shadow:
+    0 0 0 10px #1a1712,
+    0 40px 60px -30px rgb(0 0 0 / 0.6);
+  padding: 2.75rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  position: relative;
+  margin: 1rem 0;
+}
+.stage-notch {
+  position: absolute;
+  top: 0.9rem;
+  width: 64px;
+  height: 6px;
+  border-radius: 99px;
+  background: #1a1712;
+}
+.stage-sticker {
+  background: #c9c2b4;
+}
+[data-theme='dark'] .stage-sticker {
+  background: #3a342b;
+}
+.stage-sticker .stage-object {
+  width: min(80%, 300px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: #fffcf6;
+  color: #1a1712;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: 0 16px 28px -14px rgb(0 0 0 / 0.45);
+  padding: 2.6rem;
+}
+.stage-sticker .stage-caption {
+  font-size: 0.95rem;
 }

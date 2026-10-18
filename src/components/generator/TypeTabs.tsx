@@ -52,11 +52,7 @@ export function TypeTabs({ value, onChange, hideHeading = false }: Props) {
                 onClick={() => onChange(type)}
                 onKeyDown={(e) => onKey(e, i)}
                 data-type={type}
-                className={`min-h-11 shrink-0 whitespace-nowrap rounded-full border px-4 text-sm font-semibold ${
-                  checked
-                    ? 'border-accent bg-accent text-accent-contrast'
-                    : 'border-border bg-surface text-text hover:bg-surface-2'
-                }`}
+                className="chip shrink-0"
               >
                 {t(`type.${type}`)}
               </button>

@@ -16,7 +16,10 @@
     "expiry": "Will my QR expire?",
     "print": "Print sheets",
     "skip": "Skip to main content",
-    "menu": "Menu"
+    "menu": "Menu",
+    "tools": "Tools",
+    "templates": "Templates",
+    "learn": "Learn"
   },
   "theme": {
     "toggle": "Colour theme: {mode}. Change theme",
@@ -675,7 +678,15 @@
     },
     "expiry": "Will this code expire?",
     "scanAnother": "Scan another code",
-    "privacy": "Decoding happens entirely in your browser. Images and camera video are never uploaded."
+    "privacy": "Decoding happens entirely in your browser. Images and camera video are never uploaded.",
+    "history": {
+      "title": "Recent scans",
+      "remember": "Remember scans on this device",
+      "off": "Off. Turn it on to keep your last 20 scans — stored only in this browser.",
+      "empty": "No scans yet.",
+      "clear": "Clear history"
+    },
+    "secretNote": "This QR code holds a password-locked note."
   },
   "expiry": {
     "verdict": {
@@ -1022,5 +1033,276 @@
       "main": "UNSURE",
       "hi": "पता नहीं"
     }
+  },
+  "search": {
+    "placeholder": "Search tools, types, settings",
+    "open": "Search",
+    "results": "Results",
+    "empty": "Nothing found. Try “wifi”, “barcode” or “dark”.",
+    "move": "move",
+    "go": "open",
+    "tip": "Tip: press / anywhere",
+    "groups": {
+      "tools": "Tools",
+      "create": "Create",
+      "templates": "Templates",
+      "learn": "Learn",
+      "settings": "Settings"
+    },
+    "actions": {
+      "dark": "Dark mode",
+      "light": "Light mode",
+      "system": "Follow system theme",
+      "large": "Big & clear text",
+      "normal": "Normal text size",
+      "personalise": "Personalise…"
+    },
+    "pill": "Search tools…"
+  },
+  "tools": {
+    "groups": {
+      "create": "Create",
+      "bulk": "Make in bulk",
+      "check": "Check & share"
+    },
+    "qr": {
+      "name": "QR code",
+      "desc": "16 types, scan-tested"
+    },
+    "barcode": {
+      "name": "Barcode",
+      "desc": "EAN-13, UPC, Code 128"
+    },
+    "secret": {
+      "name": "Secret note",
+      "desc": "Password-locked message"
+    },
+    "photo": {
+      "name": "Photo QR",
+      "desc": "Your photo in the code"
+    },
+    "batch": {
+      "name": "Bulk from CSV",
+      "desc": "Hundreds at once, ZIP or PDF"
+    },
+    "numbered": {
+      "name": "Numbered codes",
+      "desc": "Table 1 to 50 in one go"
+    },
+    "print": {
+      "name": "Print sheets",
+      "desc": "Stickers, tents, posters"
+    },
+    "scanner": {
+      "name": "Scanner",
+      "desc": "With private history"
+    },
+    "expiry": {
+      "name": "Will my QR expire?",
+      "desc": "Spot rented codes"
+    },
+    "templates": {
+      "name": "Templates",
+      "desc": "Ready designs to edit"
+    },
+    "promo": {
+      "kicker": "New",
+      "title": "Templates",
+      "body": "Menus, weddings, sale posters — ready to edit."
+    }
+  },
+  "bento": {
+    "title": "Everything you need. Nothing you don't.",
+    "lead": "Every tool runs on your device, scan-tests its result, and costs nothing — forever.",
+    "barcode": "Barcodes for your products — EAN-13, UPC and Code 128, print-ready.",
+    "secret": "Lock a message with a password. Only the password opens it.",
+    "photo": "Your photo, blended into a code that still scans.",
+    "templates": "Café menu, wedding, WiFi card, festival sale — start from a ready design.",
+    "numbered": "Table 1 to 50 in one go — for restaurants, events and stock.",
+    "scanner": "Scan before you tap — with an optional private history.",
+    "expiry": "Is your old QR code rented? Find out in a second.",
+    "print": "Sticker sheets and table tents that print at the exact size.",
+    "batch": "Hundreds of codes from one spreadsheet, as a ZIP or PDF.",
+    "templateLabels": {
+      "0": "Menu",
+      "1": "Shaadi",
+      "2": "WiFi",
+      "3": "Sale"
+    }
+  },
+  "mockup": {
+    "label": "Preview on",
+    "plain": "Plain",
+    "tent": "Table tent",
+    "phone": "Phone",
+    "sticker": "Sticker"
+  },
+  "template": {
+    "filter": "Filter templates",
+    "use": "Use the {name} template",
+    "useShort": "Use this template",
+    "category": {
+      "all": "All",
+      "restaurant": "Restaurant",
+      "shop": "Shop & UPI",
+      "wedding": "Wedding",
+      "wifi": "WiFi",
+      "events": "Events",
+      "business": "Business",
+      "festival": "Festival",
+      "social": "Social"
+    },
+    "cafeMenu": {
+      "name": "Café menu",
+      "label": "Scan for the menu"
+    },
+    "payCounter": {
+      "name": "Pay at counter",
+      "label": "Scan to pay"
+    },
+    "shaadi": {
+      "name": "Wedding invite",
+      "label": "Save the date"
+    },
+    "venue": {
+      "name": "Wedding venue",
+      "label": "Find the venue"
+    },
+    "guestWifi": {
+      "name": "Guest WiFi",
+      "label": "Free WiFi"
+    },
+    "festivalSale": {
+      "name": "Festival sale",
+      "label": "Scan for offers"
+    },
+    "businessCard": {
+      "name": "Business card",
+      "label": "Save my number"
+    },
+    "party": {
+      "name": "Party invite",
+      "label": "You're invited"
+    },
+    "review": {
+      "name": "Google review",
+      "label": "Loved it? Rate us"
+    },
+    "instagram": {
+      "name": "Instagram follow",
+      "label": "Follow us"
+    },
+    "whatsappOrder": {
+      "name": "Order on WhatsApp",
+      "label": "Order on WhatsApp"
+    },
+    "appDownload": {
+      "name": "App download",
+      "label": "Get the app"
+    }
+  },
+  "barcode": {
+    "format": "Format",
+    "formats": {
+      "ean13": "EAN-13",
+      "upca": "UPC-A",
+      "ean8": "EAN-8",
+      "code128": "Code 128"
+    },
+    "formatHint": {
+      "ean13": "Used on retail products in India and most countries.",
+      "upca": "Used on products in the USA and Canada.",
+      "ean8": "A short code for small packs.",
+      "code128": "Letters and numbers — for stock, shipping and IDs."
+    },
+    "many": "Many at once",
+    "manyHint": "One per line; download them all as a ZIP.",
+    "number": "Product number",
+    "text": "Text",
+    "okNumber": "Full number with check digit: {value}",
+    "okText": "Letters, numbers and symbols are fine.",
+    "list": "Numbers or text, one per line",
+    "listBad": "{count} line(s) need fixing, starting with “{first}”.",
+    "listOk": "{count} barcode(s) ready.",
+    "height": "Bar height",
+    "showText": "Show the numbers under the bars",
+    "alt": "Barcode for {value}",
+    "placeholder": "Your barcode will appear here",
+    "status": {
+      "great": "Scan-tested — a scanner reads exactly this.",
+      "risky": "Scans, but the colours are too close — use dark bars on a light background.",
+      "fail": "Our test scanner couldn't read it. Use darker bars or taller bars.",
+      "checking": "Testing that it scans…"
+    },
+    "downloadSvg": "Download SVG",
+    "downloadZip": "Download {count} as a ZIP",
+    "zipped": "{count} barcodes saved",
+    "gs1": "Barcodes on products sold in shops need a number registered with GS1 India. For your own stock, any number works.",
+    "errors": {
+      "digitsOnly": "Use digits only.",
+      "checkDigit": "The last digit (check digit) is wrong — remove it and we'll add the right one.",
+      "length13": "EAN-13 needs 12 or 13 digits.",
+      "length12": "UPC-A needs 11 or 12 digits.",
+      "length8": "EAN-8 needs 7 or 8 digits.",
+      "ascii": "Code 128 here supports English letters, digits and symbols only.",
+      "tooLong": "Keep it under 48 characters."
+    }
+  },
+  "secret": {
+    "message": "Your secret message",
+    "count": "{count} / {max} characters",
+    "password": "Password",
+    "passwordHint": "Share the password separately — by voice or another chat.",
+    "tooShort": "Use at least {min} characters.",
+    "make": "Lock it in a QR code",
+    "locking": "Locking…",
+    "how": "Encrypted on your device with AES-256. The code links to PakkaQR's “open a note” page with the locked text inside the link; it is unlocked on the reader's phone and never sent to a server.",
+    "alt": "QR code with a password-locked note",
+    "placeholder": "Write a message and a password to make the code",
+    "copied": "Link copied"
+  },
+  "open": {
+    "noNote": "No note found. Paste the link from the code.",
+    "wrongPassword": "Wrong password. Try again.",
+    "badNote": "This note looks damaged and can't be opened.",
+    "unlocked": "Your note",
+    "privacy": "Opened on this device. Nothing was sent anywhere.",
+    "paste": "Link or code from the QR",
+    "found": "This QR code holds a locked note.",
+    "open": "Open the note",
+    "opening": "Opening…"
+  },
+  "photoqr": {
+    "content": "Link or text",
+    "photo": "Photo",
+    "pick": "Choose a photo",
+    "private": "Your photo never leaves your device.",
+    "dot": "Dot size",
+    "dotArt": "More photo",
+    "dotBalanced": "Balanced",
+    "dotSafe": "Easier to scan",
+    "dotHint": "Smaller dots show more of the photo but are harder to scan.",
+    "wash": "Lighten the photo",
+    "washHint": "A lighter photo makes the code easier to read.",
+    "alt": "Photo QR code for {text}",
+    "badImage": "That image couldn't be opened.",
+    "status": {
+      "great": "Scan-tested — it reads back exactly.",
+      "risky": "Scans in our test, but check it with your phone before printing.",
+      "fail": "Doesn't scan yet — make the dots bigger or lighten the photo.",
+      "checking": "Testing that it scans…"
+    }
+  },
+  "numbered": {
+    "title": "Numbered series",
+    "hint": "Make “Table 1 to 50” or “Room 101 to 120” in one go.",
+    "from": "From",
+    "to": "To",
+    "pad": "Number format",
+    "template": "{field} — use {n} for the number",
+    "templateHint": "Example: https://yoursite.in/menu?table={n}",
+    "fileName": "File name pattern",
+    "fill": "Fill in {count} rows",
+    "invalid": "Check the range (up to {max}) and include {n}"
   }
 }

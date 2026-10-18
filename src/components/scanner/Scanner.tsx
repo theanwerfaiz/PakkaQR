@@ -1,7 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { classify, parseWifi } from '../../lib/expiry';
 import { isOpenable, linkWarnings } from '../../lib/scanner/safety';
 import { localePath, type Locale } from '../../lib/i18n';
+import { extractToken } from '../../lib/secret';
+import {
+  clearScans,
+  loadScans,
+  recordScan,
+  scanHistoryEnabled,
+  setScanHistoryEnabled,
+  type ScanEntry,
+} from '../../lib/storage/scans';
 import { Modal } from '../common/Modal';
 import { ToastProvider, useToast } from '../common/Toast';
 import { I18nProvider, useI18n } from '../common/i18n';
@@ -23,12 +32,81 @@ function ScannerApp() {
   const toast = useToast();
   const [text, setText] = useState<string | null>(null);
   const [confirming, setConfirming] = useState(false);
+  const [historyOn, setHistoryOn] = useState(false);
+  const [scans, setScans] = useState<ScanEntry[]>([]);
+  useEffect(() => {
+    setHistoryOn(scanHistoryEnabled());
+    setScans(loadScans());
+  }, []);
+  const onResult = (value: string) => {
+    setText(value);
+    if (historyOn) setScans(recordScan(value));
+  };
 
   if (text === null) {
     return (
-      <div className="card space-y-4 p-4 sm:p-6">
-        <CodeCapture onResult={setText} />
-        <p className="hint">{t('scanner.privacy')}</p>
+      <div className="flex flex-col gap-5">
+        <div className="card space-y-4 p-4 sm:p-6">
+          <CodeCapture onResult={onResult} />
+          <p className="hint">{t('scanner.privacy')}</p>
+        </div>
+        <section className="card flex flex-col gap-3 p-4 sm:p-6" aria-labelledby="history-heading">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 id="history-heading" className="text-2xl">
+              {t('scanner.history.title')}
+            </h2>
+            <label className="flex min-h-11 cursor-pointer items-center gap-3 font-medium">
+              {t('scanner.history.remember')}
+              <input
+                type="checkbox"
+                checked={historyOn}
+                onChange={(e) => {
+                  setScanHistoryEnabled(e.target.checked);
+                  setHistoryOn(e.target.checked);
+                  if (!e.target.checked) setScans([]);
+                }}
+                data-testid="history-toggle"
+              />
+            </label>
+          </div>
+          {!historyOn ? (
+            <p className="hint">{t('scanner.history.off')}</p>
+          ) : scans.length === 0 ? (
+            <p className="hint">{t('scanner.history.empty')}</p>
+          ) : (
+            <>
+              <ul className="flex flex-col gap-1.5" data-testid="history-list">
+                {scans.map((s) => (
+                  <li key={`${s.at}-${s.text}`}>
+                    <button
+                      type="button"
+                      className="flex w-full items-center gap-3 rounded-[12px] bg-soft/70 px-3 py-2.5 text-left hover:bg-soft"
+                      onClick={() => setText(s.text)}
+                    >
+                      <span className="min-w-0 flex-1 truncate font-medium">{s.text}</span>
+                      <span className="shrink-0 text-sm text-muted">
+                        {new Date(s.at).toLocaleString(locale === 'hi' ? 'hi-IN' : 'en-IN', {
+                          dateStyle: 'short',
+                          timeStyle: 'short',
+                        })}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm self-start"
+                onClick={() => {
+                  clearScans();
+                  setScans([]);
+                }}
+              >
+                {t('scanner.history.clear')}
+              </button>
+            </>
+          )}
+        </section>
       </div>
     );
   }
@@ -92,6 +170,17 @@ function ScannerApp() {
               </li>
             ))}
           </ul>
+        )}
+        {extractToken(text) && (
+          <p className="note flex flex-wrap items-center justify-between gap-3 text-[0.95rem]">
+            {t('scanner.secretNote')}
+            <a
+              className="btn btn-primary btn-sm"
+              href={`${localePath(locale, 'open', import.meta.env.BASE_URL)}#${extractToken(text)}`}
+            >
+              {t('open.open')}
+            </a>
+          </p>
         )}
         <div className="flex flex-wrap gap-2">
           <button type="button" className="btn btn-secondary" onClick={() => void copy()}>

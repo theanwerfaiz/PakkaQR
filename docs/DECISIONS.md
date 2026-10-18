@@ -161,3 +161,21 @@ The home page's "What should the code open?" box guesses the type from what was 
 ## D-36 · Font loading and Lighthouse
 
 The Anek Latin file is preloaded on English pages so the headline paints in its final font (CLS 0). The language switch ("हिन्दी") uses the system font, so English pages no longer download the 250 KB Devanagari font for one word. Hindi pages don't preload Devanagari: tests showed it delays first paint more than the small layout shift it prevents. Local Lighthouse (mobile) after this change: `/` 97–99, `/wifi-qr-code-generator` 96–97, `/bulk-qr-code-generator` 99, `/qr-code-scanner` 99, accessibility/best practices/SEO 100; `/hi` 88–96 because of the Devanagari font size. Subsetting that font is a possible later improvement.
+
+## D-37 · v2: premium polish and the tools hub
+
+- **Fewer outlines.** Cards are separated by soft surfaces and a light shadow instead of borders. Form inputs keep a 1px border in `--border-strong` (3:1 against the surface, WCAG 1.4.11); chips, segmented controls and secondary buttons use soft fills because their text identifies them.
+- **Custom controls.** Every checkbox in the app is an on/off setting, so all checkboxes are drawn as switches (still native checkboxes underneath). Sliders, dropdowns and colour swatches are restyled with plain CSS; no component library.
+- **Tools menu and search.** The header has a Tools disclosure menu and a Ctrl/⌘ K (or `/`) search palette. The search index is built at build time per language and embedded as JSON, so searching never touches the network.
+- **Real-look previews.** The generator shows the live code on a plain sheet, a table tent, a phone or a round sticker. The settings are CSS around the same canvas; the stamp sits outside the code area.
+- **View transitions.** Pages cross-fade with the CSS `@view-transition` rule where supported; it is turned off by "Less motion".
+
+## D-38 · New tools
+
+- **Barcodes** (`src/lib/barcode`): EAN-13, UPC-A, EAN-8 and Code 128 (set B), encoded by hand from the GS1/ISO tables (no new dependency). The check digit is added or verified. Every barcode is decoded with ZXing (already a dependency, loaded on demand) before the stamp shows PAKKA, and unit tests decode each format.
+- **Secret note** (`src/lib/secret`): PBKDF2-SHA-256 (210,000 iterations) → AES-256-GCM via Web Crypto, random 16-byte salt and 12-byte IV per note, `pq1:` + base64url. The code holds a link to `/open#pq1:…`; the token is after `#`, which browsers never send to servers. Trade-off: opening needs PakkaQR's open page (or a copy of the open-source code). Messages are capped at 300 characters so the code stays scannable. The `/open` page is `noindex` and left out of the sitemap.
+- **Photo QR** (`src/lib/photo`): the photo fills the symbol; data modules are drawn as smaller dark/light squares and finder, timing and alignment patterns stay solid. EC is fixed at H and every render is decoded before download is allowed.
+- **Templates** (`src/data/templates.ts`): a preset + frame + label per template; "Use" hands content and design to the generator through sessionStorage (same mechanism as the expiry checker).
+- **Numbered series** (`src/lib/batch/numbered.ts`): builds CSV for the existing bulk pipeline.
+- **Scan history**: off by default; when on, the last 20 scans are kept in localStorage only, and turning it off deletes them.
+- **Share target / shortcuts**: the web manifest lets Android share a link straight into PakkaQR (`?text=` / `?url=`), detected with the smart-paste rules.

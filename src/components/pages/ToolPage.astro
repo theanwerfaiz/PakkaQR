@@ -6,6 +6,11 @@ import Batch from '../batch/Batch';
 import Scanner from '../scanner/Scanner';
 import ExpiryChecker from '../expiry/ExpiryChecker';
 import Print from '../print/Print';
+import BarcodeTool from '../tools/BarcodeTool';
+import Templates from '../tools/Templates';
+import SecretNote from '../tools/SecretNote';
+import OpenNote from '../tools/OpenNote';
+import PhotoQr from '../tools/PhotoQr';
 import type { PageDef } from '../../data/pages';
 import { getTranslator, type Locale } from '../../lib/i18n';
 import { contentList, useContent, type Faq } from '../../lib/i18n/content';
@@ -34,6 +39,11 @@ const paragraphs = contentList(locale, k('body'));
   {page.kind === 'scanner' && <Scanner client:load locale={locale} />}
   {page.kind === 'expiry' && <ExpiryChecker client:load locale={locale} />}
   {page.kind === 'print' && <Print client:load locale={locale} />}
+  {page.kind === 'barcode' && <BarcodeTool client:load locale={locale} />}
+  {page.kind === 'templates' && <Templates client:load locale={locale} />}
+  {page.kind === 'secret' && <SecretNote client:load locale={locale} />}
+  {page.kind === 'open' && <OpenNote client:load locale={locale} />}
+  {page.kind === 'photo' && <PhotoQr client:load locale={locale} />}
 </section>
 
 {paragraphs.length > 0 && (
@@ -45,6 +55,6 @@ const paragraphs = contentList(locale, k('body'));
   </section>
 )}
 
-<HowTo title={c(k('howToTitle'))} steps={steps} />
-<FaqList title={c(k('faqTitle'))} faqs={faqs} />
+{steps.length > 0 && <HowTo title={c(k('howToTitle'))} steps={steps} />}
+{faqs.length > 0 && <FaqList title={c(k('faqTitle'))} faqs={faqs} />}
 <RelatedLinks locale={locale} slugs={page.related} title={c('common.related')} />

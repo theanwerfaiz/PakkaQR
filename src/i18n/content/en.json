@@ -1216,6 +1216,122 @@
       "intro": "But your QR code can — forever. Head back to the generator.",
       "home": "Go to the generator",
       "homeHi": "हिन्दी में खोलें"
+    },
+    "barcode": {
+      "title": "Free Barcode Generator — EAN-13, UPC · PakkaQR",
+      "description": "Make EAN-13, UPC-A, EAN-8 and Code 128 barcodes for free. Check digit added for you, scan-tested, download SVG or PNG. No signup, runs in your browser.",
+      "h1": "Barcodes for your products.",
+      "intro": "EAN-13, UPC-A, EAN-8 and Code 128 — with the check digit added for you, a scan test on every barcode, and print-ready SVG.",
+      "linkText": "Barcode generator",
+      "blurb": "EAN-13, UPC and Code 128, scan-tested.",
+      "howToTitle": "How to make a barcode",
+      "steps": [
+        "Pick a format — EAN-13 for most retail products.",
+        "Type the product number; we add the check digit.",
+        "Check the PAKKA stamp, then download SVG or PNG."
+      ],
+      "faqTitle": "Barcode questions",
+      "faq": [
+        {
+          "q": "Do I need to register my barcode number?",
+          "a": "For products sold in shops, yes — retailers expect a number registered with GS1 India. For your own stock, shelves or events, any number works."
+        },
+        {
+          "q": "Which format should I use?",
+          "a": "EAN-13 for retail products in India, UPC-A for the USA and Canada, EAN-8 for very small packs, and Code 128 for letters and numbers like SKUs and IDs."
+        },
+        {
+          "q": "What size should I print it?",
+          "a": "An EAN-13 is about 37 mm wide at standard size. You can go down to about 80% — test the print with a phone before printing many."
+        }
+      ]
+    },
+    "templates": {
+      "title": "Free QR Code Templates for Menus & More · PakkaQR",
+      "description": "Ready-made QR designs for café menus, UPI payments, weddings, guest WiFi and festival sales. Pick one, edit, download. Free and scan-tested.",
+      "h1": "Start from a ready design.",
+      "intro": "Café menus, pay-at-counter, wedding invites, guest WiFi, festival sales and more. Every template is scan-tested — change anything you like.",
+      "linkText": "QR code templates",
+      "blurb": "Ready designs for menus, weddings, WiFi and sales.",
+      "howToTitle": "How templates work",
+      "steps": [
+        "Pick a template.",
+        "Change the details — your link, UPI ID or WiFi.",
+        "Download, or make a story card to share."
+      ],
+      "faqTitle": "Template questions",
+      "faq": [
+        {
+          "q": "Can I change the colours and the label?",
+          "a": "Yes. A template is just a starting point — every colour, shape, logo and label can be changed."
+        },
+        {
+          "q": "Are template codes still static?",
+          "a": "Yes. Your details go inside the code itself, so it works forever, like every PakkaQR code."
+        }
+      ]
+    },
+    "secret": {
+      "title": "Secret Message QR Code with Password · PakkaQR",
+      "description": "Lock a message inside a QR code with a password. Encrypted on your device with AES-256; only someone with the password can read it. Free, no signup.",
+      "h1": "A secret note, locked in a QR code.",
+      "intro": "Write a message, pick a password, get a code. Anyone can scan it, but only someone with the password can read it — and the note is never sent to a server.",
+      "linkText": "Secret message QR",
+      "blurb": "A password-locked note inside a code.",
+      "howToTitle": "How to make a secret QR code",
+      "steps": [
+        "Write your message.",
+        "Choose a password and share it separately.",
+        "Download the code. To read it, scan it and type the password."
+      ],
+      "faqTitle": "Secret note questions",
+      "faq": [
+        {
+          "q": "How safe is it?",
+          "a": "The note is encrypted on your device with AES-256 and a password-derived key (PBKDF2, 210,000 rounds). Without the password it can’t be read. Use a long password for anything important."
+        },
+        {
+          "q": "Does the note go through your server?",
+          "a": "No. The locked note sits after the # in the link, which browsers never send to any server. It is unlocked on the reader’s phone."
+        },
+        {
+          "q": "What if PakkaQR goes offline?",
+          "a": "The note is still inside the code. The “open a note” page is open source, so it can be opened with a copy of the code from GitHub."
+        }
+      ]
+    },
+    "open": {
+      "title": "Open a secret note · PakkaQR",
+      "description": "Unlock a password-protected note from a PakkaQR secret QR code. Opened on your device.",
+      "h1": "Open a secret note",
+      "intro": "Type the password you were given. The note is unlocked on this device — nothing is sent anywhere.",
+      "linkText": "Open a secret note",
+      "blurb": "Unlock a password-protected note."
+    },
+    "photo": {
+      "title": "Photo QR Code Generator · PakkaQR",
+      "description": "Blend your photo into a QR code that still scans. Every design is scan-tested in your browser. Free, no signup, your photo never leaves your device.",
+      "h1": "Your photo, inside a QR code.",
+      "intro": "Pick a photo — your shop, your product, your face — and blend it into a code that still scans. We test every version before you download.",
+      "linkText": "Photo QR code",
+      "blurb": "Your picture blended into a code.",
+      "howToTitle": "How to make a photo QR code",
+      "steps": [
+        "Type the link or text.",
+        "Choose a photo.",
+        "Adjust the dots until the PAKKA stamp appears, then download."
+      ],
+      "faqTitle": "Photo QR questions",
+      "faq": [
+        {
+          "q": "Will it really scan?",
+          "a": "Every version is decoded in your browser before you can download. Phones with good cameras read it easily; check it once with yours before printing many."
+        },
+        {
+          "q": "Which photos work best?",
+          "a": "Simple photos with soft colours. Very busy or very dark photos make the code harder to read — lighten the photo or use bigger dots."
+        }
+      ]
     }
   }
 }

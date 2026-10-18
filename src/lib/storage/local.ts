@@ -34,6 +34,8 @@ export function writeSession(key: string, value: string): void {
 
 /** sessionStorage key the generator reads on load ("recreate as forever code"). */
 export const HANDOFF_KEY = 'pakkaqr:handoff';
+/** A design handed to the generator along with content (templates). */
+export const HANDOFF_DESIGN_KEY = 'pakkaqr:handoff-design';
 
 /** Reads and removes a sessionStorage value. */
 export function takeSession(key: string): string | null {

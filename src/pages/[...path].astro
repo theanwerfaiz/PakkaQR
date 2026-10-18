@@ -49,6 +49,7 @@ if (faqs.length) jsonLd.push(faqPage(faqs, lang));
   title={c(k('title'))}
   description={c(k('description'))}
   jsonLd={jsonLd}
+  noindex={page.kind === 'open'}
 >
   {(page.kind === 'home' || page.kind === 'tool' || page.kind === 'usecase') && (
     <GeneratorPage locale={locale} page={page} />
@@ -56,7 +57,12 @@ if (faqs.length) jsonLd.push(faqPage(faqs, lang));
   {(page.kind === 'batch' ||
     page.kind === 'scanner' ||
     page.kind === 'expiry' ||
-    page.kind === 'print') && <ToolPage locale={locale} page={page} />}
+    page.kind === 'print' ||
+    page.kind === 'barcode' ||
+    page.kind === 'templates' ||
+    page.kind === 'secret' ||
+    page.kind === 'open' ||
+    page.kind === 'photo') && <ToolPage locale={locale} page={page} />}
   {(page.kind === 'article' ||
     page.kind === 'about' ||
     page.kind === 'privacy' ||

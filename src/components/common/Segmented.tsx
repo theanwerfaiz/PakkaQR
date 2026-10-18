@@ -39,7 +39,7 @@ export function Segmented<T extends string>({ label, value, options, onChange, h
         role="radiogroup"
         aria-labelledby={`${id}-label`}
         aria-describedby={hint ? `${id}-hint` : undefined}
-        className="inline-flex flex-wrap gap-1 rounded-[10px] border border-border bg-surface-2 p-1"
+        className="seg"
       >
         {options.map((o, i) => {
           const checked = o.value === value;
@@ -55,9 +55,6 @@ export function Segmented<T extends string>({ label, value, options, onChange, h
               tabIndex={checked ? 0 : -1}
               onClick={() => onChange(o.value)}
               onKeyDown={(e) => move(e, i)}
-              className={`min-h-10 rounded-lg px-3 text-sm font-medium ${
-                checked ? 'bg-surface text-text shadow-sm' : 'text-muted hover:text-text'
-              }`}
             >
               {o.label}
             </button>

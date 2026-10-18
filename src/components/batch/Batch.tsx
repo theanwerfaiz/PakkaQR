@@ -24,6 +24,7 @@ import { FormField } from '../common/FormField';
 import { ToastProvider } from '../common/Toast';
 import { I18nProvider, useT } from '../common/i18n';
 import { PresetGrid } from '../generator/PresetGrid';
+import { Numbered } from './Numbered';
 
 export default function Batch({ locale }: { locale: Locale }) {
   return (
@@ -177,6 +178,7 @@ function BatchApp() {
             </button>
           </div>
         </div>
+        <Numbered type={type} onCsv={setCsvText} />
         <Dropzone
           accept=".csv,text/csv,text/plain"
           label={t('batch.upload')}

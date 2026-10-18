@@ -1,6 +1,8 @@
 ---
 import LogoMark from './LogoMark.astro';
-import { NAV } from '../../data/pages';
+import Icon from './Icon.astro';
+import { NAV, TOOLS_MENU, TOOL_SLUGS } from '../../data/pages';
+import { searchIndex } from '../../data/search';
 import { localePath, localeInfo, locales, getTranslator, type Locale } from '../../lib/i18n';
 
 interface Props {
@@ -10,11 +12,14 @@ interface Props {
 const { locale, slug } = Astro.props;
 const t = getTranslator(locale);
 const base = import.meta.env.BASE_URL;
-const navItems = (Object.keys(NAV) as Array<keyof typeof NAV>).map((key) => ({
-  key,
-  href: localePath(locale, NAV[key], base),
-  current: NAV[key] === slug,
-}));
+const link = (target: string) => localePath(locale, target, base);
+const navItems = [
+  { key: 'generator', slug: NAV.generator },
+  { key: 'templates', slug: TOOL_SLUGS.templates },
+  { key: 'scanner', slug: NAV.scanner },
+  { key: 'learn', slug: 'static-vs-dynamic-qr-codes' },
+].map((item) => ({ ...item, href: link(item.slug), current: item.slug === slug }));
+const index = JSON.stringify(searchIndex(locale, base)).replace(/</g, '\\u003c');
 const otherLocales = locales.filter((l) => l !== locale);
 const accents = [
   { id: 'sindoor', color: '#C2321A' },
@@ -32,22 +37,22 @@ const icon = {
 } as const;
 ---
 
-<header class="border-b border-border">
+<header class="sticky top-0 z-40 border-b border-[color-mix(in_srgb,var(--text)_8%,transparent)] bg-[var(--header-bg)] backdrop-blur-md">
   <a
     href="#main"
     class="visually-hidden focus:not-sr-only focus:static focus:block focus:p-3 focus:w-auto focus:h-auto focus:m-0 focus:[clip:auto]"
   >
     {t('nav.skip')}
   </a>
-  <div class="mx-auto flex max-w-[1360px] flex-wrap items-center gap-x-6 gap-y-1 px-4 py-3 sm:px-8">
+  <div class="mx-auto flex max-w-[1360px] flex-wrap items-center gap-x-6 gap-y-0 px-4 py-2 sm:px-8">
     <a
-      href={localePath(locale, '', base)}
+      href={link('')}
       class="flex min-h-11 items-center gap-2.5 text-text no-underline hover:text-text"
       aria-label={t('brand.logoAlt')}
     >
-      <LogoMark size={32} />
+      <LogoMark size={30} />
       <span
-        class="text-[1.6rem] leading-none font-[750] [font-stretch:80%]"
+        class="text-[1.5rem] leading-none font-[750] [font-stretch:80%]"
         lang="en"
         aria-hidden="true"
       >
@@ -56,17 +61,41 @@ const icon = {
     </a>
     <nav
       aria-label={t('nav.label')}
-      class="order-3 -mx-4 w-[calc(100%+2rem)] overflow-x-auto px-4 md:order-none md:mx-0 md:w-auto md:flex-1 md:px-0"
+      class="order-3 -mx-4 w-[calc(100%+2rem)] overflow-x-auto px-4 lg:order-none lg:mx-0 lg:w-auto lg:overflow-visible lg:px-0"
     >
-      <ul class="flex gap-5 whitespace-nowrap md:gap-6">
-        {navItems.map((item) => (
+      <ul class="flex items-center gap-5 whitespace-nowrap lg:gap-6">
+        <li>
+          <a
+            href={navItems[0]!.href}
+            aria-current={navItems[0]!.current ? 'page' : undefined}
+            class:list={[
+              'inline-flex min-h-11 items-center text-[0.98rem]',
+              navItems[0]!.current ? 'font-semibold' : 'text-muted no-underline hover:text-text',
+            ]}
+          >
+            {t('nav.generator')}
+          </a>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="inline-flex min-h-11 items-center gap-1 text-[0.98rem] text-muted hover:text-text aria-expanded:font-semibold aria-expanded:text-text"
+            aria-expanded="false"
+            aria-controls="tools-menu"
+            data-tools-toggle
+          >
+            {t('nav.tools')}
+            <Icon name="chev" size={16} />
+          </button>
+        </li>
+        {navItems.slice(1).map((item) => (
           <li>
             <a
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               class:list={[
                 'inline-flex min-h-11 items-center text-[0.98rem]',
-                item.current ? 'font-semibold underline' : 'no-underline hover:underline',
+                item.current ? 'font-semibold' : 'text-muted no-underline hover:text-text',
               ]}
             >
               {t(`nav.${item.key}`)}
@@ -75,13 +104,36 @@ const icon = {
         ))}
       </ul>
     </nav>
-    <div class="ml-auto flex items-center gap-2">
+    <div class="ml-auto flex items-center gap-1.5">
+      <button
+        type="button"
+        class="hidden min-h-10 w-56 items-center gap-2.5 rounded-[12px] bg-soft px-3 text-left text-[0.9rem] text-muted hover:bg-soft-hover md:flex"
+        data-search-open
+        aria-haspopup="dialog"
+        aria-controls="search"
+      >
+        <Icon name="search" size={18} />
+        <span class="flex-1 truncate whitespace-nowrap">{t('search.pill')}</span>
+        <kbd class="kbd" data-search-kbd>
+          Ctrl K
+        </kbd>
+      </button>
+      <button
+        type="button"
+        class="btn btn-ghost min-h-11 min-w-11 rounded-full p-0 md:hidden"
+        data-search-open
+        aria-haspopup="dialog"
+        aria-controls="search"
+        aria-label={t('search.open')}
+      >
+        <Icon name="search" />
+      </button>
       {otherLocales.map((l) => (
         <a
           href={localePath(l, slug, base)}
           hreflang={localeInfo[l].tag}
           lang={localeInfo[l].tag}
-          class="chip lang-switch min-h-11 no-underline"
+          class="lang-switch inline-flex min-h-11 items-center rounded-full px-2.5 text-[0.95rem] text-muted no-underline hover:text-text"
           data-lang-link={l}
         >
           {localeInfo[l].nativeName}
@@ -89,7 +141,7 @@ const icon = {
       ))}
       <button
         type="button"
-        class="btn btn-ghost min-h-11 min-w-11 rounded-full border border-border p-0"
+        class="btn btn-ghost min-h-11 min-w-11 rounded-full p-0"
         data-theme-toggle
         data-label-template={t('theme.toggle')}
         data-label-system={t('theme.system')}
@@ -104,34 +156,138 @@ const icon = {
           </svg>
         </span>
         <span data-icon="light" hidden>
-          <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
-            <circle cx="12" cy="12" r="4.5"></circle>
-            <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"></path>
-          </svg>
+          <Icon name="sun" />
         </span>
         <span data-icon="dark" hidden>
-          <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
-            <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path>
-          </svg>
+          <Icon name="moon" />
         </span>
       </button>
       <button
         type="button"
-        class="btn btn-ghost min-h-11 min-w-11 rounded-full border border-border p-0"
+        class="btn btn-ghost min-h-11 min-w-11 rounded-full p-0"
         data-personalise-open
         aria-haspopup="dialog"
         aria-controls="personalise"
         aria-label={t('personalise.open')}
         title={t('personalise.open')}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" {...icon}>
-          <path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path>
-          <circle cx="16" cy="7" r="2.2"></circle>
-          <circle cx="10" cy="17" r="2.2"></circle>
-        </svg>
+        <Icon name="sliders" />
       </button>
     </div>
   </div>
+
+  <div
+    id="tools-menu"
+    hidden
+    class="absolute inset-x-0 top-full z-40 px-3 pt-2 sm:px-8"
+    data-tools-menu
+  >
+    <div class="mx-auto grid max-w-[1100px] gap-3 rounded-[24px] bg-surface p-4 shadow-[0_30px_60px_-24px_rgb(0_0_0/0.4)] sm:grid-cols-2 lg:grid-cols-[repeat(3,1fr)_220px]">
+      {TOOLS_MENU.map((group) => (
+        <div class="flex flex-col gap-1">
+          <p class="kicker mb-1 ml-2.5">{t(`tools.groups.${group.group}`)}</p>
+          {group.items.map((item) => (
+            <a
+              href={link(item.slug)}
+              class="group flex items-start gap-3 rounded-[14px] p-2.5 no-underline hover:bg-soft"
+            >
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[11px] bg-soft text-text group-hover:bg-accent group-hover:text-accent-contrast">
+                <Icon name={item.icon} size={19} />
+              </span>
+              <span>
+                <span class="block font-semibold text-text">{t(`tools.${item.id}.name`)}</span>
+                <span class="block text-[0.88rem] text-muted">{t(`tools.${item.id}.desc`)}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      ))}
+      <a
+        href={link(TOOL_SLUGS.templates)}
+        class="flex flex-col justify-between gap-4 rounded-[18px] bg-[#141210] p-5 text-[#EFE8DA] no-underline hover:text-[#EFE8DA] max-lg:hidden"
+      >
+        <span class="kicker !text-[#B9AE99]">{t('tools.promo.kicker')}</span>
+        <span>
+          <span class="block text-xl font-bold [font-stretch:85%]">{t('tools.promo.title')}</span>
+          <span class="mt-1 block text-[0.9rem] text-[#CFC5B2]">{t('tools.promo.body')}</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <dialog
+    id="search"
+    aria-label={t('search.open')}
+    class="mx-auto mt-[10vh] mb-auto w-[min(40rem,calc(100%-1.5rem))] rounded-[22px] bg-surface p-0 text-text shadow-[0_40px_80px_-20px_rgb(0_0_0/0.5)] backdrop:bg-black/40 backdrop:backdrop-blur-[2px]"
+  >
+    <div class="flex items-center gap-3 border-b border-border px-4 py-3">
+      <Icon name="search" size={22} />
+      <input
+        type="search"
+        class="min-h-11 flex-1 border-0 bg-transparent text-[1.15rem] text-text outline-none placeholder:text-muted"
+        placeholder={t('search.placeholder')}
+        aria-label={t('search.placeholder')}
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="search-results"
+        aria-autocomplete="list"
+        autocomplete="off"
+        spellcheck="false"
+        data-search-input
+      />
+      <button
+        type="button"
+        class="kbd cursor-pointer"
+        data-search-close
+        aria-label={t('modal.close')}
+      >
+        Esc
+      </button>
+    </div>
+    <ul
+      id="search-results"
+      role="listbox"
+      aria-label={t('search.results')}
+      class="max-h-[60vh] overflow-y-auto p-2"
+      data-search-results
+    ></ul>
+    <p class="hidden px-5 py-6 text-center text-muted" data-search-empty>
+      {t('search.empty')}
+    </p>
+    <div class="flex gap-4 bg-soft/60 px-5 py-2.5 text-[0.8rem] text-muted max-sm:hidden">
+      <span>
+        <kbd class="kbd">↑</kbd> <kbd class="kbd">↓</kbd> {t('search.move')}
+      </span>
+      <span>
+        <kbd class="kbd">Enter</kbd> {t('search.go')}
+      </span>
+      <span class="ml-auto">{t('search.tip')}</span>
+    </div>
+    <script type="application/json" data-search-index set:html={index} />
+    <template data-search-icons>
+      {[
+        'qr',
+        'barcode',
+        'lock',
+        'image',
+        'stack',
+        'table',
+        'print',
+        'scan',
+        'clock',
+        'layers',
+        'book',
+        'moon',
+        'sun',
+        'text',
+        'sliders',
+      ].map((n) => (
+        <span data-icon-name={n}>
+          <Icon name={n} size={18} />
+        </span>
+      ))}
+    </template>
+  </dialog>
 
   <dialog
     id="personalise"
@@ -314,6 +470,198 @@ const icon = {
   dialog?.addEventListener('click', (event) => {
     // Click on the backdrop closes it.
     if (event.target === dialog) dialog.close();
+  });
+
+  // ------------------------------------------------------------ tools menu
+  const toolsToggle = document.querySelector<HTMLButtonElement>('[data-tools-toggle]');
+  const toolsMenu = document.querySelector<HTMLElement>('[data-tools-menu]');
+  const setTools = (open: boolean) => {
+    if (!toolsToggle || !toolsMenu) return;
+    toolsToggle.setAttribute('aria-expanded', String(open));
+    toolsMenu.hidden = !open;
+  };
+  toolsToggle?.addEventListener('click', () =>
+    setTools(toolsToggle.getAttribute('aria-expanded') !== 'true'),
+  );
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    if (
+      toolsMenu &&
+      !toolsMenu.hidden &&
+      !toolsMenu.contains(target) &&
+      !toolsToggle?.contains(target)
+    )
+      setTools(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toolsMenu && !toolsMenu.hidden) {
+      setTools(false);
+      toolsToggle?.focus();
+    }
+  });
+
+  // ------------------------------------------------------------ search
+  interface Entry {
+    title: string;
+    group: string;
+    keys: string;
+    icon: string;
+    href?: string;
+    action?: string;
+  }
+  const searchDialog = document.getElementById('search') as HTMLDialogElement | null;
+  const searchInput = searchDialog?.querySelector<HTMLInputElement>('[data-search-input]');
+  const results = searchDialog?.querySelector<HTMLUListElement>('[data-search-results]');
+  const empty = searchDialog?.querySelector<HTMLElement>('[data-search-empty]');
+  const icons = searchDialog?.querySelector<HTMLTemplateElement>('[data-search-icons]');
+  let entries: Entry[] = [];
+  try {
+    entries = JSON.parse(
+      searchDialog?.querySelector('[data-search-index]')?.textContent ?? '[]',
+    ) as Entry[];
+  } catch {
+    entries = [];
+  }
+  const norm = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '');
+  let shown: Entry[] = [];
+  let active = 0;
+
+  function score(e: Entry, q: string): number {
+    if (!q) return 1;
+    const title = norm(e.title);
+    const all = `${title} ${norm(e.keys)} ${norm(e.group)}`;
+    const words = q.split(/\s+/).filter(Boolean);
+    if (!words.every((w) => all.includes(w))) return 0;
+    return (title.startsWith(q) ? 3 : 0) + (title.includes(q) ? 2 : 0) + 1;
+  }
+
+  function render() {
+    if (!results || !searchInput) return;
+    const q = norm(searchInput.value.trim());
+    const ranked = entries
+      .map((e, i) => ({ e, s: score(e, q), i }))
+      .filter((x) => x.s > 0)
+      .sort((a, b) => b.s - a.s || a.i - b.i);
+    shown = (q ? ranked : ranked.filter((x) => x.e.group === entries[0]?.group || x.e.action))
+      .slice(0, 12)
+      .map((x) => x.e);
+    active = Math.min(active, Math.max(0, shown.length - 1));
+    results.replaceChildren(
+      ...shown.map((e, i) => {
+        const li = document.createElement('li');
+        li.id = `search-opt-${i}`;
+        li.setAttribute('role', 'option');
+        li.setAttribute('aria-selected', String(i === active));
+        li.className =
+          'flex cursor-pointer items-center gap-3 rounded-[12px] px-3 py-2.5 aria-selected:bg-soft';
+        const ic = document.createElement('span');
+        ic.className =
+          'flex h-8 w-8 shrink-0 items-center justify-center rounded-[9px] bg-soft text-text';
+        const svg = icons?.content.querySelector(`[data-icon-name="${e.icon}"] svg`);
+        if (svg) ic.append(svg.cloneNode(true));
+        const title = document.createElement('span');
+        title.className = 'flex-1 font-medium';
+        title.textContent = e.title;
+        const group = document.createElement('span');
+        group.className = 'kicker !text-[0.68rem]';
+        group.textContent = e.group;
+        li.append(ic, title, group);
+        li.addEventListener('mousemove', () => {
+          if (active !== i) {
+            active = i;
+            render();
+          }
+        });
+        li.addEventListener('click', () => go(e));
+        return li;
+      }),
+    );
+    searchInput.setAttribute('aria-activedescendant', shown.length ? `search-opt-${active}` : '');
+    empty?.classList.toggle('hidden', shown.length > 0);
+    results.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: 'nearest' });
+  }
+
+  function go(e: Entry) {
+    searchDialog?.close();
+    if (e.href) {
+      window.location.href = e.href;
+      return;
+    }
+    switch (e.action) {
+      case 'dark':
+      case 'light':
+      case 'system':
+        writeLocal('pakkaqr:theme', e.action);
+        apply(e.action);
+        break;
+      case 'large':
+      case 'normal':
+        writeLocal('pakkaqr:size', e.action);
+        setAttr('size', e.action === 'large' ? 'large' : null);
+        break;
+      case 'personalise':
+        syncForm();
+        dialog?.showModal();
+        break;
+    }
+  }
+
+  function openSearch() {
+    if (!searchDialog || !searchInput) return;
+    setTools(false);
+    searchInput.value = '';
+    active = 0;
+    render();
+    searchDialog.showModal();
+    searchInput.focus();
+  }
+
+  searchInput?.addEventListener('input', () => {
+    active = 0;
+    render();
+  });
+  searchInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!shown.length) return;
+      active = (active + (e.key === 'ArrowDown' ? 1 : -1) + shown.length) % shown.length;
+      render();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const e2 = shown[active];
+      if (e2) go(e2);
+    } else if (e.key === 'Escape') {
+      // A search field would only clear itself on the first Escape.
+      e.preventDefault();
+      searchDialog?.close();
+    }
+  });
+  searchDialog?.addEventListener('click', (e) => {
+    if (e.target === searchDialog) searchDialog.close();
+  });
+  searchDialog
+    ?.querySelector('[data-search-close]')
+    ?.addEventListener('click', () => searchDialog.close());
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-search-open]'))
+    b.addEventListener('click', openSearch);
+  if (/Mac|iPhone|iPad/.test(navigator.platform)) {
+    for (const k of document.querySelectorAll('[data-search-kbd]')) k.textContent = '⌘ K';
+  }
+  document.addEventListener('keydown', (e) => {
+    const typing = (e.target as HTMLElement | null)?.closest?.(
+      'input, textarea, select, [contenteditable]',
+    );
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      openSearch();
+    } else if (e.key === '/' && !typing && !searchDialog?.open) {
+      e.preventDefault();
+      openSearch();
+    }
   });
 
   apply(current());

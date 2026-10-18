@@ -20,6 +20,8 @@ Many "free" QR generators create **dynamic** codes. The printed pattern holds _t
 - **Bulk generator:** CSV to a ZIP of PNGs/SVGs (plus an optional PDF), generated in a Web Worker, with a report for any bad rows.
 - **Print layouts:** sticker sheets (2–10 cm), A4 table tents, posters, 10-up business cards and WiFi cards, as print-ready PDFs.
 - **QR scanner** (camera, upload or paste) with safe link handling, and a **"Will my QR code expire?" checker**.
+- **More tools:** barcode generator (EAN-13, UPC-A, EAN-8, Code 128), 12 ready templates, password-locked secret notes, photo QR codes, numbered series ("Table 1 to 50") and an opt-in scan history.
+- **Find anything fast:** Tools menu and Ctrl/⌘ K search; preview your code on a table tent, phone or sticker.
 - **Share cards:** Instagram/WhatsApp story, post and square images, and a short animated video — all made on your device.
 - **Personalise:** theme, stamp colour, Big & clear text, less motion and vibration.
 - Saved designs, opt-in history and shareable style links. **English + हिन्दी**, light/dark theme, works offline (PWA).

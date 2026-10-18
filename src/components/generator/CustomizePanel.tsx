@@ -91,7 +91,7 @@ export function CustomizePanel({
         </button>
       </div>
       <QuickStyle design={design} onChange={onChange} />
-      <div className="card overflow-hidden">
+      <div className="overflow-hidden rounded-[20px] bg-soft/45">
         <Section
           id="presets"
           title={t('design.presets')}

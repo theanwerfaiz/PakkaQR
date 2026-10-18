@@ -29,7 +29,15 @@ import {
   withExtension,
 } from '../../lib/export';
 import { loadLastDesign, recordHistory, sanitizeContent, saveLastDesign } from '../../lib/storage';
-import { HANDOFF_KEY, readSession, takeSession, writeSession } from '../../lib/storage/local';
+import {
+  HANDOFF_DESIGN_KEY,
+  HANDOFF_KEY,
+  readSession,
+  takeSession,
+  writeSession,
+} from '../../lib/storage/local';
+import { sanitizeDesign } from '../../lib/render/design';
+import { detectInput } from '../../lib/smart/detect';
 import { siteConfig } from '../../lib/site';
 import { Modal } from '../common/Modal';
 import { ToastProvider, useToast } from '../common/Toast';
@@ -38,6 +46,7 @@ import { ContentForm } from '../forms/ContentForm';
 import { CustomizePanel } from './CustomizePanel';
 import { ExportPanel, type ExportRequest } from './ExportPanel';
 import { PayloadBox } from './PayloadBox';
+import { MockupStage } from './MockupStage';
 import { Preview } from './Preview';
 import { SavedPanel } from './SavedPanel';
 import { ScanMe } from './ScanMe';
@@ -137,7 +146,25 @@ function GeneratorApp({
       history.replaceState(null, '', window.location.pathname + window.location.search);
       toast({ text: t('saved.appliedFromLink') });
     }
+    const handoffDesign = takeSession(HANDOFF_DESIGN_KEY);
+    if (handoffDesign) {
+      try {
+        const next = sanitizeDesign(JSON.parse(handoffDesign));
+        d = d.logo && !next.logo ? { ...next, logo: d.logo } : next;
+      } catch {
+        // Ignore a malformed hand-off.
+      }
+    }
     setDesign(d);
+    // Shared into PakkaQR from another app (PWA share target): ?url= / ?text= / ?title=.
+    const params = new URLSearchParams(window.location.search);
+    const sharedText = params.get('url') || params.get('text') || params.get('title');
+    if (sharedText) {
+      const link = /https?:\/\/\S+/.exec(sharedText)?.[0];
+      const detected = detectInput(link ?? sharedText);
+      if (detected) dispatch({ kind: 'content', content: detected.content });
+      history.replaceState(null, '', window.location.pathname);
+    }
     const handoff = takeSession(HANDOFF_KEY);
     if (handoff) {
       try {
@@ -442,10 +469,10 @@ function GeneratorApp({
 
   return (
     <div
-      className="grid grid-cols-[minmax(0,1fr)] gap-x-14 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)] lg:items-start"
+      className="grid grid-cols-[minmax(0,1fr)] overflow-clip rounded-[28px] bg-surface shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]"
       data-testid="generator"
     >
-      <div className="flex flex-col gap-7 lg:col-start-1">
+      <div className="flex flex-col gap-7 p-5 sm:p-8 lg:col-start-1">
         {hero && (
           <>
             <SmartInput
@@ -465,11 +492,7 @@ function GeneratorApp({
           </>
         )}
         <TypeTabs value={type} onChange={(next) => dispatch({ kind: 'type', type: next })} />
-        <section
-          id="generator-form"
-          aria-labelledby="details-heading"
-          className="rounded-[20px] border border-border bg-surface p-5 sm:p-6"
-        >
+        <section id="generator-form" aria-labelledby="details-heading" className="flex flex-col">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
             <h2 id="details-heading" className="text-2xl">
               {t('generator.details')}
@@ -531,13 +554,18 @@ function GeneratorApp({
 
       <aside
         aria-labelledby="preview-heading"
-        className="lg:sticky lg:top-6 lg:col-start-2 lg:row-span-2 lg:row-start-1"
+        className="bg-soft/70 p-5 sm:p-7 lg:col-start-2 lg:row-span-2 lg:row-start-1"
       >
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 lg:sticky lg:top-24">
           <h2 id="preview-heading" className="visually-hidden">
             {t('generator.previewHeading')}
           </h2>
-          <figure className="sheet relative mt-10 flex flex-col items-center gap-4 px-6 pt-12 pb-6 sm:px-8">
+          <MockupStage
+            caption={headline}
+            stamp={
+              shownStamp && <Stamp small status={shownStamp} stampKey={shownStamp} spin={spin} />
+            }
+          >
             <Preview
               geometry={geometry}
               logo={logoImage}
@@ -545,15 +573,7 @@ function GeneratorApp({
               transparent={design.transparentBg}
               message={previewMessage}
             />
-            {shownStamp && (
-              <Stamp
-                status={shownStamp}
-                stampKey={shownStamp}
-                spin={spin}
-                className="absolute -top-14 right-3 sm:right-6"
-              />
-            )}
-          </figure>
+          </MockupStage>
           <ScanStatus
             status={status}
             issues={issues}
@@ -622,7 +642,7 @@ function GeneratorApp({
         </div>
       </aside>
 
-      <div className="lg:col-start-1">
+      <div className="border-t border-border p-5 sm:p-8 lg:col-start-1">
         <CustomizePanel
           design={design}
           onChange={setDesign}

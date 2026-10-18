@@ -31,5 +31,31 @@
       "sizes": "any",
       "type": "image/svg+xml"
     }
+  ],
+  "share_target": {
+    "action": "./",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "Make a QR code",
+      "short_name": "Create",
+      "url": "./"
+    },
+    {
+      "name": "Scan a QR code",
+      "short_name": "Scan",
+      "url": "./qr-code-scanner"
+    },
+    {
+      "name": "Barcode generator",
+      "short_name": "Barcode",
+      "url": "./barcode-generator"
+    }
   ]
 }

@@ -34,7 +34,7 @@ export function Slider({ label, value, min, max, step = 1, onChange, display, hi
         aria-valuetext={display}
         aria-describedby={hint ? `${id}-hint` : undefined}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="h-11 w-full cursor-pointer accent-[var(--accent)]"
+        className="w-full"
       />
       {hint && (
         <p id={`${id}-hint`} className="hint">

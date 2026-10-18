@@ -35,7 +35,7 @@ export default defineConfig({
     react(),
     sitemap({
       i18n: { defaultLocale: 'en', locales: { en: 'en-IN', hi: 'hi-IN' } },
-      filter: (page) => !page.includes('/404'),
+      filter: (page) => !page.includes('/404') && !/\/open(\.html)?$/.test(page),
     }),
   ],
   security: {

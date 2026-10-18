@@ -8,6 +8,8 @@ First public release candidate. Not tagged yet: the release gate still needs CI 
 
 ### Added
 
+- Premium polish: softer surfaces, custom switches/sliders/dropdowns, a sticky header with a Tools menu and Ctrl/⌘ K search, real-look previews (table tent, phone, sticker), a feature grid on the home page and smooth page transitions.
+- New tools: barcode generator (EAN-13, UPC-A, EAN-8, Code 128, scan-tested, bulk ZIP), template gallery (12 designs), password-locked secret notes with an "open a note" page, photo QR codes, numbered series in the bulk tool, opt-in scan history, and "share into PakkaQR" on Android.
 - "Ink & Stamp" redesign: paper/ink palette with one stamp colour, Anek Latin + Anek Devanagari and JetBrains Mono (self-hosted), and a rubber-stamp status (PAKKA / RISKY / DOES NOT SCAN) instead of emoji.
 - Paste-anything box that detects the QR type and fills the form; one-tap starters (link in bio, pay me, split the bill, guest WiFi, playlist, party invite, business card, reviews).
 - Split the bill for UPI codes, "What's inside the code" box with copy and read-aloud, and a scan-with-your-phone check after downloading.

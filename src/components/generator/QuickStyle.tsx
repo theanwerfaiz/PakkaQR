@@ -51,7 +51,7 @@ export function QuickStyle({ design, onChange }: Props) {
 
   return (
     <div className="grid gap-4 sm:grid-cols-2" data-testid="quick-style">
-      <div className="flex flex-col gap-3 rounded-[16px] border border-border p-4">
+      <div className="flex flex-col gap-3 rounded-[18px] bg-soft/60 p-5">
         <div>
           <h3 className="text-xl">{t('remix.title')}</h3>
           <p className="hint">{t('remix.hint')}</p>
@@ -105,7 +105,7 @@ export function QuickStyle({ design, onChange }: Props) {
           {t('remix.shuffle')}
         </button>
       </div>
-      <div className="flex flex-col gap-3 rounded-[16px] border border-border p-4">
+      <div className="flex flex-col gap-3 rounded-[18px] bg-soft/60 p-5">
         <div>
           <h3 className="text-xl">{t('photo.title')}</h3>
           <p className="hint">{t('photo.hint')}</p>

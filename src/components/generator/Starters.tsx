@@ -1,8 +1,7 @@
 import type { QrContent, QrType } from '../../lib/payloads';
 import { encoders } from '../../lib/payloads';
 import type { FrameSettings, QrDesign } from '../../lib/render/design';
-import { applyPreset, presets } from '../../lib/render/presets';
-import { luminance } from '../../lib/scannability/checks';
+import { styledDesign } from '../../lib/render/presets';
 import { useT } from '../common/i18n';
 
 export interface Starter {
@@ -35,24 +34,7 @@ interface Props {
 export function Starters({ design, onStart }: Props) {
   const t = useT();
   const start = (s: Starter) => {
-    const preset = presets.find((p) => p.id === s.preset);
-    let next = preset ? applyPreset(design, preset) : design;
-    if (s.frame) {
-      const color = next.gradient ? next.gradient.colors[0] : next.fg;
-      // Light-on-dark styles get a light frame with dark text.
-      const dark = luminance(next.bg) < luminance(color);
-      next = {
-        ...next,
-        frame: {
-          id: s.frame.id,
-          label: t(`starter.${s.id}.label`),
-          labelColor: dark ? next.bg : '#FFFFFF',
-          frameColor: color,
-        },
-      };
-    } else {
-      next = { ...next, frame: undefined };
-    }
+    const next = styledDesign(design, s.preset, s.frame?.id, t(`starter.${s.id}.label`));
     onStart({ type: s.type, fields: { ...encoders[s.type].defaults, ...s.fields } }, next, s);
   };
   return (

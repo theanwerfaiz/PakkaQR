@@ -4,8 +4,8 @@ import HowTo from '../content/HowTo.astro';
 import FaqList from '../content/FaqList.astro';
 import RelatedLinks from '../content/RelatedLinks.astro';
 import StaticDynamicDiagram from '../content/StaticDynamicDiagram.astro';
+import Bento from '../content/Bento.astro';
 import type { PageDef } from '../../data/pages';
-import { NAV } from '../../data/pages';
 import { getTranslator, localePath, type Locale } from '../../lib/i18n';
 import { contentList, useContent, type Faq } from '../../lib/i18n/content';
 
@@ -35,8 +35,6 @@ const h1Parts = at >= 0 ? [h1.slice(0, at), em, h1.slice(at + em.length)] : null
 const lead = isHome ? c('home.lead') : c(k('intro'));
 const theirs = contentList(locale, 'home.rented.theirs');
 const ours = contentList(locale, 'home.rented.ours');
-const tools = contentList<{ title: string; body: string }>(locale, 'home.tools.items');
-const toolSlugs = [NAV.expiry, NAV.batch, NAV.print, NAV.scanner];
 ---
 
 <section class="mx-auto max-w-[1360px] px-4 pt-10 pb-4 sm:px-8 sm:pt-14">
@@ -69,6 +67,8 @@ const toolSlugs = [NAV.expiry, NAV.batch, NAV.print, NAV.scanner];
     {...(gen.openPanel ? { openPanel: gen.openPanel } : {})}
   />
 </section>
+
+{isHome && <Bento locale={locale} />}
 
 {isHome && (
   <section class="mt-24 bg-[#141210] text-[#EFE8DA]" aria-labelledby="rented-heading">
@@ -148,46 +148,6 @@ const toolSlugs = [NAV.expiry, NAV.batch, NAV.print, NAV.scanner];
     <div class="mt-8">
       <StaticDynamicDiagram locale={locale} />
     </div>
-  </section>
-)}
-
-{isHome && (
-  <section class="mx-auto mt-20 max-w-[1360px] px-4 sm:px-8" aria-labelledby="tools-heading">
-    <h2 id="tools-heading">{c('home.tools.title')}</h2>
-    <ul class="mt-6 border-t border-border">
-      {tools.map((tool, i) => (
-        <li class="border-b border-border">
-          <a
-            href={localePath(locale, toolSlugs[i] ?? '', base)}
-            class="group grid grid-cols-[3rem_minmax(0,1fr)_auto] items-center gap-4 py-6 no-underline sm:grid-cols-[4rem_minmax(0,1fr)_auto]"
-          >
-            <span class="font-mono text-muted" aria-hidden="true">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <span class="flex flex-col gap-1">
-              <span class="text-[1.5rem] leading-tight font-bold [font-stretch:85%] group-hover:text-stamp">
-                {tool.title}
-              </span>
-              <span class="text-muted">{tool.body}</span>
-            </span>
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              class="transition-transform group-hover:translate-x-1"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </a>
-        </li>
-      ))}
-    </ul>
   </section>
 )}
 

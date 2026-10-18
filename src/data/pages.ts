@@ -8,6 +8,11 @@ export type PageKind =
   | 'scanner'
   | 'expiry'
   | 'print'
+  | 'barcode'
+  | 'templates'
+  | 'secret'
+  | 'open'
+  | 'photo'
   | 'article'
   | 'about'
   | 'privacy'
@@ -204,6 +209,40 @@ export const pages: PageDef[] = [
     howTo: true,
   },
   {
+    slug: 'barcode-generator',
+    kind: 'barcode',
+    key: 'barcode',
+    related: ['bulk-qr-code-generator', 'print', 'upi-qr-code-generator'],
+    howTo: true,
+  },
+  {
+    slug: 'qr-code-templates',
+    kind: 'templates',
+    key: 'templates',
+    related: ['restaurant-menu-qr-code', 'wedding-qr-code', 'wifi-qr-code-generator'],
+    howTo: true,
+  },
+  {
+    slug: 'secret-message-qr-code',
+    kind: 'secret',
+    key: 'secret',
+    related: ['text-qr-code-generator', 'qr-code-scanner', 'photo-qr-code'],
+    howTo: true,
+  },
+  {
+    slug: 'open',
+    kind: 'open',
+    key: 'open',
+    related: ['secret-message-qr-code', 'qr-code-scanner'],
+  },
+  {
+    slug: 'photo-qr-code',
+    kind: 'photo',
+    key: 'photo',
+    related: ['qr-code-with-logo', 'qr-code-templates', 'instagram-qr-code-generator'],
+    howTo: true,
+  },
+  {
     slug: 'restaurant-menu-qr-code',
     kind: 'usecase',
     key: 'restaurant',
@@ -261,3 +300,43 @@ export const NAV = {
   expiry: 'qr-code-expiry-checker',
   print: 'print',
 } as const;
+
+export const TOOL_SLUGS = {
+  barcode: 'barcode-generator',
+  templates: 'qr-code-templates',
+  secret: 'secret-message-qr-code',
+  open: 'open',
+  photo: 'photo-qr-code',
+} as const;
+
+/** The Tools menu, grouped. Labels come from i18n `tools.<id>.name` / `.desc`. */
+export const TOOLS_MENU: Array<{
+  group: string;
+  items: Array<{ id: string; slug: string; icon: string }>;
+}> = [
+  {
+    group: 'create',
+    items: [
+      { id: 'qr', slug: '', icon: 'qr' },
+      { id: 'barcode', slug: TOOL_SLUGS.barcode, icon: 'barcode' },
+      { id: 'secret', slug: TOOL_SLUGS.secret, icon: 'lock' },
+      { id: 'photo', slug: TOOL_SLUGS.photo, icon: 'image' },
+    ],
+  },
+  {
+    group: 'bulk',
+    items: [
+      { id: 'batch', slug: NAV.batch, icon: 'stack' },
+      { id: 'numbered', slug: `${NAV.batch}#numbered`, icon: 'table' },
+      { id: 'print', slug: NAV.print, icon: 'print' },
+    ],
+  },
+  {
+    group: 'check',
+    items: [
+      { id: 'scanner', slug: NAV.scanner, icon: 'scan' },
+      { id: 'expiry', slug: NAV.expiry, icon: 'clock' },
+      { id: 'templates', slug: TOOL_SLUGS.templates, icon: 'layers' },
+    ],
+  },
+];
