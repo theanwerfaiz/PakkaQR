@@ -20,6 +20,7 @@ export function SmartInput({ onDetect, onMagic, onChangeType }: Props) {
   const [value, setValue] = useState('');
   const [reason, setReason] = useState<DetectReason | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const input = useRef<HTMLInputElement>(null);
 
   const run = (text: string) => {
     clearTimeout(timer.current);
@@ -32,7 +33,18 @@ export function SmartInput({ onDetect, onMagic, onChangeType }: Props) {
     if (d) onDetect(d.content);
   };
 
-  useEffect(() => () => clearTimeout(timer.current), []);
+  useEffect(() => {
+    // Text typed before the page finished loading is already in the field:
+    // pick it up instead of losing it.
+    const early = input.current?.value ?? '';
+    if (early.trim()) {
+      setValue(early);
+      run(early);
+    }
+    return () => clearTimeout(timer.current);
+    // Runs once after hydration.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col gap-3">
@@ -41,8 +53,9 @@ export function SmartInput({ onDetect, onMagic, onChangeType }: Props) {
       </label>
       <div className="hero-input">
         <input
+          ref={input}
           id={id}
-          value={value}
+          defaultValue=""
           placeholder={t('smart.placeholder')}
           aria-describedby={`${id}-status`}
           autoComplete="off"
@@ -50,8 +63,8 @@ export function SmartInput({ onDetect, onMagic, onChangeType }: Props) {
           enterKeyHint="go"
           data-testid="smart-input"
           className="min-w-0 flex-1 border-0 bg-transparent py-3 text-[1.25rem] font-medium text-text outline-none placeholder:text-muted"
-          onChange={(e) => {
-            const next = e.target.value;
+          onInput={(e) => {
+            const next = e.currentTarget.value;
             setValue(next);
             clearTimeout(timer.current);
             if (!next.trim()) setReason(null);
@@ -67,14 +80,16 @@ export function SmartInput({ onDetect, onMagic, onChangeType }: Props) {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              run(value);
+              // Read the field itself: it is always current, even if state lags.
+              setValue(e.currentTarget.value);
+              run(e.currentTarget.value);
             }
           }}
         />
         <button
           type="button"
           className="btn btn-primary shrink-0"
-          onClick={() => run(value)}
+          onClick={() => run(input.current?.value ?? value)}
           disabled={!value.trim()}
         >
           {t('smart.go')}

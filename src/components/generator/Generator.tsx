@@ -125,6 +125,8 @@ function GeneratorApp({
   const [shareOpen, setShareOpen] = useState(false);
   const [scanMe, setScanMe] = useState(false);
   const [spin, setSpin] = useState(0);
+  /** True once mounted and restored: tests (and nothing else) wait for it. */
+  const [ready, setReady] = useState(false);
 
   // ------------------------------------------------------------ restore style
   useEffect(() => {
@@ -176,6 +178,7 @@ function GeneratorApp({
     }
     setCaps({ copy: canCopyImage(), share: canShareFiles() });
     loaded.current = true;
+    setReady(true);
     // Runs once on mount by design.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -471,6 +474,7 @@ function GeneratorApp({
     <div
       className="grid grid-cols-[minmax(0,1fr)] overflow-clip rounded-[28px] bg-surface shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]"
       data-testid="generator"
+      data-ready={ready || undefined}
     >
       <div className="flex flex-col gap-7 p-5 sm:p-8 lg:col-start-1">
         {hero && (

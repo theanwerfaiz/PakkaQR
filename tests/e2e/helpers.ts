@@ -55,4 +55,8 @@ export async function chooseType(page: Page, type: string) {
 export async function open(page: Page, path: string) {
   await page.goto(path);
   await page.locator('astro-island:not([ssr])').first().waitFor({ state: 'attached' });
+  // React hydrates in chunks after the island is marked; on generator pages wait
+  // until the generator has mounted, so early typing can't race hydration.
+  if (await page.locator('[data-testid=generator]').count())
+    await page.locator('[data-testid=generator][data-ready]').waitFor({ state: 'attached' });
 }
